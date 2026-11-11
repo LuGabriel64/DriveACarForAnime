@@ -1,0 +1,10 @@
+# Studio / Rojo
+*.rbxl.lock
+*.rbxlx.lock
+sourcemap.json
+# Python
+__pycache__/
+*.pyc
+# SO
+.DS_Store
+Thumbs.db
