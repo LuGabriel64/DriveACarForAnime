@@ -2,6 +2,8 @@
 ================================================================================
  DRIVE A CAR FOR ANIME — BÍBLIA DO PROJETO  Beta 1.4  (leia ANTES de editar qualquer coisa)
 ================================================================================
+ >>> RESUMO ATUALIZADO (Beta 1.8b+): ServerStorage.ProjectDocs.04_EstadoAtual. As seções abaixo são a história
+     até a Beta 1.4; o que mudou depois (roleta, obstáculos, estilo dos personagens...) está no 04 e no 01_ChangeLog.
 
 1. VISÃO
    O jogador começa com um carro e dirige por BIOMAS grandes e cheios de obstáculos

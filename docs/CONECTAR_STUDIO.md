@@ -54,7 +54,7 @@ cd DriveACarForAnime
 6. Com o place aberto no Studio, mande ao Claude Code:
 
 > Leia o CLAUDE.md. Conecte ao Roblox Studio, confira Config.Version e o topo do 01_ChangeLog, e siga
-> planejamento/beta-1.9/07_plano_de_implementacao.md a partir da Etapa 0.
+> planejamento/beta-1.9/07_plano_de_implementacao.md a partir da Etapa A (a Etapa 0 já virou a Beta 1.8d).
 
 O Claude Code lê o `CLAUDE.md` sozinho ao abrir a pasta, então ele já sabe as regras do projeto e onde
 está o plano.

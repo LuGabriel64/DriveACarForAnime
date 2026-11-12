@@ -90,7 +90,8 @@ local function showResults(s)
 	local body = results.Body
 	for _, c in ipairs(body:GetChildren()) do c:Destroy() end
 	local reasonText = ({ finish = "🏆 YOU REACHED THE END!", respawn = "💥 Race over", home = "🏝️ Back to the lobby",
-		delivered = "🥚 EGG SECURED! It's hatching at your base", caught = "💥 The collapse caught you — egg lost!" })[s.Reason] or "Race over"
+		delivered = "🥚 EGG SECURED! It's hatching at your base", caught = "💥 The collapse caught you — egg lost!",
+		invalid = "⚠️ Impossible speed — race cancelled" })[s.Reason] or "Race over" -- Beta 1.8d: + invalid (RaceService)
 	UIKit.Text(body, { Text = reasonText, TextSize = 26, Size = UDim2.new(1, 0, 0, 32), Stroke = 3, ZIndex = 22 })
 	local function stat(y, icon, label, value, color)
 		local f = new("Frame", { Size = UDim2.new(1, 0, 0, 56), Position = UDim2.fromOffset(0, y), BackgroundColor3 = C.CardBg, ZIndex = 22 }, body)

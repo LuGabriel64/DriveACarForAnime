@@ -4,6 +4,44 @@
 ]]
 return {
 	{
+		Date = "2026-11-12", Author = "Claude Code (Lu, via MCP)", Version = "Beta 1.8d",
+		Summary = "Etapa 0 do plano da Beta 1.9 (auditoria de 11/11): Map/SpawnLocation duplicados fora do Workspace, anti-trapaça de velocidade na fuga e no recorde, save que só confirma quando grava, limpeza. (Era 'Beta 1.8c' no plano do GitHub; virou 1.8d porque 1.8c já foi usada na entrada de docs abaixo.)",
+		Files = {
+			"Workspace: a 2ª Map (43.298 objetos) e a 2ª SpawnLocation foram MOVIDAS para ServerStorage.Backups['Beta 1.8b'] (não apagadas; eram idênticas às que ficaram)",
+			"Limpeza (também movidos para o backup 1.8b): Lighting.Sky genérico (fica o 'Simple Sunset Sky'), StarterGui.ScreenGui vazio, Workspace.Script ('Hello world')",
+			"ServerStorage.Backups['Beta 1.8b'] (NOVO): todos os scripts, ProjectDocs, Tools, LegacyCode + LEIA-ME de restauração",
+			"ReplicatedStorage.Shared.Config: Version 'Beta 1.8d', Updates 1.8d, Config.AntiCheat NOVO (ForwardSpeedMult 1.6, BurstSeconds 2.5, Slack 120, FallbackTopSpeed 70); Escape.MaxForwardSpeed fica SEM USO (não apagado)",
+			"ServerScriptService.Services.EscapeService: step() usa forwardOk() — orçamento de avanço pela TopSpeed REAL do carro x 1,6 (antes SpeedCap 700 x 1,6 + 60/tick, ~1.700 studs/s); warn no Output quando anula",
+			"ServerScriptService.Services.RaceService: mesmo orçamento no laço de distância; velocidade impossível => End(player, 'invalid') sem contar o salto (MinZ não anda)",
+			"ServerScriptService.Services.DataService: save() devolve ok AND wrote (wrote = transform não cancelou pela trava de outro servidor) => SaveSync/ProcessReceipt não confirma Robux sem gravar. Formato do save igual (Version 2)",
+			"StarterPlayer.StarterPlayerScripts.Client.RaceUI: texto do Reason 'invalid' ('Impossible speed — race cancelled')",
+			"ServerStorage.ProjectDocs.04_EstadoAtual: versão, backups, Workspace limpo, anti-trapaça, pendência de publicar",
+		},
+		Notes = {
+			"Testado em Play (Studio, 1 jogador, TopSpeed 70): Output sem erros; Workspace com 5 filhos; tags no Workspace Hazard 51, BoostPad 46, LobbyLantern 60, RacePortal 1, BiomeEgg 7.",
+			"Testado: corrida a 100 studs/s (abaixo de 70x1,6=112) por 3.089 studs = aceita; teleporte de 2.000 studs na corrida = RaceEnded 'invalid', distância parada em 413.",
+			"Testado: fuga com teleporte do ovo até a base = 'invalid' (3.158 studs em 0,11 s); fuga legítima a 100 studs/s = 'delivered' (29,7 s após o colapso).",
+			"NÃO testado: DataService.save com trava de outro servidor (precisa de 2 servidores publicados + API de DataStore); compra real com Robux; carros de tier alto com boost em sequência (o Slack de 120 studs deve cobrir, conferir num playtest dirigindo de verdade).",
+			"Movimento dos testes foi feito por PivotTo no cliente (simula o carro do jogador, que é dono da física), não dirigindo com o teclado.",
+			"Só SALVO no Studio, NÃO publicado: o dono publica quando quiser.",
+		},
+	},
+	{
+		Date = "2026-11-11", Author = "Claude Code (Lu)", Version = "Beta 1.8c",
+		Summary = "Integração/auditoria para trabalhar em conjunto com o Claude Code do amigo, Roblox Assistant e Rebirth. Só DOCUMENTAÇÃO: nenhum script do jogo nem o mapa foram alterados.",
+		Files = {
+			"ProjectDocs.04_EstadoAtual (NOVO): porta de entrada para qualquer assistente — fluxo do jogo, onde cada script atua, rede, Features, pegadinhas, pendências",
+			"ProjectDocs.02_AI_Protocol: ordem de leitura (04 primeiro), Author identifica quem fez, regra 13 atualizada com os nomes da Beta 1.7, regras 17 (duplicatas no Workspace) e 18 (dois Claude Code no mesmo place)",
+			"ProjectDocs.00_ProjectBible: aviso no topo apontando para o 04",
+		},
+		Notes = {
+			"Auditoria: 53 scripts lidos (12 serviços, 30 módulos de cliente, 5 shared, 2 ferramentas, docs). Sem erros de compilação conhecidos.",
+			"ACHADO: Workspace tem DOIS 'Map' idênticos (35.540 peças cada, 51 obstáculos cada) e DOIS SpawnLocation em (0,3,3230). Os scripts só usam o primeiro; o segundo dobra o peso do place e as tags (Hazard 102, LobbyLantern etc.). NÃO apagado — aguardando o OK do dono.",
+			"Workspace.Script e Workspace.Script.Script ('Hello world', Enabled=false) continuam lá, inofensivos.",
+			"GitHub LuGabriel64/DriveACarForAnime: só README (nenhum código sincronizado ainda).",
+		},
+	},
+	{
 		Date = "2026-11-10", Author = "Claude", Version = "Beta 1.8b",
 		Summary = "Personagens no estilo BLOCOS ANIME (referência do dono: avatar R6 com rosto de anime e cabelo esculpido em espetos). Vale para TODOS os personagens.",
 		Files = {

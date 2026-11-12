@@ -15,7 +15,7 @@ local Config = {}
 local C = Color3.fromRGB
 
 Config.GameName = "Drive A Car For Anime"
-Config.Version  = "Beta 1.8"
+Config.Version  = "Beta 1.8d"
 
 -- ---------------------------------------------------------------- RECURSOS (liga/desliga sistemas)
 Config.Features = {
@@ -58,6 +58,11 @@ Config.Credits = {
 	{ Role = "Special Thanks",      Names = { "Every beta tester!" } },
 }
 Config.Updates = {
+	{ Version = "Beta 1.8d", Date = "Nov 12, 2026", Notes = {
+		"🧹 Removed a duplicated copy of the whole map: less lag, especially on phones",
+		"✨ No more flickering signs and lights in the garages",
+		"🛡️ Fairer escapes and records: impossible speeds no longer count",
+	} },
 	{ Version = "Beta 1.8", Date = "Nov 10, 2026", Notes = {
 		"🚧 NEW OBSTACLES in every world: giant pendulums, spinning blades, crushing pistons, laser gates and geysers!",
 		"💥 Hitting an obstacle knocks you back and slows you down — watch the timing!",
@@ -413,10 +418,21 @@ Config.Escape = {
 	CarFactorCap = 0.92,    -- nunca passa de 92% da sua velocidade máxima (sempre dá para fugir dirigindo bem)
 	MinSpeed = 45,          -- studs/s mínimos do colapso
 	BaseZ = 40,             -- linha de chegada da fuga (pórtico de largada = Config.Race.StartLineZ)
-	MaxForwardSpeed = 1.6,  -- anti-exploit: avanço em direção à base acima de SpeedCap x isto (por tick) = fuga anulada
+	MaxForwardSpeed = 1.6,  -- (até a Beta 1.8b: limite por tick SpeedCap x isto + 60). Beta 1.8d: SEM USO — ver Config.AntiCheat
 	CaughtEndDelay = 1.6,   -- segundos mostrando a queda antes de voltar ao lobby
 	ChunkLength = 36,       -- (visual) tamanho de cada pedaço de pista que desaba
 	ShakeDistance = 160,    -- (visual) tremor de câmera quando o colapso está a menos de X studs
+}
+-- Beta 1.8d: ANTI-TRAPAÇA de velocidade (fuga do ovo e recorde de distância). O cliente é dono da física do carro,
+-- então o servidor confere o avanço com um "orçamento" (token bucket): enche a TopSpeed x ForwardSpeedMult por
+-- segundo, até TopSpeed x ForwardSpeedMult x BurstSeconds + Slack; cada tick gasta o avanço medido. Orçamento
+-- negativo = velocidade impossível (teleporte / speed hack) => fuga anulada ("invalid") ou corrida encerrada sem recorde.
+-- Velocidade sustentada máxima aceita = TopSpeed x 1,6 (o mesmo que o boost pad dá no Client.DriveController).
+Config.AntiCheat = {
+	ForwardSpeedMult = 1.6, -- = boost pad (DriveController: cap x1.6)
+	BurstSeconds = 2.5,     -- tolera posições chegando em rajada depois de lag de rede
+	Slack = 120,            -- studs extras: empurrão do boost (35) + batida de obstáculo (42) + margem
+	FallbackTopSpeed = 70,  -- se o atributo TopSpeed ainda não existir (carro inicial)
 }
 -- ---------------------------------------------------------------- ROLETA DA SORTE (Beta 1.5)
 -- Um giro GRÁTIS a cada Cooldown segundos (8 h). O servidor (Services.WheelService) decide tudo: confere o tempo com

@@ -1,6 +1,6 @@
 # DriveACarForAnime
 
-**Drive A Car For Anime**, um jogo de Roblox (Beta 1.8b).
+**Drive A Car For Anime**, um jogo de Roblox (Beta 1.8d; a publicada ainda é a 1.8b).
 
 Dirija por 7 biomas e pegue o ovo gigante no fim de cada um. Depois fuja da pista que desmorona,
 choque personagens de anime na garagem e compre carros mais rápidos para chegar mais longe.
@@ -8,7 +8,7 @@ choque personagens de anime na garagem e compre carros mais rápidos para chegar
 | Onde | O quê |
 |------|-------|
 | `CLAUDE.md` | **comece aqui**: regras do projeto e fluxo de trabalho para pessoas e assistentes de IA |
-| `CHANGELOG.md` | todas as versões, da 0.1.0 à Beta 1.8b, e as planejadas |
+| `CHANGELOG.md` | todas as versões, da 0.1.0 à Beta 1.8d, e as planejadas |
 | `planejamento/beta-1.9/` | projeto da próxima versão: desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, idiomas |
 | `docs/ESTRUTURA.md` | onde fica cada script no Studio, os biomas, o loop do jogo e as ações de rede |
 | `docs/AUDITORIA_2026-11-11.md` | problemas encontrados e como corrigir |

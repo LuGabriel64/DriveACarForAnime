@@ -1,4 +1,4 @@
-# Estrutura do jogo — Beta 1.8b
+# Estrutura do jogo — Beta 1.8d
 
 Mapa rápido de **onde está cada coisa** no Roblox Studio e do que cada script faz.
 A documentação longa e oficial continua **dentro do place**, em `ServerStorage.ProjectDocs`.
@@ -46,10 +46,10 @@ ServerStorage
 ├─ Tools/WorldBuilder       gera terreno, lobby, biomas, obstáculos, hazards (2.411 linhas, ferramenta de EDIÇÃO)
 ├─ Tools/LobbyBuilder       design alternativo de outra sessão, NUNCA aplicado
 ├─ LegacyCode/              AnimeModelFactory voxel (1.6) e chibi (1.7)
-└─ Backups/                 "Beta 1.1" (único com TERRENO), "Beta 1.6", "Beta 1.7" + LEIA-ME de restauração
+└─ Backups/                 "Beta 1.1" (único com TERRENO), "Beta 1.6", "Beta 1.7", "Beta 1.8b" + LEIA-ME de restauração
 
 Workspace
-├─ Map/                     ⚠ DUPLICADO no place de 11/11 (ver docs/AUDITORIA_2026-11-11.md)
+├─ Map/                     um só desde a Beta 1.8d (a cópia duplicada foi para Backups["Beta 1.8b"])
 │  ├─ Drivable/<bioma>      pontes, passarelas, lombadas (o raycast do carro usa isto + Terrain)
 │  ├─ Props/<bioma>         decoração, obstáculos, JapanTech (bioma 1), Hazards (Beta 1.8)
 │  ├─ Plots/Plot_1..8       garagens (Base/Title/Label, Slots/Slot_N, Placed, CarPad, CarSpawn, PlayerSpawn)

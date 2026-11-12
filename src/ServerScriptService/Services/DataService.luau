@@ -8,6 +8,9 @@
 	PRÓXIMO PASSO RECOMENDADO: migrar para ProfileStore (loleris) quando o projeto crescer.
 	Beta 1.3: + data.Incubator / data.NextIncId / Stats.Escapes / Stats.EscapesLost (reconcile() preenche saves antigos).
 	Beta 1.5: + data.Wheel {LastSpin, Spins, Pending}; leaderstats.Cash (placar do Roblox) espelha o Cash; SaveNow(player).
+	Beta 1.8d (auditoria 11/11, item 5): save() só devolve true se o UpdateAsync GRAVOU de verdade. Antes, a trava de
+	  outro servidor cancelava a gravação (transform devolvia nil) e mesmo assim save() dava true => o WheelService
+	  confirmava compra de Robux (PurchaseGranted) sem ter salvo. Formato do save NÃO mudou (Version continua 2).
 ]]
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -107,19 +110,23 @@ local function save(player, release)
 	if not p or not p.Persistent then return true end
 	p.Data.Stats.PlayTime = (p.Data.Stats.PlayTime or 0) + (os.clock() - p.LastSave)
 	p.LastSave = os.clock()
+	local wrote = false -- Beta 1.8d: true só se o transform devolveu os dados (gravação não cancelada)
 	local ok, err = pcall(function()
 		getStore():UpdateAsync(keyOf(player), function(old)
+			wrote = false -- o UpdateAsync pode chamar o transform mais de uma vez
 			old = old or {}
 			if old.Lock and old.Lock.JobId ~= game.JobId and (os.time() - old.Lock.Time) < Config.Data.LockTimeout then
 				return nil
 			end
 			old.Data = p.Data
 			old.Lock = (not release) and { JobId = game.JobId, Time = os.time() } or nil
+			wrote = true
 			return old
 		end)
 	end)
-	if not ok then warn("[DataService] erro ao salvar " .. player.Name .. ": " .. tostring(err)) end
-	return ok
+	if not ok then warn("[DataService] erro ao salvar " .. player.Name .. ": " .. tostring(err))
+	elseif not wrote then warn("[DataService] save de " .. player.Name .. " cancelado: perfil travado por outro servidor") end
+	return ok and wrote
 end
 
 local function loadPlayer(player)

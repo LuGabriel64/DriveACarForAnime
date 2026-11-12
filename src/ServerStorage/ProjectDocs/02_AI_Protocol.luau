@@ -2,8 +2,9 @@
   PROTOCOLO DE COLABORAÇÃO ENTRE ASSISTENTES (Roblox Assistant, Claude, Rebirth IA)
   =================================================================================
   Cole isto no início do prompt de qualquer assistente:
-     "Antes de qualquer coisa, leia ServerStorage.ProjectDocs (00_ProjectBible, 01_ChangeLog, 02_AI_Protocol)
-      e Shared.Config. Siga as convenções. Ao terminar, registre a mudança no 01_ChangeLog."
+     "Antes de qualquer coisa, leia ServerStorage.ProjectDocs (04_EstadoAtual PRIMEIRO, depois 02_AI_Protocol,
+      01_ChangeLog e 00_ProjectBible) e Shared.Config. Siga as convenções. Ao terminar, registre a mudança no
+      01_ChangeLog (Author = quem fez: 'Claude Code (Lu)', 'Claude Code (amigo)', 'Roblox Assistant', 'Rebirth'...)."
 
   REGRAS
   1. LER antes de escrever: veja o ChangeLog e o módulo que vai tocar (cabeçalho explica o papel dele).
@@ -25,6 +26,8 @@
      EXCEÇÃO (09/11/2026, Beta 1.6): o DONO decidiu usar o elenco de Dragon Ball Z no bioma 1 (Goku, Kuririn, Vegeta,
      Master Kame, Gohan, Cell, Piccolo, Majin Boo) e assume o risco. Não reverta sem o dono pedir; não amplie para
      outros biomas/IPs sem pedido expresso. O elenco original antigo continua no Config como Legacy.
+     ATUALIZAÇÃO Beta 1.7: o dono pediu nomes LEVEMENTE alterados (Gokun, Kurilin, Vegita, Master Kamo, Gohen, Cello,
+     Pikollo, Majin Bubu; Ids iguais). Não volte aos nomes originais e não copie emblemas/símbolos (ex.: kanji do peito).
  14. Antes de uma versão grande, faça BACKUP em ServerStorage.Backups["<versão>"] (veja "Beta 1.0").
      Sistemas antigos ficam GUARDADOS atrás de Config.Features (não apague código que o dono pode querer de volta).
  15. Cache de módulos no EDITOR: depois de editar o Config, um require() pelo Command Bar pode devolver a versão
@@ -32,6 +35,10 @@
        local c = game.ReplicatedStorage.Shared.Config; local n = c:Clone(); n.Parent = c.Parent; c:Destroy()
  16. Funções locais definidas MAIS ABAIXO no arquivo não existem para funções definidas acima (ex.: WorldBuilder
      usa WorldBuilder.PROP / WorldBuilder.EnergyAura no lobby por isso).
+ 17. Antes de mexer no mapa, confira se não há instâncias DUPLICADAS na raiz do Workspace (ex.: dois 'Map' ou dois
+     'SpawnLocation' — aconteceu em 11/11/2026). FindFirstChild pega só o primeiro; o segundo dobra peças e tags.
+ 18. Dois Claude Code trabalham no mesmo place (o dono e o amigo). Antes de começar, leia o TOPO do ChangeLog para ver
+     o que o outro fez; não desfaça mudanças recentes do outro sem registrar o motivo.
  12. Material de terreno: confira se o Enum.Material existe antes de usar (ex.: "CorrugatedMetal" NÃO existe
      como Material; use Enum.Material.Metal ou um MaterialVariant).
 

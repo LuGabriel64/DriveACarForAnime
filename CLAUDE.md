@@ -11,7 +11,7 @@ Jogo de Roblox no estilo "Steal an Egg" / "Throw a Food For Animals" / "Kick a L
 - choca personagens de anime, que rendem $/s na garagem;
 - compra carros melhores, que abrem os próximos biomas.
 
-Versão atual do jogo: **Beta 1.8b**. Próxima: **Beta 1.9**, já projetada em `planejamento/beta-1.9/`
+Versão atual do jogo: **Beta 1.8d** (salva no Studio; a publicada ainda é a 1.8b). Próxima: **Beta 1.9**, já projetada em `planejamento/beta-1.9/`
 (ainda não aplicada). Dois desenvolvedores: o dono do repositório (LuGabriel64) e um amigo (Gabxx10),
 cada um com o seu Claude Code.
 
@@ -110,17 +110,24 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
 
 ## Estado em 12/11/2026
 
-- **Jogo:** Beta 1.8b. Ninguém subiu mudança de jogo ao GitHub desde o espelho de 11/11.
-- **Urgente no Studio:** `Workspace.Map` e `SpawnLocation` estão **duplicados** no place (43 mil peças a
-  mais, tags em dobro). É a Etapa 0 do plano (Beta 1.8c), junto com as correções 3, 4 e 5 da auditoria.
+- **Jogo:** Beta 1.8d, aplicada em 12/11 pelo Claude Code do dono, no PC dele, via MCP. É a Etapa 0 do
+  plano: mapa duplicado fora do Workspace, anti-trapaça (`Config.AntiCheat`), save com Robux e limpeza.
+  - Está **salva** no place (versão 95, Team Create), mas **não publicada**: os jogadores ainda veem a 1.8b.
+  - `src/` confere byte a byte com o place (checksum). Ver `CHANGELOG.md`.
+- **Numeração:** "Beta 1.8c" foi usada no place por uma entrada só de documentação (11/11). Por isso a Etapa 0
+  virou 1.8d. Antes de escolher o número de uma versão, confira o topo do `01_ChangeLog` **dentro do place**.
+- **Falta da 1.8d:** o `.rbxl` em `places/` (Studio > "Baixar uma cópia") e publicar o jogo.
+- **PC do dono:** não tem Python instalado, então `place_tool.py` e os testes da 1.9 não rodam lá ainda.
+  Para conferir o espelho sem Python, compare checksums dos `Source` pelo MCP (como no commit da 1.8d).
 - **Beta 1.9 projetada, não aplicada:** desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível,
   pontos de spin, idiomas EN/PT e UI por plataforma. Lógica pura testada (80 verificações); módulos que
   dependem do Roblox só compilados; UI, mapa e dois serviços ainda por escrever. Se o place já estiver na
   1.9 quando for aplicar, vira 2.0.
 - **A sessão da nuvem (claude.ai/code) não alcança o Studio.** Quem aplica é um Claude Code local.
-  Em 12/11 o dono ligou o Claude Code do PowerShell ao Studio; os pedidos prontos para colar lá, um por
-  etapa, estão em `planejamento/beta-1.9/PROMPTS_PARA_O_STUDIO.md`. Se você é esse Claude Code local:
-  rode `git pull`, siga o plano a partir da Etapa 0 e pare ao fim de cada etapa.
+  Em 12/11 o dono ligou o Claude Code do PowerShell ao Studio (MCP `Roblox_Studio`), e esse Claude Code aplicou a
+  Etapa 0 (Beta 1.8d). Os pedidos prontos para colar lá, um por etapa, estão em
+  `planejamento/beta-1.9/PROMPTS_PARA_O_STUDIO.md`. Se você é esse Claude Code local: rode `git pull`, siga o
+  plano a partir da **Etapa A** e pare ao fim de cada etapa.
 - **Pendências do dono:** IDs de música (`Config.Music`) e de sons (`Config.Sounds`), ProductIds dos
   pacotes da roleta, créditos, `Gift.GroupId`, conferir as bandeiras do botão de idiomas.
 - **Colaboração:** o amigo ainda não usa o GitHub. Recomendado: Team Create para o jogo (mesmo place) e o
@@ -128,4 +135,4 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
   Ver `docs/CONECTAR_STUDIO.md`.
 - **Ainda sem conexão:** Obsidian e os demais conectores (referências de UI). O dono vai ligar depois.
 - Ideias de produto ainda na fila: anéis de energia com combo, página Index (coleção), compra de vagas na
-  garagem, rebirth, ranking de distância (só depois da auditoria 4).
+  garagem, rebirth, ranking de distância (a auditoria 4, que bloqueava o ranking, foi corrigida na 1.8d).

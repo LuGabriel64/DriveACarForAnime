@@ -15,7 +15,13 @@ Para o Claude Code que tiver o MCP do Roblox Studio (do dono ou do amigo). Leia 
 4. **Backup.** `ServerStorage.Backups["Beta 1.8b"]` com scripts, docs, ferramentas e `Map`, mais o LEIA-ME
    de restauração (o place hoje **não tem** backup interno da 1.8). O `.rbxl` em `places/` é o segundo backup.
 
-## Etapa 0 — Beta 1.8c: limpar o que a auditoria achou
+## Etapa 0 — Beta 1.8d: limpar o que a auditoria achou ✅ feita em 12/11/2026
+
+> **Feita** como **Beta 1.8d** (o número 1.8c já tinha sido usado no place). Ver `CHANGELOG.md`. O backup
+> `ServerStorage.Backups["Beta 1.8b"]` já existe, então o passo 4 acima está cumprido. Ao começar a Etapa A,
+> `Config.Version` vai estar em "Beta 1.8d". Falta só **publicar** e salvar o `.rbxl` em `places/`.
+> O anti-trapaça usou um orçamento (`Config.AntiCheat`) em vez da troca de uma linha sugerida na auditoria:
+> com +60 studs por tick (10 por segundo), a sugestão ainda aceitaria cerca de 600 studs/s.
 
 Pequena, separada e publicada antes do resto, para o jogo ficar saudável.
 
@@ -27,7 +33,7 @@ Pequena, separada e publicada antes do resto, para o jogo ficar saudável.
 | 0.4 | Auditoria 5: `DataService.save` devolve `false` quando a gravação é cancelada pela trava | leitura do código + teste com dois servidores, se possível |
 | 0.5 | Limpeza: segundo `Sky`, `StarterGui.ScreenGui` vazio, `Workspace.Script` | Output sem avisos |
 
-Registrar como **Beta 1.8c** no `01_ChangeLog`, no `Config.Updates` e no `CHANGELOG.md`. Playtest rápido.
+Registrado como **Beta 1.8d** no `01_ChangeLog`, no `Config.Updates` e no `CHANGELOG.md`. Playtest feito.
 
 ## Etapa A — Fundação (sem nada visível de 1v1 ainda)
 

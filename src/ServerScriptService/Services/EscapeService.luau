@@ -19,6 +19,8 @@
 	        z >= BaseZ     => ENTREGUE na base: ovo vai para a INCUBADORA (IncubatorService), volta ao lobby
 	        corrida acabou (Home / morreu / saiu) => ovo perdido ("abandoned")
 	        avanço impossível em direção à base (teleporte/speed hack) => fuga anulada ("invalid")
+	          Beta 1.8d: medido pelo orçamento de Config.AntiCheat (TopSpeed REAL do carro x 1,6), não mais pelo
+	          teto global SpeedCap (que aceitava ~1.700 studs/s). Auditoria 11/11, item 3.
 
 	POR QUE A PISTA NÃO É DESTRUÍDA NO SERVIDOR: a pista é UMA só para todos (modelo "pista fantasma" da Beta 1.2).
 	Destruir de verdade derrubaria os outros corredores. Então o colapso é desenhado POR JOGADOR no cliente e a
@@ -193,6 +195,16 @@ local function buildEggs()
 end
 
 -- ---------------------------------------------------------------- regra da fuga (autoridade do servidor)
+-- Beta 1.8d: orçamento de avanço (ver Config.AntiCheat). false = andou mais rápido do que o carro consegue.
+local AC = Config.AntiCheat
+local function forwardOk(player, e, advance, dt)
+	local rate = (player:GetAttribute("TopSpeed") or AC.FallbackTopSpeed) * AC.ForwardSpeedMult
+	local cap = rate * AC.BurstSeconds + AC.Slack
+	e.Budget = math.min(cap, (e.Budget or cap) + rate * dt)
+	if advance > 0 then e.Budget -= advance end
+	return e.Budget >= 0
+end
+
 local function step()
 	local t = workspace:GetServerTimeNow()
 	for player, e in pairs(escapes) do
@@ -206,7 +218,9 @@ local function step()
 				local dt = math.max(t - e.LastT, 1 / 60)
 				local advance = pos.Z - e.LastPos.Z -- quanto chegou mais perto da base desde o último tick
 				e.LastPos, e.LastT = pos, t
-				if advance > Config.SpeedCap * E.MaxForwardSpeed * dt + 60 then
+				if not forwardOk(player, e, advance, dt) then
+					warn(("[EscapeService] %s: avanço impossível (%.0f studs em %.2fs, TopSpeed %s) => fuga anulada"):format(
+						player.Name, advance, dt, tostring(player:GetAttribute("TopSpeed"))))
 					finish(player, false, "invalid")
 				elseif t >= e.FrontStart then
 					if not e.Armed then

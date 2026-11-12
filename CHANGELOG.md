@@ -13,8 +13,9 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
 | [Beta 1.9](#beta-19--planejada) | — | 📐 planejada | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
-| [Beta 1.8c](#beta-18c--planejada) | — | 📐 planejada | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
-| [Beta 1.8b](#beta-18b--10112026) | 10/11/2026 | ✅ no jogo | Personagens em "blocos anime" |
+| [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
+| [Beta 1.8c](#beta-18c--11112026) | 11/11/2026 | ✅ | Só documentação dentro do place (`04_EstadoAtual`) |
+| [Beta 1.8b](#beta-18b--10112026) | 10/11/2026 | ✅ publicada | Personagens em "blocos anime" |
 | [Beta 1.8](#beta-18--10112026) | 10/11/2026 | ✅ | Obstáculos animados, menos boosts |
 | [Beta 1.7](#beta-17--10112026) | 10/11/2026 | ✅ | Roleta nova com pacotes de Robux, Secret preta, segurar F |
 | [Beta 1.6b](#beta-16b--09112026) | 09/11/2026 | ✅ | Ovo pego passando com o carro |
@@ -30,12 +31,22 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 | [Beta 1.0](#beta-10-020--06112026) | 06/11/2026 | ✅ | Garagens e 7 biomas |
 | [0.1.0](#010--03112026) | 03/11/2026 | ✅ | Fundação do projeto |
 
-Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único com o terreno), `["Beta 1.6"]`
-e `["Beta 1.7"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão a partir da 1.8b.
+Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único com o terreno), `["Beta 1.6"]`,
+`["Beta 1.7"]` e `["Beta 1.8b"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão a partir da 1.8b.
 
 ---
 
 ## Repositório
+
+### 12/11/2026 — Beta 1.8d aplicada pelo Studio · Claude Code (PC do dono, com MCP)
+
+- Primeira sessão ligada ao Studio de verdade. Antes de mudar, o código do place foi comparado com `src/` por
+  checksum: os 51 scripts do jogo eram idênticos. Só os docs internos tinham mudado (entrada "1.8c").
+- `src/` atualizado à mão com as mesmas edições feitas no Studio. Os 5 scripts e os 5 docs alterados conferem
+  byte a byte com o place (checksum). Sem Python neste PC, então o `place_tool.py` não rodou.
+- `src/ServerStorage/ProjectDocs/04_EstadoAtual.luau` (novo no espelho). Tag `beta-1.8d`.
+- `PROMPTS_PARA_O_STUDIO.md`: Etapa 0 marcada como feita (virou 1.8d).
+- **Falta:** o `.rbxl` da 1.8d em `places/` (o dono baixa pelo Studio).
 
 ### 12/11/2026 — Preparação para aplicar no Studio · Claude Code (sessão do dono, nuvem)
 
@@ -98,11 +109,58 @@ este pacote vira a Beta 2.0.
 - **Interface por plataforma:** tamanhos e layouts próprios para celular, tablet, PC e TV.
 - Save passa para a versão 3 (campos novos; nada é apagado).
 
-### Beta 1.8c — planejada
+### Beta 1.8d — 12/11/2026
 
-Etapa 0 do plano da 1.9, publicada à parte: apagar o `Map` e a `SpawnLocation` duplicados, apertar o
-anti-trapaça da fuga e do recorde, corrigir o retorno do save, limpar sobras. Detalhes em
-[`docs/AUDITORIA_2026-11-11.md`](docs/AUDITORIA_2026-11-11.md).
+**Correções da auditoria de 11/11 (Etapa 0 do plano da 1.9).** Autor: Claude Code do dono, local, ligado ao
+Studio pelo MCP. No plano ela se chamava "Beta 1.8c", mas esse número já tinha sido usado no place por uma
+entrada só de documentação, então virou 1.8d.
+
+- **Mapa duplicado:** a segunda `Workspace.Map` (43.298 objetos) e a segunda `SpawnLocation` saíram do Workspace.
+  Não foram apagadas: foram movidas para `ServerStorage.Backups["Beta 1.8b"]`, porque eram idênticas às que
+  ficaram e servem de backup do mapa. As tags no Workspace voltaram ao normal: `Hazard` 51, `BoostPad` 46,
+  `LobbyLantern` 60, `RacePortal` 1.
+- **Anti-trapaça da fuga** (`Services.EscapeService`, auditoria 3): o limite agora segue a velocidade real
+  do carro (atributo `TopSpeed`) × 1,6, e não mais o teto global de 700 × 1,6 + 60 studs por tick, que
+  aceitava cerca de 1.700 studs/s. O limite funciona como um "orçamento" (token bucket) em `Config.AntiCheat`:
+  - aguenta posições chegando em rajada depois de lag (2,5 s) e o empurrão de boost ou de batida (120 studs);
+  - não deixa passar teleporte nem velocidade sustentada acima de `TopSpeed` × 1,6.
+- **Recorde de distância** (`Services.RaceService`, auditoria 4): usa o mesmo orçamento. Com velocidade
+  impossível, a corrida termina com o motivo `invalid` e a distância do salto não conta.
+  `Client.RaceUI` ganhou o texto "Impossible speed — race cancelled".
+- **Save com Robux** (`Services.DataService`, auditoria 5): `save()` só devolve `true` quando o `UpdateAsync`
+  gravou de verdade. Se a trava de outro servidor cancelar a gravação, `SaveSync` devolve `false` e o
+  `ProcessReceipt` responde `NotProcessedYet`, em vez de confirmar a compra sem salvar. O formato do save não mudou.
+- **Limpeza:** o `Sky` genérico (fica o "Simple Sunset Sky", que é o que o `AtmosphereController` cita),
+  `StarterGui.ScreenGui` vazio e `Workspace.Script` ("Hello world") foram movidos para o backup 1.8b.
+- `Shared.Config`: `Version = "Beta 1.8d"`, notas em `Updates`, tabela nova `Config.AntiCheat`.
+  `Escape.MaxForwardSpeed` ficou sem uso, mas não foi apagado.
+- Backup `ServerStorage.Backups["Beta 1.8b"]` com todos os scripts, docs, Tools e LegacyCode, mais o LEIA-ME.
+- `ProjectDocs`: entrada no `01_ChangeLog` e `04_EstadoAtual` atualizado.
+
+Testado no Play do Studio (1 jogador, carro inicial com `TopSpeed` 70):
+
+| Teste | Resultado |
+|-------|-----------|
+| Output | sem erros |
+| Corrida a 100 studs/s (abaixo do limite de 112) | aceita, 3.089 studs |
+| Teleporte de 2.000 studs na corrida | encerrada como `invalid`, distância parada em 413 |
+| Fuga com teleporte do ovo até a base | `invalid` |
+| Fuga legítima a 100 studs/s | `delivered` |
+
+Os movimentos foram feitos com `PivotTo` no cliente, não dirigindo com o teclado.
+
+Não testado:
+- save bloqueado pela trava de outro servidor (precisa de dois servidores publicados);
+- compra real com Robux;
+- carro de tier alto pegando vários boosts seguidos, dirigindo de verdade.
+
+**Salva no Studio (versão 95 do place), ainda não publicada.**
+
+### Beta 1.8c — 11/11/2026
+
+**Só documentação dentro do place.** Autor: Claude Code do dono. Criou `ProjectDocs.04_EstadoAtual` (porta de
+entrada para qualquer assistente), as regras 17 e 18 no `02_AI_Protocol` e um aviso no topo do `00_ProjectBible`.
+Nenhum script do jogo mudou. (Estava no place mas não no espelho do GitHub até a 1.8d.)
 
 ### Beta 1.8b — 10/11/2026
 

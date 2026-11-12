@@ -14,7 +14,9 @@ git pull
 
 ---
 
-## Pedido 1 — Etapa 0: correções (vira a Beta 1.8c)
+## Pedido 1 — Etapa 0: correções ✅ FEITO em 12/11/2026 (virou a Beta 1.8d)
+
+> Já aplicado (ver `CHANGELOG.md`, Beta 1.8d). Não cole de novo: comece pelo Pedido 2. Fica aqui como registro.
 
 ```text
 Leia o CLAUDE.md, docs/AUDITORIA_2026-11-11.md e planejamento/beta-1.9/07_plano_de_implementacao.md.

@@ -7,6 +7,12 @@ Studio é a fonte da verdade e esta sessão não alcança o Studio. Cada item di
 
 Severidade: 🔴 corrigir já · 🟠 corrigir antes de publicar · 🟡 melhoria
 
+> **Status em 12/11/2026 (Beta 1.8d):** os itens 1, 2, 3, 4 e 5 e a limpeza do item 7 (Sky, ScreenGui e
+> Workspace.Script) foram **corrigidos** no Studio. Ver `CHANGELOG.md`. Nos itens 3 e 4, a correção foi um
+> orçamento de velocidade (`Config.AntiCheat`) em vez da troca de 1 linha sugerida abaixo, porque a folga de
+> +60 studs por tick ainda permitia ~600 studs/s. Ainda abertos: item 6 (pendências do dono), `LobbyBuilder` e o
+> tamanho de `ServerStorage.Backups`.
+
 ---
 
 ## 🔴 1. `Workspace.Map` está DUPLICADO (43.298 objetos a mais)
