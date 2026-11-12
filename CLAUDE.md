@@ -11,7 +11,9 @@ Jogo de Roblox no estilo "Steal an Egg" / "Throw a Food For Animals" / "Kick a L
 - choca personagens de anime, que rendem $/s na garagem;
 - compra carros melhores, que abrem os próximos biomas.
 
-Versão atual: **Beta 1.8b**. Dois desenvolvedores: o dono do repositório e um amigo.
+Versão atual do jogo: **Beta 1.8b**. Próxima: **Beta 1.9**, já projetada em `planejamento/beta-1.9/`
+(ainda não aplicada). Dois desenvolvedores: o dono do repositório (LuGabriel64) e um amigo (Gabxx10),
+cada um com o seu Claude Code.
 
 ## Fonte da verdade
 
@@ -34,8 +36,14 @@ Versão atual: **Beta 1.8b**. Dois desenvolvedores: o dono do repositório e um 
 
 ## Mapa rápido
 
-Ver `docs/ESTRUTURA.md`: Explorer, serviços, biomas, loop e ações de rede.
-Problemas conhecidos: `docs/AUDITORIA_2026-11-11.md`. Histórico do chat até a Beta 1.2: `docs/HISTORICO_CHAT.md`.
+| Preciso de… | Onde está |
+|-------------|-----------|
+| Onde fica cada script, biomas, loop, ações de rede | `docs/ESTRUTURA.md` |
+| Problemas conhecidos e como corrigir | `docs/AUDITORIA_2026-11-11.md` |
+| Todas as versões, da 0.1.0 à planejada 1.9 | `CHANGELOG.md` |
+| Projeto da próxima versão + passo a passo para aplicar | `planejamento/beta-1.9/README.md` e `07_plano_de_implementacao.md` |
+| Como ligar o Claude Code ao Roblox Studio | `docs/CONECTAR_STUDIO.md` |
+| O que foi decidido no chat até a Beta 1.2 | `docs/HISTORICO_CHAT.md` |
 
 ## Regras do projeto (do dono + `02_AI_Protocol`)
 
@@ -64,6 +72,31 @@ Problemas conhecidos: `docs/AUDITORIA_2026-11-11.md`. Histórico do chat até a 
 - MCP do Studio: o `studio_id` muda entre chamadas, então chame `list_roblox_studios` antes. Scripts
   `execute_luau` devem ser idempotentes (a conexão cai no meio).
 
+## A cada pedido do dono (mesmo sem mudar o jogo)
+
+- Atualize o GitHub no mesmo turno: `CHANGELOG.md` (seção "Repositório" ou a versão do jogo), os documentos
+  afetados e este arquivo, se o estado mudou. Commit num branch, depois junte ao `main` (o dono autorizou).
+- Escreva para quem chega sem contexto: o Claude Code do outro desenvolvedor lê só o repositório.
+- Diga sempre o que foi testado e o que não foi. Código escrito sem o Studio é **rascunho** e fica em
+  `planejamento/`, nunca em `src/`.
+- O dono pode trocar de modelo ou ficar sem tokens no meio: nada pode depender da memória da conversa.
+  O que importa tem de estar num arquivo deste repositório.
+
+## Projeto de uma versão antes de ter o Studio
+
+Padrão usado na Beta 1.9 (`planejamento/beta-1.9/`):
+- documentos numerados com o desenho, um `README.md` com status e decisões em aberto, e um plano de
+  implementação em etapas com os testes de cada uma;
+- `rascunho/` com o Luau já escrito, nos caminhos de destino do Explorer;
+- `testes/` com testes da lógica pura, rodando fora do Roblox contra o `Config` real de `src/`:
+
+```bash
+python planejamento/beta-1.9/testes/run_tests.py
+```
+
+Os rascunhos evitam sintaxe exclusiva do Luau (anotações de tipo, `continue`, expressão `if`) para que os
+mesmos arquivos rodem nos testes.
+
 ## Sincronizar o repositório com o Studio (a cada versão)
 
 ```bash
@@ -75,12 +108,21 @@ git diff --stat                                                  # o que mudou d
 
 No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses pacotes.
 
-## Estado em 11/11/2026
+## Estado em 12/11/2026
 
-- O place de 11/11 tem **`Workspace.Map` e `SpawnLocation` duplicados**: 43 mil peças a mais e tags em dobro.
-  Corrigir no Studio é a prioridade nº 1 (ver auditoria, itens 1 e 2).
-- Abertos: o anti-trapaça da fuga é frouxo (auditoria 3) e o save das compras com Robux pode ser cancelado
-  pela trava da sessão (auditoria 5).
-- Pendências do dono: ProductIds dos pacotes da roleta, sons (`Config.Sounds`), créditos e `Gift.GroupId`.
-- Próximos passos de produto, já sugeridos antes: anéis de energia com combo, página Index (coleção),
-  compra de vagas na garagem, rebirth, ranking de distância (só depois da auditoria 4) e sons.
+- **Jogo:** Beta 1.8b. Ninguém subiu mudança de jogo ao GitHub desde o espelho de 11/11.
+- **Urgente no Studio:** `Workspace.Map` e `SpawnLocation` estão **duplicados** no place (43 mil peças a
+  mais, tags em dobro). É a Etapa 0 do plano (Beta 1.8c), junto com as correções 3, 4 e 5 da auditoria.
+- **Beta 1.9 projetada, não aplicada:** desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível,
+  pontos de spin, idiomas EN/PT e UI por plataforma. Lógica pura testada (80 verificações); módulos que
+  dependem do Roblox só compilados; UI, mapa e dois serviços ainda por escrever. Se o place já estiver na
+  1.9 quando for aplicar, vira 2.0.
+- **Esta sessão roda na nuvem e não alcança o Studio.** Quem aplica é um Claude Code local
+  (`docs/CONECTAR_STUDIO.md`).
+- **Pendências do dono:** IDs de música (`Config.Music`) e de sons (`Config.Sounds`), ProductIds dos
+  pacotes da roleta, créditos, `Gift.GroupId`, conferir as bandeiras do botão de idiomas.
+- **A combinar entre os dois desenvolvedores:** os dois Studios abrem o mesmo place (Team Create) ou cópias
+  separadas? Ver `docs/CONECTAR_STUDIO.md`.
+- **Ainda sem conexão:** Obsidian e os demais conectores (referências de UI). O dono vai ligar depois.
+- Ideias de produto ainda na fila: anéis de energia com combo, página Index (coleção), compra de vagas na
+  garagem, rebirth, ranking de distância (só depois da auditoria 4).
