@@ -44,6 +44,24 @@ git clone https://github.com/LuGabriel64/DriveACarForAnime.git
 O Claude Code lê o `CLAUDE.md` sozinho ao abrir a pasta, então ele já sabe as regras do projeto e onde
 está o plano.
 
+## Conexão manual (se o "Quick connect" não aparecer)
+
+Comando fornecido pelo dono em 12/11/2026 (aponta para o `mcp.bat` que o Roblox instala). Rode no
+**PowerShell ou Prompt de Comando do seu PC**, dentro da pasta do repositório — não no chat do Claude:
+
+```bash
+claude mcp add --transport stdio Roblox_Studio -- "cmd.exe" "/c" "cd /d %LOCALAPPDATA%\Roblox && .\mcp.bat"
+```
+
+```bash
+claude mcp list
+```
+
+- Por padrão a conexão vale só para a pasta onde o comando foi rodado. Para valer em qualquer pasta,
+  use `claude mcp add --scope user ...`.
+- Não testado por esta sessão (ela roda na nuvem, em Linux). Se der erro, confira se o arquivo
+  `%LOCALAPPDATA%\Roblox\mcp.bat` existe e se o Studio está aberto com o servidor MCP ligado.
+
 ## Como saber que conectou
 
 Peça: "liste os Roblox Studios conectados". A resposta deve trazer **Drive A Car For Anime**
