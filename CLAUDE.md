@@ -38,6 +38,7 @@ cada um com o seu Claude Code.
 
 | Preciso de… | Onde está |
 |-------------|-----------|
+| **Estado atual do jogo, o que foi testado e o que falta (comece aqui)** | `estado-atual/README.md` |
 | Onde fica cada script, biomas, loop, ações de rede | `docs/ESTRUTURA.md` |
 | Problemas conhecidos e como corrigir | `docs/AUDITORIA_2026-11-11.md` |
 | Todas as versões, da 0.1.0 à planejada 1.9 | `CHANGELOG.md` |
