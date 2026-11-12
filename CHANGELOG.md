@@ -37,7 +37,8 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 ---
 
 ## Repositório
-n### 12/11/2026 — Pasta `estado-atual/` · Claude Code (PC do dono)
+
+### 12/11/2026 — Pasta `estado-atual/` · Claude Code (PC do dono)
 
 - Pasta nova com o estado do jogo, o que foi feito na Beta 1.8d, os testes, as tarefas do dono, a situação
   da Beta 1.9, o histórico da sessão e as lições técnicas. Linkada no `CLAUDE.md` e no `README.md`.
