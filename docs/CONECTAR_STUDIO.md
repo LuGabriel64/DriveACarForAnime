@@ -140,6 +140,22 @@ git pull
 antes de começar, e commit + `git push` ao terminar cada etapa. Se os dois mudarem o mesmo arquivo, o Git
 avisa do conflito no `git pull`; o Claude Code resolve, mas é melhor evitar combinando quem mexe em quê.
 
+### As conversas do Claude não são compartilhadas — o repositório é
+
+Pergunta do dono em 12/11: "se eu abrir uma conversa local, meu amigo vê?"
+
+- Uma conversa **local** (PowerShell ou app Claude Desktop, aba Code, sessão local) fica guardada no PC
+  onde rodou. Outro PC não a recebe, mesmo logado na mesma conta.
+- Com o **Remote Control** ligado, a sessão local aparece na lista de sessões da conta enquanto o PC
+  estiver ligado. Mas quem abrir por lá estará **comandando o PC e o Studio do dono**, não o próprio.
+- Uma conversa da **nuvem** (claude.ai/code) aparece para quem estiver logado na mesma conta, mas não
+  alcança Studio nenhum.
+
+Por isso o projeto não depende de conversa: o que um Claude Code fez tem de estar no `01_ChangeLog`
+(Studio), no `CHANGELOG.md` e no `CLAUDE.md` (GitHub). O Claude Code do outro desenvolvedor dá
+`git pull`, lê esses arquivos e continua de onde o primeiro parou. Não confirmado na documentação
+oficial por esta sessão: o comportamento exato da lista de sessões entre dois PCs na mesma conta.
+
 ## Depois: Rojo (opcional)
 
 O `default.project.json` deste repositório já descreve onde cada pasta de `src/` fica no Studio. Com o
