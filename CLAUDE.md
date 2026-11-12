@@ -117,12 +117,15 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
   pontos de spin, idiomas EN/PT e UI por plataforma. Lógica pura testada (80 verificações); módulos que
   dependem do Roblox só compilados; UI, mapa e dois serviços ainda por escrever. Se o place já estiver na
   1.9 quando for aplicar, vira 2.0.
-- **Esta sessão roda na nuvem e não alcança o Studio.** Quem aplica é um Claude Code local
-  (`docs/CONECTAR_STUDIO.md`).
+- **A sessão da nuvem (claude.ai/code) não alcança o Studio.** Quem aplica é um Claude Code local.
+  Em 12/11 o dono ligou o Claude Code do PowerShell ao Studio; os pedidos prontos para colar lá, um por
+  etapa, estão em `planejamento/beta-1.9/PROMPTS_PARA_O_STUDIO.md`. Se você é esse Claude Code local:
+  rode `git pull`, siga o plano a partir da Etapa 0 e pare ao fim de cada etapa.
 - **Pendências do dono:** IDs de música (`Config.Music`) e de sons (`Config.Sounds`), ProductIds dos
   pacotes da roleta, créditos, `Gift.GroupId`, conferir as bandeiras do botão de idiomas.
-- **A combinar entre os dois desenvolvedores:** os dois Studios abrem o mesmo place (Team Create) ou cópias
-  separadas? Ver `docs/CONECTAR_STUDIO.md`.
+- **Colaboração:** o amigo ainda não usa o GitHub. Recomendado: Team Create para o jogo (mesmo place) e o
+  amigo como colaborador do repositório com a conta dele. GitHub sozinho não junta dois places.
+  Ver `docs/CONECTAR_STUDIO.md`.
 - **Ainda sem conexão:** Obsidian e os demais conectores (referências de UI). O dono vai ligar depois.
 - Ideias de produto ainda na fila: anéis de energia com combo, página Index (coleção), compra de vagas na
   garagem, rebirth, ranking de distância (só depois da auditoria 4).

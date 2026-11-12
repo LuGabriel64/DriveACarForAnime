@@ -37,6 +37,15 @@ e `["Beta 1.7"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão
 
 ## Repositório
 
+### 12/11/2026 — Preparação para aplicar no Studio · Claude Code (sessão do dono, nuvem)
+
+Nenhuma mudança no jogo. O dono ligou um Claude Code local (PowerShell) ao Roblox Studio.
+
+- `planejamento/beta-1.9/PROMPTS_PARA_O_STUDIO.md`: um pedido pronto por etapa (0, A, B, C, D) para colar
+  no Claude Code local.
+- `docs/CONECTAR_STUDIO.md`: comando manual do MCP, pré-requisitos no Windows (Git), e como os dois
+  desenvolvedores compartilham o jogo (Team Create) e o repositório (colaborador no GitHub).
+
 ### 12/11/2026 — Projeto da Beta 1.9 · Claude Code (sessão do dono, nuvem)
 
 Nenhuma mudança no jogo.

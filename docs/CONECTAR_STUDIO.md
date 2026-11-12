@@ -96,16 +96,49 @@ Cuidados já aprendidos, que estão no `CLAUDE.md`:
 
 ## Dois desenvolvedores, um jogo
 
-O Studio do dono e o do amigo abrem o **mesmo place** (Team Create) ou cópias diferentes? Isso muda tudo:
+São **duas coisas diferentes**, e é preciso compartilhar as duas:
 
-- **Mesmo place (Team Create):** os dois Claude Code alteram o mesmo jogo. Combinem quem mexe em quê e
-  registrem no `01_ChangeLog` antes de começar, para um não sobrescrever o outro.
-- **Cópias separadas:** cada um tem um jogo diferente e as versões divergem. Nesse caso o GitHub vira o
-  ponto de encontro: quem terminar uma versão exporta o `.rbxl`, extrai para `src/` e faz commit; o outro
-  parte dali.
+| | O que é | Como os dois compartilham |
+|---|---------|---------------------------|
+| **O jogo** | o place no Roblox (mapa, scripts, UI) | **Team Create** no Studio: os dois abrem o MESMO place |
+| **O repositório** | documentos, projeto, espelho dos scripts, backups | **GitHub**: os dois dão `git pull` e `git push` no mesmo repositório |
 
-Em qualquer caso, o ritual de cada versão é o mesmo (ver `CLAUDE.md`): backup, mudança, teste em Play,
-ChangeLog, `.rbxl` em `places/`, extração para `src/`, commit e tag.
+**Ligar os dois Claude Code ao mesmo GitHub NÃO junta os jogos.** O GitHub não muda o place de ninguém:
+se cada um tiver uma cópia separada do place, o que um fizer no Studio não aparece para o outro.
+
+### O jogo: Team Create
+
+1. O dono abre o place no Studio → botão **Collaborate** (canto superior direito) → convida a conta
+   Roblox do amigo com permissão de **Edit**.
+2. O amigo abre o place por **File → Open from Roblox → Shared With Me** (não por um arquivo `.rbxl` antigo).
+3. A partir daí os dois Studios (e os dois Claude Code) mexem no mesmo jogo, ao vivo.
+
+Com dois assistentes no mesmo place:
+- **um de cada vez por sistema**: combinem quem mexe em quê antes de começar (ex.: um faz a corrida, o
+  outro a batalha) e escrevam isso no topo do `01_ChangeLog`;
+- cada um lê a entrada mais nova do `01_ChangeLog` antes de trabalhar;
+- não rodem ao mesmo tempo ferramentas que regeneram o mapa (`WorldBuilder`).
+
+### O repositório: colaborador, não senha compartilhada
+
+O repositório é público: o amigo já consegue baixar (`git clone`). Para **enviar** mudanças, o certo é:
+
+1. O amigo cria a conta dele no GitHub.
+2. O dono abre o repositório no GitHub → **Settings → Collaborators → Add people** → convida a conta do amigo.
+3. O amigo aceita o convite e passa a dar `git push` com a conta dele.
+
+Usar a conta do dono no PC do amigo também funcionaria, mas não é recomendado: é compartilhar a senha
+(o GitHub pode pedir verificação a cada login) e todo commit fica com o mesmo nome, sem dar para saber
+quem fez o quê.
+
+Rotina dos dois, sempre:
+
+```bash
+git pull
+```
+
+antes de começar, e commit + `git push` ao terminar cada etapa. Se os dois mudarem o mesmo arquivo, o Git
+avisa do conflito no `git pull`; o Claude Code resolve, mas é melhor evitar combinando quem mexe em quê.
 
 ## Depois: Rojo (opcional)
 

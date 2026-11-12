@@ -32,6 +32,7 @@ planejamento/beta-1.9/
 ├─ 05_idiomas.md
 ├─ 06_interface_multiplataforma.md
 ├─ 07_plano_de_implementacao.md     passo a passo para aplicar no Studio, com backup e testes
+├─ PROMPTS_PARA_O_STUDIO.md         pedidos prontos, um por etapa, para colar no Claude Code local
 ├─ rascunho/                        código Luau já escrito (NÃO está em src/ nem no place)
 │  ├─ Shared/ConfigBeta19.luau      todos os números novos                    ✅ testado
 │  ├─ Shared/AnimeStats.luau        estrelas, nível, XP, renda, status        ✅ testado
