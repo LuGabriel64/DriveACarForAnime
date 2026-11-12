@@ -30,11 +30,26 @@ lógica pura, documentar e manter o GitHub.
 4. **Abra o Claude Code na pasta do repositório**:
    - app Claude Desktop → aba **Code** → sessão **local** → escolha a pasta `DriveACarForAnime`; ou
    - no terminal, dentro da pasta, rode `claude`.
-5. Se a pasta ainda não existe no PC, baixe o repositório antes:
+5. Se a pasta ainda não existe no PC, baixe o repositório antes. Abra o PowerShell e vá para Documentos
+   (não use `C:\WINDOWS\system32`, que é onde o PowerShell de administrador abre):
+
+```bash
+cd $HOME\Documents
+```
 
 ```bash
 git clone https://github.com/LuGabriel64/DriveACarForAnime.git
 ```
+
+```bash
+cd DriveACarForAnime
+```
+
+   - **"git não é reconhecido"** (aconteceu no PC do dono em 12/11): o Git não está instalado. Rode
+     `winget install --id Git.Git -e`, **feche e reabra o PowerShell** e tente de novo.
+   - **"already exists"**: já há uma pasta com esse nome em Documentos (a conversa antiga criou uma).
+     Clone com outro nome: `git clone <url> DriveACarForAnime-Git`.
+   - **"claude não é reconhecido"**: instale com `irm https://claude.ai/install.ps1 | iex` e reabra o PowerShell.
 
 6. Com o place aberto no Studio, mande ao Claude Code:
 
