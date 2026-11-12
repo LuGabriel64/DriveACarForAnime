@@ -7,7 +7,7 @@
 ## Em uma frase
 
 O jogo está na **Beta 1.8d**: as correções da auditoria foram aplicadas e testadas no Studio. A versão está
-**salva** no place, mas **ainda não publicada**. A **Beta 1.9** está só projetada: nada dela entrou no jogo.
+**salva** no place, mas **ainda não publicada**. A **Beta 1.9** está **em aplicação**: a Etapa A entrou no place (sem salvar e sem espelho); ver `07_beta-1.9_aplicacao_em_andamento.md`.
 
 ## Situação de cada coisa
 
@@ -18,8 +18,8 @@ O jogo está na **Beta 1.8d**: as correções da auditoria foram aplicadas e tes
 | Espelho `src/` no GitHub | igual ao place 1.8d, byte a byte (conferido por checksum) |
 | Tag git | `beta-1.8d` (commit `17e3993`) |
 | `.rbxl` da 1.8d em `places/` | **falta** (só o dono consegue baixar) |
-| Beta 1.9 | projetada em `planejamento/beta-1.9/`, **nenhuma etapa aplicada** |
-| Próximo passo | publicar a 1.8d, depois o **Pedido 2 (Etapa A)** da Beta 1.9 |
+| Beta 1.9 | **Etapa A aplicada no place** (não salva, telas não testadas, `src/` não espelhado); B, C e D por fazer |
+| Próximo passo | reabrir o Studio, conferir e testar a Etapa A, `save_place`, espelhar; depois a Etapa B |
 
 ## Arquivos desta pasta
 
@@ -30,6 +30,7 @@ O jogo está na **Beta 1.8d**: as correções da auditoria foram aplicadas e tes
 | [`03_tarefas_do_dono.md`](03_tarefas_do_dono.md) | Checklist do que só o dono (LuGabriel64) pode fazer |
 | [`04_beta-1.9_situacao.md`](04_beta-1.9_situacao.md) | O que existe da 1.9, o que falta, a ordem das etapas e como pedir |
 | [`05_historico_da_sessao_2026-11-12.md`](05_historico_da_sessao_2026-11-12.md) | Cada pedido do dono nesta sessão e o que o Claude Code respondeu ou fez |
+| [`07_beta-1.9_aplicacao_em_andamento.md`](07_beta-1.9_aplicacao_em_andamento.md) | **Leia antes de continuar a 1.9**: o que já está no place, o que foi testado e como seguir |
 | [`06_licoes_tecnicas.md`](06_licoes_tecnicas.md) | Pegadinhas descobertas (MCP, testes em Play, Git, Windows) |
 
 ## Como usar esta pasta (para o Claude Code)

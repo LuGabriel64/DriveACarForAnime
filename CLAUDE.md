@@ -120,7 +120,9 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
 - **Falta da 1.8d:** o `.rbxl` em `places/` (Studio > "Baixar uma cópia") e publicar o jogo.
 - **PC do dono:** não tem Python instalado, então `place_tool.py` e os testes da 1.9 não rodam lá ainda.
   Para conferir o espelho sem Python, compare checksums dos `Source` pelo MCP (como no commit da 1.8d).
-- **Beta 1.9 projetada, não aplicada:** desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível,
+- **Beta 1.9 em aplicação (12/11):** a Etapa A está no place, sem `save_place`, sem espelho em `src/` e com as
+  telas sem teste. Leia `estado-atual/07_beta-1.9_aplicacao_em_andamento.md` antes de mexer.
+- **Beta 1.9, projeto original:** desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível,
   pontos de spin, idiomas EN/PT e UI por plataforma. Lógica pura testada (80 verificações); módulos que
   dependem do Roblox só compilados; UI, mapa e dois serviços ainda por escrever. Se o place já estiver na
   1.9 quando for aplicar, vira 2.0.

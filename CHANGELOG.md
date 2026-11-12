@@ -38,6 +38,14 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 
 ## Repositório
 
+### 12/11/2026 — Beta 1.9, Etapa A aplicada no place (não salva, não espelhada) · Claude Code (PC do dono, app desktop com MCP)
+
+- Etapa A (save v3, estrelas, nível/XP, pontos de spin, idiomas EN/PT, `Platform`) aplicada no Studio pelo MCP.
+- **Sem `save_place` e sem espelho em `src/`**: o Studio parou de responder ao MCP. Detalhes, testes feitos e
+  o que falta em `estado-atual/07_beta-1.9_aplicacao_em_andamento.md`.
+- Backup `ServerStorage.Backups["Beta 1.8d"]` criado; 2 pêndulos soltos no Workspace movidos para ele.
+- Novo `tools/place/mirror_from_dump.js`: place → `src/` com Node, sem Python e sem `.rbxl` (ainda não usado de verdade).
+
 ### 12/11/2026 — Pasta `estado-atual/` · Claude Code (PC do dono)
 
 - Pasta nova com o estado do jogo, o que foi feito na Beta 1.8d, os testes, as tarefas do dono, a situação
