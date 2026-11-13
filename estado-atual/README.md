@@ -1,25 +1,26 @@
 # Estado atual do jogo — leia isto primeiro
 
-> **Última atualização:** 12/11/2026, pelo Claude Code local do dono (PC com Windows, ligado ao Roblox Studio
+> **Última atualização:** 13/11/2026, pelo Claude Code local do dono (app desktop, ligado ao Roblox Studio
 > pelo MCP). Se você é um Claude Code (app, nuvem, PC do amigo) chegando agora, esta pasta resume **tudo** o
 > que foi feito, testado, deixado de lado e o que falta. Nada aqui depende da memória de alguma conversa.
 
 ## Em uma frase
 
-O jogo está na **Beta 1.8d**: as correções da auditoria foram aplicadas e testadas no Studio. A versão está
-**salva** no place, mas **ainda não publicada**. A **Beta 1.9** está **em aplicação**: a Etapa A entrou no place (sem salvar e sem espelho); ver `07_beta-1.9_aplicacao_em_andamento.md`.
+O jogo está na **Beta 1.9**, aplicada e **salva** no place, mas **ainda não publicada**. Ela traz o desafio 1v1
+(corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas e UI por aparelho. Tudo o que roda
+com 1 jogador foi testado; **o que precisa de 2 jogadores ainda não** (ver `07_beta-1.9_aplicacao_em_andamento.md`).
 
 ## Situação de cada coisa
 
 | O quê | Estado |
 |-------|--------|
 | Jogo publicado (o que os jogadores veem) | Beta 1.8b |
-| Place salvo no Studio (Team Create, versão 95) | **Beta 1.8d** |
-| Espelho `src/` no GitHub | igual ao place na versão 105 (1.8d + Etapa A da 1.9) |
-| Tag git | `beta-1.8d` (commit `17e3993`) |
-| `.rbxl` da 1.8d em `places/` | **falta** (só o dono consegue baixar) |
-| Beta 1.9 | **Etapa A aplicada, testada, salva (versão 105) e espelhada em `src/`**; B, C e D por fazer |
-| Próximo passo | Etapa B (desafio + corrida 1v1) |
+| Place salvo no Studio (Team Create, versão 113) | **Beta 1.9** |
+| Espelho `src/` no GitHub | igual ao place na versão 113 (só `LegacyCode` e `LobbyBuilder` não foram redespejados: não mudaram) |
+| Tag git | `beta-1.9` (este commit) e `beta-1.8d` (commit `17e3993`) |
+| `.rbxl` em `places/` | **falta** (só o dono consegue baixar) |
+| Beta 1.9 | **aplicada (Etapas A, B, C e D)**; falta o teste com 2 jogadores |
+| Próximo passo | o dono testa com 2 jogadores (Test > Start, 2 Players), escolhe as músicas e publica |
 
 ## Arquivos desta pasta
 

@@ -36,7 +36,10 @@ local function refresh()
 	local meRacing = isRacing(lp)
 	for _, p in ipairs(Players:GetPlayers()) do
 		if p ~= lp then
-			local hide = meRacing or isRacing(p)
+			-- Beta 1.9: adversários do MESMO desafio 1v1 (mesmo MatchId ~= 0) se veem; os carros continuam sem colidir
+			local myMatch = lp:GetAttribute("MatchId") or 0
+			local sameMatch = myMatch ~= 0 and (p:GetAttribute("MatchId") or 0) == myMatch
+			local hide = (meRacing or isRacing(p)) and not sameMatch
 			setHidden(p.Character, hide)
 			setHidden(cars and cars:FindFirstChild("Car_" .. p.Name), hide)
 		end

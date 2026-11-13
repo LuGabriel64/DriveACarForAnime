@@ -353,5 +353,7 @@ return {
 
 	-- ============================================================ EXTRAS (textos acrescentados ao aplicar a Beta 1.9 no Studio)
 	["⬆️ LEVEL UP!"] = "⬆️ SUBIU DE NÍVEL!",
+	["Forfeit"] = "Desistência",
+	["Disqualified"] = "Desclassificado",
 	['🐾 Equipped <font color="#57e63c">%d/%d</font>   ⚡ <font color="#57e63c">$%s/s</font>'] = '🐾 Equipados <font color="#57e63c">%d/%d</font>   ⚡ <font color="#57e63c">$%s/s</font>',
 }

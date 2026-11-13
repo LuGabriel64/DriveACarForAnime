@@ -1,7 +1,59 @@
-# Beta 1.9 — aplicação em andamento (12/11/2026)
+# Beta 1.9 — aplicação (12 e 13/11/2026)
 
-> Escrito pelo Claude Code local do dono (app desktop, MCP `Roblox_Studio`). **Leia antes de continuar a 1.9.**
-> A sessão parou porque o Studio deixou de responder ao MCP logo depois de um Play de teste.
+> Escrito pelo Claude Code local do dono (app desktop, MCP `Roblox_Studio`). **Leia antes de mexer na 1.9.**
+> As atualizações estão da mais nova (topo) para a mais antiga.
+
+## ATUALIZAÇÃO 13/11/2026 (2) — Etapas B, C e D: Beta 1.9 completa no place (versão 113)
+
+**O que entrou:**
+- Servidor: `VersusService` (convite, etapas, lojas de F1 e de vitória, recompensas), `DuelRaceService`
+  (corrida 1v1), `BattleSim` + `BattleService` (batalha); `RaceService` com o modo Duel; `CarService` com o
+  carro de F1; `ZoneService`/`EscapeService` respeitando o modo Duel.
+- Cliente: `VersusUI` (painel de desafio, cartão de convite, faixa Lobby/Vote/Prep, resultado, lojas, escolha do
+  lutador), `DuelRaceUI` (placar e colapso), `BattleUI` (cena da luta), `MusicController`; dock com os botões
+  CORRIDA 1v1 e BATALHA; `GhostController` mostra o adversário do mesmo desafio; `BiomeEggs` some com o ovo no
+  modo Duel.
+- Mapa: `ServerStorage.Tools.VersusBuilder` → `Workspace.Map.Versus` (Hall + 3 arenas).
+- Etapa D: `Config.Version = "Beta 1.9"`, nota em `Config.Updates`, e entradas novas no `01_ChangeLog`, na
+  `00_ProjectBible` (10g), no `02_AI_Protocol` (regras 19 a 23) e no `04_EstadoAtual`.
+
+**Testado em Play (1 jogador):**
+- o jogo sobe sem erros como "Beta 1.9" e todas as telas novas são criadas;
+- lojas: comprar sem dinheiro dá `NoCash`, item inválido dá `Invalid`, equipar o que não tem dá `NotOwned`;
+- convites: convidar a si mesmo e modo inválido são recusados; a lista de jogadores vem vazia;
+- o painel de desafio aparece em português;
+- **cena da batalha**, com um roteiro gerado pelo `BattleSim` real no servidor e enviado pelo `Remotes.Event`
+  (como o `BattleService` faz): câmera girando, lutadores caindo, barras de vida, energia e escudo, golpes,
+  ULT, K.O., vitória e, no fim, câmera e HUD de volta;
+- **placar e colapso da corrida 1v1**, numa corrida solo com os atributos do modo Duel postos só no cliente:
+  placar "1º/2º, +183 m à frente, Colapso: 63 m", parede de destruição e tela avermelhada.
+
+**Corrigido depois do teste:** os estandartes da arena 1 tapavam a câmera; a câmera lateral da luta foi
+afastada (os pilares cobriam a vista); o aviso "Hatch eggs to earn money!" do HUD passou a ser traduzido.
+
+**NÃO testado (precisa de 2 jogadores; o MCP só abre Play de 1):**
+- convite → aceitar/recusar/expirar/cancelar;
+- Versus Hall, READY, votação, preparação e LEAVE em cada etapa;
+- corrida 1v1 de verdade (grid lado a lado, F1, colapso decidido pelo servidor, chegada, tempo máximo);
+- batalha disparada pelo `BattleService` (escolha do lutador, plateia), recompensas (XP, dinheiro, +10 pontos)
+  e o limite de 10 partidas contra o mesmo adversário.
+
+**Também não testado:** dirigir o F1 (só o modelo foi montado: 34 peças); celular, tablet e TV; música (os IDs
+em `Config.Music` estão vazios).
+
+**Como testar com 2 jogadores:** no Studio, aba Test → Clients and Servers → 2 Players → Start. Em cada janela:
+escolher garagem → CORRIDA 1v1 → INVITE no outro → ACCEPT → READY nos dois → votar → aguardar 30 s. Olhe o
+Output do servidor: `[DuelRaceService]` e `[BattleService]` imprimem o resumo de cada partida (a batalha imprime
+a semente; com ela, `BattleSim.Run(a, b, semente)` reproduz a mesma luta).
+
+**Pontos de atenção para quem continuar:**
+- No teste por MCP, escolha a garagem pelo menu (clicar em JOGAR e ESCOLHER por coordenadas). Se usar o remote
+  `ClaimGarage` e apagar o `StartMenu` à mão, o giro de câmera do menu continua rodando e briga com a câmera
+  da batalha.
+- Para testar a batalha sem 2 jogadores: no contexto **Server**, `require` do `BattleSim` (é biblioteca, sem
+  Net, então não quebra nada), gere o roteiro e envie com
+  `game.ReplicatedStorage.Remotes.Event:FireClient(p, "BattleScript", roteiro)`. **Não** dê `require` nos
+  outros `Services` durante o Play (regra 11).
 
 ## ATUALIZAÇÃO 13/11/2026 — Etapa A testada, salva e espelhada
 

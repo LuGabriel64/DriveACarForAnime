@@ -4,6 +4,27 @@
 ]]
 return {
 	{
+		Date = "2026-11-13", Author = "Claude Code (Lu, via MCP; Fable 5.2 e depois Opus 5.5)", Version = "Beta 1.9",
+		Summary = "Beta 1.9 inteira (Etapas A, B, C e D do planejamento/beta-1.9 do GitHub): estrelas 0-5 e nível 1-50 nos personagens, XP, pontos de spin, idiomas EN/PT, UI por aparelho, DESAFIO 1v1 (convite, Versus Hall, votação, preparação, resultado), CORRIDA 1v1 com carros de F1 e colapso desde a largada, BATALHA DE ANIME simulada no servidor e encenada no cliente, lojas de F1 e de animações de vitória, música. Save Version 3 (só campos novos).",
+		Files = {
+			"ServerStorage.Backups['Beta 1.8d'] (NOVO) + StrayFromWorkspace: 2 Hazard_pendulum que estavam SOLTOS no Workspace (fora da pista) foram movidos para lá",
+			"ReplicatedStorage.Shared: ConfigBeta19, AnimeStats, Locale (+ pt) NOVOS | Config: liga o ConfigBeta19, Version 1.9, Updates | CarFactory: corpo 'f1'",
+			"ServerScriptService.Services NOVOS: ProgressService, VersusService, DuelRaceService, BattleSim, BattleService (Main.ORDER atualizado)",
+			"Services alterados: DataService (save v3, Lang, SetLanguage), FarmService (AnimeStats, Refresh, CashPerSec, placa com estrelas), EggRoll/IncubatorService (Stars), WheelService (AddPoints, +2/min, WheelPoints), RaceService (Start com opts, modo Duel, OnEnded), CarService (Spawn com F1, bloqueios em partida), ZoneService/EscapeService (modo Duel, Locale)",
+			"StarterPlayerScripts.Client NOVOS: Platform, VersusUI, DuelRaceUI, BattleUI, MusicController (ClientMain.ORDER atualizado)",
+			"Client alterados: UIKit (Locale.Bind, UIKit.T, Platform), StartMenu (botão Languages + idioma no Configs), InventoryPanel (★, nível, XP, Poder, SET PARTNER), WheelPanel (barra de pontos), LobbyDock (RACE 1v1, BATTLE), HUD/RaceUI/Notify/EggRouletteUI/BiomeEggs/GhostController",
+			"ServerStorage.Tools: VersusBuilder (NOVO; atalhos WorldBuilder.BuildVersusHall/BuildArena/BuildVersus) e MirrorDump (NOVO; espelho para o GitHub sem Python)",
+			"Workspace.Map.Versus (NOVO): Hall em (1400,0,3200) + Arena_sky_ring / Arena_moon_dojo / Arena_lava_arena em x=-1400 (~250 peças no total)",
+		},
+		Notes = {
+			"Testado em Play (1 jogador): save v3 e renda igual à de antes; troca de idioma ao vivo; mochila com estrelas/XP/Poder; barra de pontos de spin; fuga do ovo completa com estrelas; dock com os 2 botões novos; painel de desafio; validações do servidor (sem dinheiro, item inválido, convidar a si mesmo, modo inválido, PickFighter fora de partida); cena da batalha com roteiro REAL do BattleSim (entrada, golpes, ULT, K.O., vitória, limpeza); placar e colapso da corrida 1v1 (com o modo Duel marcado só no cliente).",
+			"NÃO TESTADO: qualquer coisa com 2 jogadores (convite, aceite, Versus Hall, votação, corrida 1v1 de verdade, batalha disparada pelo BattleService, recompensas, saída no meio). O MCP só abre Play de 1 jogador: use Test > Start com 2 Players no Studio, ou o jogo publicado com 2 contas.",
+			"NÃO TESTADO: dirigir o carro de F1 (só o modelo foi montado); celular/tablet/TV; música (IDs em Config.Music estão vazios: falta o dono escolher).",
+			"Diferença do projeto: o EscapeFX NÃO foi generalizado (risco de quebrar a fuga do ovo). O colapso da corrida 1v1 tem visual próprio e mais simples em Client.DuelRaceUI.",
+			"Salvo no Studio (Team Create), NÃO publicado.",
+		},
+	},
+	{
 		Date = "2026-11-12", Author = "Claude Code (Lu, via MCP)", Version = "Beta 1.8d",
 		Summary = "Etapa 0 do plano da Beta 1.9 (auditoria de 11/11): Map/SpawnLocation duplicados fora do Workspace, anti-trapaça de velocidade na fuga e no recorde, save que só confirma quando grava, limpeza. (Era 'Beta 1.8c' no plano do GitHub; virou 1.8d porque 1.8c já foi usada na entrada de docs abaixo.)",
 		Files = {

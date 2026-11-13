@@ -11,6 +11,7 @@ local Net = require(RS:WaitForChild("Shared"):WaitForChild("Net"))
 -- Beta 1.3: IncubatorService (choco na base) e EscapeService (ovo do bioma + fuga). EggRoll é biblioteca (sem Init).
 local ORDER = { "DataService", "FarmService", "CarService", "ZoneService", "RaceService", "EggService", "IncubatorService", "EscapeService", "WheelService",
 	"ProgressService", -- Beta 1.9: XP / nível / parceiro dos personagens
+	"VersusService", "DuelRaceService", "BattleService", -- Beta 1.9: desafio 1v1 (convite/etapas), corrida 1v1 e batalha de anime
 	"AnimeService", "GiftService" } -- Beta 1.5: + WheelService (roleta)
 local loaded = {}
 for _, name in ipairs(ORDER) do

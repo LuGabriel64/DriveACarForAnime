@@ -33,6 +33,8 @@ if Config.Features.CaptureNodes then
 end
 for _, n in ipairs({ "GhostController", "RaceUI" }) do table.insert(ORDER, n) end -- Beta 1.2: corrida solo
 table.insert(ORDER, "HazardController") -- Beta 1.8: obstáculos animados (pêndulo, hélice, pistão, laser, gêiser)
+-- Beta 1.9: desafio 1v1 (música, convite/etapas/lojas, placar da corrida, cena da batalha). Antes do StartMenu.
+for _, n in ipairs({ "MusicController", "VersusUI", "DuelRaceUI", "BattleUI" }) do table.insert(ORDER, n) end
 table.insert(ORDER, "StartMenu")
 
 for _, name in ipairs(ORDER) do

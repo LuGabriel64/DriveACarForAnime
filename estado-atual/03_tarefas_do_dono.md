@@ -3,7 +3,22 @@
 Coisas que **só você** pode fazer. Os assistentes não alcançam o Creator Hub, não publicam sem você pedir e
 não baixam o place. Marque com `[x]` quando fizer (ou peça ao Claude Code para marcar).
 
-## Agora (Beta 1.8d)
+## Agora (Beta 1.9)
+
+- [ ] **Testar com 2 jogadores** no Studio: aba Test > Clients and Servers > 2 Players > Start. Em cada janela,
+      escolher garagem; numa delas, CORRIDA 1v1 > INVITE > na outra, ACEITAR; READY nos dois; votar; esperar a
+      corrida. Depois repetir com BATALHA (os dois precisam de pelo menos 1 personagem). Anote o que estranhar
+      e cole para o Claude Code. Passo a passo em `estado-atual/07_beta-1.9_aplicacao_em_andamento.md`.
+- [ ] **Dirigir o carro de F1** numa corrida 1v1 e dizer se está gostoso de pilotar (velocidade, curva).
+- [ ] **Escolher as músicas** (Creator Store > Audio) e colar os IDs em `Config.Music` (dentro do
+      `ReplicatedStorage.Shared.ConfigBeta19`): Race, Battle, VersusLobby e Victory. Sem ID, fica em silêncio.
+- [ ] **Abrir o jogo no celular** (ou no emulador do Studio: Test > Device) e ver se placar, barras e botões
+      estão bons de tamanho.
+- [ ] **Preços** dos F1 ($150K a $5B) e das animações de vitória ($25K a $20B): ajuste jogando.
+- [ ] **Publicar** quando os testes acima estiverem bons. Até lá, os jogadores veem a Beta 1.8b.
+- [ ] **Baixar o `.rbxl`** (Arquivo > "Baixar uma cópia") como `places/DriveACarForAnime_Beta1.9_2026-11-13.rbxl`.
+
+## Da Beta 1.8d (ainda valem)
 
 - [ ] **Jogar um pouco no Studio** (Play) e ver se nada quebrou: menu, garagem, corrida, pegar o ovo, fuga,
       roleta da sorte.

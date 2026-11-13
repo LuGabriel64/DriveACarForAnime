@@ -57,7 +57,7 @@ local function countdown(info)
 	local overlay = new("Frame", { Name = "Countdown", Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, ZIndex = 45 }, gui)
 	local big = UIKit.Text(overlay, { Text = "", TextSize = 150, Size = UDim2.fromOffset(500, 170), Position = UDim2.fromScale(0.5, 0.38),
 		AnchorPoint = Vector2.new(0.5, 0.5), Stroke = 9, ZIndex = 46 })
-	local sub = UIKit.Text(overlay, { Text = UIKit.T("SLOT %d  •  SOLO RACE", info.Slot), TextSize = 26, Size = UDim2.fromOffset(500, 34),
+	local sub = UIKit.Text(overlay, { Text = info.Mode == "Duel" and UIKit.T("🏁 1v1 RACE") or UIKit.T("SLOT %d  •  SOLO RACE", info.Slot), -- Beta 1.9: corrida 1v1 TextSize = 26, Size = UDim2.fromOffset(500, 34),
 		Position = UDim2.new(0.5, 0, 0.38, 100), AnchorPoint = Vector2.new(0.5, 0.5), Stroke = 3, ZIndex = 46 })
 	local colors = { [3] = Color3.fromRGB(255, 80, 80), [2] = Color3.fromRGB(255, 190, 40), [1] = Color3.fromRGB(255, 240, 80) }
 	local last
@@ -143,14 +143,18 @@ function RaceUI.Init()
 	local function onState()
 		local st = lp:GetAttribute("RaceState") or "Lobby"
 		raceBtn.Visible = st == "Lobby" and not Config.Features.LobbyDock -- Beta 1.4: o PLAY do dock substitui
-		panel.Visible = st ~= "Lobby"
+		panel.Visible = st ~= "Lobby" and lp:GetAttribute("RaceMode") ~= "Duel" -- Beta 1.9: no 1v1 quem mostra é o placar do DuelRaceUI
 		if st ~= "Lobby" then UIKit.Pop(panel, 1.1) end
 	end
 	lp:GetAttributeChangedSignal("RaceState"):Connect(onState)
 	onState()
 
 	Net.On("RaceCountdown", function(info) task.spawn(countdown, info) end)
-	Net.On("RaceEnded", function(s) task.spawn(showResults, s) end)
+	Net.On("RaceEnded", function(s)
+		-- Beta 1.9: a corrida 1v1 tem a própria tela de resultado (Client.VersusUI); aqui só zera o cronômetro
+		if type(s) == "table" and s.Mode == "Duel" then startClock = nil; return end
+		task.spawn(showResults, s)
+	end)
 
 	-- atualiza o painel e verifica o PORTAL (entrar nele inicia a corrida)
 	RunService.Heartbeat:Connect(function()
@@ -162,6 +166,7 @@ function RaceUI.Init()
 			return
 		end
 		if starting then return end
+		if (lp:GetAttribute("MatchId") or 0) ~= 0 then return end -- Beta 1.9: em desafio 1v1 o portal não inicia corrida solo
 		local pos
 		if Drive.IsDriving() then pos = Drive.GetPosition() else
 			local root = lp.Character and lp.Character:FindFirstChild("HumanoidRootPart")

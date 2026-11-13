@@ -11,8 +11,8 @@ Jogo de Roblox no estilo "Steal an Egg" / "Throw a Food For Animals" / "Kick a L
 - choca personagens de anime, que rendem $/s na garagem;
 - compra carros melhores, que abrem os próximos biomas.
 
-Versão atual do jogo: **Beta 1.8d** (salva no Studio; a publicada ainda é a 1.8b). Próxima: **Beta 1.9**, já projetada em `planejamento/beta-1.9/`
-(ainda não aplicada). Dois desenvolvedores: o dono do repositório (LuGabriel64) e um amigo (Gabxx10),
+Versão atual do jogo: **Beta 1.9** (salva no Studio em 13/11; a publicada ainda é a 1.8b). Projeto e plano em
+`planejamento/beta-1.9/`; o que foi aplicado, testado e não testado em `estado-atual/07_beta-1.9_aplicacao_em_andamento.md`. Dois desenvolvedores: o dono do repositório (LuGabriel64) e um amigo (Gabxx10),
 cada um com o seu Claude Code.
 
 ## Fonte da verdade
@@ -108,6 +108,13 @@ git diff --stat                                                  # o que mudou d
 ```
 
 No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses pacotes.
+
+## Estado em 13/11/2026
+
+- **Jogo:** Beta 1.9 aplicada e salva (versão 113 do place, Team Create), **não publicada**. Desafio 1v1 (corrida de
+  F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas EN/PT e UI por aparelho. Testado com 1 jogador;
+  **falta o teste com 2 jogadores** (o MCP só abre Play de 1). Próximo número de versão: **Beta 1.9b** (ajustes) ou 2.0.
+- O histórico abaixo (12/11) continua valendo para o resto.
 
 ## Estado em 12/11/2026
 

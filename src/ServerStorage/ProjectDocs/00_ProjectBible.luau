@@ -201,6 +201,20 @@
    GUARDADOS: menu lateral do HUD e botão RACE (Config.Features.LobbyDock = false traz de volta);
      WorldBuilder.BuildLobbyBeta12 (lobby antigo). BACKUP: ServerStorage.Backups["Beta 1.3"] (inclui LobbyMap).
 
+10g. BETA 1.9 (13/11/2026) — DESAFIO 1v1, ESTRELAS, NÍVEL, IDIOMAS  (vale por cima das seções anteriores)
+   Projeto completo no GitHub: planejamento/beta-1.9/ (documentos 01 a 07).
+   PERSONAGENS: Stars 0..5 (sorteadas no ovo, +7,5% cada) e Level 1..50 (XP de partidas 1v1; +2% status e +1% renda
+     por nível). Contas em Shared.AnimeStats (servidor e cliente usam o mesmo módulo). Save Version 3.
+   PONTOS DE SPIN: +2/min jogado, +10 por vitória 1v1; 100 = 1 giro extra (WheelService.AddPoints).
+   IDIOMAS: Shared.Locale (+ pt). Texto em inglês = chave. Cliente: UIKit.T / Locale.Bind; servidor: Locale.For(player,...).
+   PLATAFORMA: Client.Platform (Phone/Tablet/Desktop/Console) -> Platform.Apply(obj, "Overlay"|"Hud"|"Panel").
+   DESAFIO 1v1 (Services.VersusService): convite -> Lobby no Versus Hall -> Vote -> Prep (30 s) -> Playing -> Result.
+     Modos registrados: "Race" (DuelRaceService: mesma pista, RaceMode "Duel", carros de F1, colapso desde a largada,
+     sem ovo e sem bloqueio de tier) e "Battle" (BattleService: BattleSim no servidor decide; BattleUI encena).
+     Recompensas: vencedor XP 100 + 2 min de renda + 10 pontos; perdedor XP 40; depois de 10 partidas contra o
+     mesmo adversário na sessão, só XP. Lojas: data.Versus.F1 / data.Versus.Fx (Cash).
+   MAPA: Workspace.Map.Versus (Tools.VersusBuilder). Hall em Config.Versus.HallOrigin; arenas em Config.Versus.Battle.Arenas.
+
 11. ROADMAP
    Fase 1 (atual): base jogável (dirigir, capturar, fazenda, garagem, 3 biomas, HUD, gift).
    Fase 2: playtest + balanceamento, sons, Index, compra de slots, rebirth, ganho offline, mais animes.

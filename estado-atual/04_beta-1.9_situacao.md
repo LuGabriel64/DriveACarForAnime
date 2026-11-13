@@ -1,6 +1,10 @@
-# Beta 1.9 — situação em 12/11/2026
+# Beta 1.9 — situação
 
-## Resumo
+> **13/11/2026: APLICADA no place (versão 113), não publicada.** Todas as etapas (0, A, B, C e D) foram feitas.
+> O que foi testado e o que falta: `07_beta-1.9_aplicacao_em_andamento.md`. O texto abaixo é o registro de
+> 12/11, de antes da aplicação.
+
+## Resumo (12/11)
 
 **Nada da Beta 1.9 está no jogo.** Ela foi projetada em sessões na nuvem (11 e 12/11), sem acesso ao Studio.
 O que aconteceu "durante a 1.9" até agora:

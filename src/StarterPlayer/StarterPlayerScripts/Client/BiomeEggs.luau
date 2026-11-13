@@ -13,6 +13,7 @@ local RunService = game:GetService("RunService")
 local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS:WaitForChild("Shared"):WaitForChild("Config"))
 local EggVisuals = require(script.Parent.EggVisuals)
+local UIKit = require(script.Parent.UIKit) -- Beta 1.9: UIKit.T (idiomas)
 
 local lp = Players.LocalPlayer
 local BiomeEggs = {}
@@ -85,14 +86,16 @@ function BiomeEggs.Init()
 		for part, n in pairs(nodes) do
 			if not n.Prompt or not n.Prompt.Parent then n.Prompt = part:FindFirstChild("GrabPrompt", true) end
 			local locked = n.Biome.Tier > tier
-			local show = carrying ~= n.Biome.Id
+			-- Beta 1.9: na corrida 1v1 (RaceMode "Duel") não existe ovo: some o ovo, a placa e o prompt
+			local show = carrying ~= n.Biome.Id and lp:GetAttribute("RaceMode") ~= "Duel"
 			if show and n.Folder.Parent ~= fx then n.Folder.Parent = fx elseif not show and n.Folder.Parent then n.Folder.Parent = nil end
 			if n.Prompt then n.Prompt.Enabled = show and racing and not escaping and not locked and not full end
 			if show then
-				if locked then n.Top.Text, n.Sub.Text = "🔒 TIER " .. n.Biome.Tier, "Needs a Tier " .. n.Biome.Tier .. " car"
-				elseif full then n.Top.Text, n.Sub.Text = "GIANT EGG!", "🥚 Incubator full!"
-				elseif escaping then n.Top.Text, n.Sub.Text = "GIANT EGG!", "One egg at a time!"
-				else n.Top.Text, n.Sub.Text = "GIANT EGG!", "Stop & hold F to grab!" end
+				local T = UIKit.T -- Beta 1.9: placa no idioma do jogador (a placa é local de cada cliente)
+				if locked then n.Top.Text, n.Sub.Text = T("🔒 TIER %d", n.Biome.Tier), T("Needs a Tier %d car", n.Biome.Tier)
+				elseif full then n.Top.Text, n.Sub.Text = T("GIANT EGG!"), T("🥚 Incubator full!")
+				elseif escaping then n.Top.Text, n.Sub.Text = T("GIANT EGG!"), T("One egg at a time!")
+				else n.Top.Text, n.Sub.Text = T("GIANT EGG!"), T("Stop & hold F to grab!") end
 				local d = camPos and (camPos - n.Base).Magnitude or 0
 				if d < 700 then
 					n.Model:PivotTo(CFrame.new(n.Base + Vector3.new(0, 2 + math.sin(t * 1.8 + n.Seed) * 1.4, 0))

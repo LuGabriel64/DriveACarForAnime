@@ -7,6 +7,12 @@
 	  * Botão EXIT  (ação "ExitCar"): o jogador desce; o carro fica parado onde está.
 	  * "GoHome": dirigindo => leva o carro à garagem; a pé => leva o jogador à garagem.
 	A FÍSICA roda no cliente dono do carro (DriveController); aqui só ficam dono de rede e atributos.
+
+	Beta 1.9 (corrida 1v1):
+	  * Spawn(player, cf, seat, cfgOverride): cfgOverride = um carro de Config.F1Cars. O modelo nasce com o atributo
+	    F1 = true e com os status do F1 (sem motor/upgrade). Sem override, tudo como antes.
+	  * Durante um desafio (atributo MatchId ~= 0) não dá para comprar, trocar ou melhorar carro: isso recriaria o
+	    modelo no meio da partida.
 ]]
 local Players = game:GetService("Players")
 local PhysicsService = game:GetService("PhysicsService")
@@ -76,7 +82,7 @@ function CarService.RefreshAttributes(player)
 	player:SetAttribute("TopSpeed", math.floor(stats.MaxSpeed))
 	player:SetAttribute("EngineLevel", lvl)
 	local m = cars[player]
-	if m then applyStats(m, stats) end
+	if m and not m:GetAttribute("F1") then applyStats(m, stats) end -- Beta 1.9: o F1 guarda os próprios status
 end
 
 function CarService.SendState(player)
@@ -135,11 +141,16 @@ function CarService.Despawn(player)
 end
 
 -- seat = true senta o jogador; false deixa o carro estacionado.
-function CarService.Spawn(player, atCF, seat)
+function CarService.Spawn(player, atCF, seat, cfgOverride)
 	local data = DataService.Get(player); if not data then return end
 	CarService.Despawn(player)
 	local cfg, stats = statsFor(data)
+	if cfgOverride then -- Beta 1.9: carro de Fórmula 1 da corrida 1v1 (status direto do Config.F1Cars)
+		cfg = cfgOverride
+		stats = { MaxSpeed = math.min(cfg.MaxSpeed, Config.SpeedCap), Accel = cfg.Accel, Turn = cfg.Turn, Grip = cfg.Grip }
+	end
 	local model = CarFactory.Build(cfg, false)
+	if cfgOverride then model:SetAttribute("F1", true) end
 	model.Name = "Car_" .. player.Name
 	model:SetAttribute("OwnerUserId", player.UserId)
 	applyStats(model, stats)
@@ -292,6 +303,7 @@ function CarService.Init()
 		local data, cfg = DataService.Get(player), type(carId) == "string" and Config.CarById[carId]
 		if not data or not cfg then return { ok = false, err = "Invalid" } end
 		if player:GetAttribute("EscapeState") == "Escaping" then return { ok = false, err = "Escaping" } end -- Beta 1.3
+		if (player:GetAttribute("MatchId") or 0) ~= 0 then return { ok = false, err = "InMatch" } end -- Beta 1.9
 		if data.Cars[carId] then return { ok = false, err = "Owned" } end
 		if cfg.Tier > bestTier(data) + 1 then return { ok = false, err = "Locked" } end
 		if not DataService.TrySpend(player, cfg.Price) then return { ok = false, err = "NoCash" } end
@@ -305,6 +317,7 @@ function CarService.Init()
 		if not data or type(carId) ~= "string" or not data.Cars[carId] then return { ok = false, err = "Invalid" } end
 		-- Beta 1.3: trocar de carro recria o modelo => proibido no meio de uma fuga com o ovo
 		if player:GetAttribute("EscapeState") == "Escaping" then return { ok = false, err = "Escaping" } end
+		if (player:GetAttribute("MatchId") or 0) ~= 0 then return { ok = false, err = "InMatch" } end -- Beta 1.9
 		if data.CarId == carId then return { ok = true } end
 		data.CarId = carId
 		refresh(player, true)
@@ -314,6 +327,7 @@ function CarService.Init()
 		local data = DataService.Get(player); if not data then return { ok = false } end
 		local entry = data.Cars[data.CarId]
 		if not entry then return { ok = false } end
+		if (player:GetAttribute("MatchId") or 0) ~= 0 then return { ok = false, err = "InMatch" } end -- Beta 1.9
 		if entry.Engine >= Config.Engine.MaxLevel then return { ok = false, err = "Max" } end
 		if not DataService.TrySpend(player, Config.EngineCost(entry.Engine, (Config.CarById[data.CarId] or Config.Cars[1]).Tier)) then return { ok = false, err = "NoCash" } end
 		entry.Engine += 1

@@ -40,6 +40,10 @@ local ERR = {
 	AlreadyRacing = "You're already racing!", Dead = "Wait to respawn!",
 }
 local function inLobby() return (lp:GetAttribute("RaceState") or "Lobby") == "Lobby" end
+-- Beta 1.9: largura de desenho do dock (era 720; entraram os botões RACE 1v1 e BATTLE). O fit() reduz em telas estreitas.
+local DOCK_W = 920
+-- Beta 1.9: num desafio 1v1 (sala de espera, votação, resultado) o dock some: quem manda é a faixa do VersusUI.
+local function inMatch() return (lp:GetAttribute("MatchId") or 0) ~= 0 end
 
 -- ---------------------------------------------------------------- botão flutuante do dock
 local function dockButton(parent, p)
@@ -189,12 +193,12 @@ function LobbyDock.Init()
 	if not Config.Features.LobbyDock then return end
 	local gui = UIKit.GetGui()
 	local hud = gui:WaitForChild("HUD", 10) or gui
-	dock = new("Frame", { Name = "LobbyDock", Size = UDim2.fromOffset(720, 132), Position = UDim2.new(0.5, 0, 1, -12), AnchorPoint = Vector2.new(0.5, 1),
+	dock = new("Frame", { Name = "LobbyDock", Size = UDim2.fromOffset(DOCK_W, 132), Position = UDim2.new(0.5, 0, 1, -12), AnchorPoint = Vector2.new(0.5, 1),
 		BackgroundTransparency = 1, ZIndex = 5 }, hud)
 	dockScale = new("UIScale", { Scale = 1 }, dock)
 	local function fit()
 		local vs = workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1280, 720)
-		dockScale.Scale = math.clamp(math.min((vs.X - 24) / 720, (vs.Y * 0.24) / 132), 0.45, 1)
+		dockScale.Scale = math.clamp(math.min((vs.X - 24) / DOCK_W, (vs.Y * 0.24) / 132), 0.4, 1)
 	end
 	fit()
 	workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(fit)
@@ -212,6 +216,11 @@ function LobbyDock.Init()
 		VerticalAlignment = Enum.VerticalAlignment.Bottom, Padding = UDim.new(0, 12), SortOrder = Enum.SortOrder.LayoutOrder }, row)
 	local small = UDim2.fromOffset(88, 84)
 
+	-- Beta 1.9: desafios 1v1 (à esquerda). Abrem o painel "Challenge a Player" do Client.VersusUI.
+	dockButton(row, { Name = "Race1v1", Icon = "🏁", Label = "RACE 1v1", Order = -1, Size = small, LabelSize = 15,
+		C1 = Color3.fromRGB(255, 214, 110), C2 = Color3.fromRGB(230, 90, 30), OnClick = function() require(script.Parent.VersusUI).OpenChallenge("Race") end })
+	dockButton(row, { Name = "Battle", Icon = "⚔️", Label = "BATTLE", Order = 0, Size = small,
+		C1 = Color3.fromRGB(255, 130, 130), C2 = Color3.fromRGB(200, 30, 60), OnClick = function() require(script.Parent.VersusUI).OpenChallenge("Battle") end })
 	dockButton(row, { Name = "Garage", Icon = "🚘", Label = "GARAGE", Order = 1, Size = small,
 		C1 = Color3.fromRGB(110, 230, 255), C2 = Color3.fromRGB(40, 110, 255), OnClick = function() InventoryPanel.OpenTab("Cars") end })
 	local inv = dockButton(row, { Name = "Inventory", Icon = "🎒", Label = "INVENTORY", Order = 2, Size = small, LabelSize = 15,
@@ -264,8 +273,9 @@ function LobbyDock.Init()
 	buildTransition()
 
 	-- estado: dock só no lobby | cortina rápida quando a corrida começa pelo PORTAL (sem clicar em PLAY)
-	local function onState() setShown(inLobby()) end
+	local function onState() setShown(inLobby() and not inMatch()) end
 	lp:GetAttributeChangedSignal("RaceState"):Connect(onState)
+	lp:GetAttributeChangedSignal("MatchId"):Connect(onState)
 	onState()
 	Net.On("RaceCountdown", function()
 		if busy or covered then return end

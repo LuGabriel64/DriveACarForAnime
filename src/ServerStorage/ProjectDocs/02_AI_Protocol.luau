@@ -41,6 +41,15 @@
      o que o outro fez; não desfaça mudanças recentes do outro sem registrar o motivo.
  12. Material de terreno: confira se o Enum.Material existe antes de usar (ex.: "CorrugatedMetal" NÃO existe
      como Material; use Enum.Material.Metal ou um MaterialVariant).
+ 19. (Beta 1.9) TEXTO DE JOGADOR: escreva em inglês e acrescente a tradução em Shared.Locale.pt. Cliente: UIKit.T("...%s", x)
+     ou UIKit.Text (traduz sozinho). Servidor: Net.Fire(p, "Toast", Locale.For(p, "..."), ...). Nunca monte frase com "..".
+ 20. (Beta 1.9) UI NOVA usa Client.Platform: Platform.Apply(frame, "Overlay"|"Hud"|"Panel") em Frames (não em botões do UIKit,
+     que já têm UIScale). No celular (Platform.IsCompact) troque o LAYOUT, não só o tamanho; deixe o centro da tela livre.
+ 21. (Beta 1.9) Números da 1.9 ficam em Shared.ConfigBeta19 (o Config o aplica no fim). Batalha: mexeu em Config.Battle.Classes
+     ou .Sim? Rode os testes do GitHub (planejamento/beta-1.9/testes) para não quebrar o equilíbrio.
+ 22. (Beta 1.9) Antes de cada Play, confira a SINTAXE de todos os scripts (loadstring(script.Source) no execute_luau, modo
+     Edit): um erro num módulo do cliente derruba os que dependem dele sem aviso claro.
+ 23. (Beta 1.9) Espelho para o GitHub sem Python: ServerStorage.Tools.MirrorDump + tools/place/mirror_from_dump.js.
 
   ESPECIALIDADES SUGERIDAS
    - Claude: arquitetura, sistemas, economia/balanceamento, UI, revisão e documentação.

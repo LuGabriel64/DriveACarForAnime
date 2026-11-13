@@ -1,4 +1,4 @@
-# Estrutura do jogo — Beta 1.8d
+# Estrutura do jogo — Beta 1.9
 
 Mapa rápido de **onde está cada coisa** no Roblox Studio e do que cada script faz.
 A documentação longa e oficial continua **dentro do place**, em `ServerStorage.ProjectDocs`.
@@ -12,12 +12,15 @@ ReplicatedStorage
 ├─ Shared/                  (src/ReplicatedStorage/Shared)
 │  ├─ Config                ← FONTE ÚNICA de números e conteúdo (biomas, carros, raridades, ovos, roleta, fuga…)
 │  ├─ Net                   ← única camada de rede (Net.Handle / Net.Call / Net.Fire)
-│  ├─ Util, CarFactory, AnimeModelFactory (personagens "blocos anime" R6, Beta 1.8b)
+│  ├─ Util, CarFactory (+ corpo "f1", 1.9), AnimeModelFactory (personagens "blocos anime" R6, Beta 1.8b)
+│  ├─ ConfigBeta19          ← números da 1.9 (estrelas, nível, pontos de spin, idiomas, música, Versus, F1, batalha)
+│  ├─ AnimeStats            ← renda e status de batalha de UM personagem (estrelas, nível, XP); servidor e cliente
+│  └─ Locale (+ pt)         ← tradução EN/PT (texto em inglês = chave)
 └─ Remotes/ Action (RemoteFunction) + Event (RemoteEvent) — use SÓ via Shared.Net
 
 ServerScriptService
 ├─ Main (Script)            ← inicia os serviços na ORDEM: Data, Farm, Car, Zone, Race, Egg, Incubator,
-│                             Escape, Wheel, Anime, Gift (cada um em pcall)
+│                             Escape, Wheel, Progress, Versus, DuelRace, Battle, Anime, Gift (cada um em pcall)
 └─ Services/
    ├─ DataService           perfil "P_<UserId>" no DataStore "DACFA_Player_v1", trava de sessão, migração v1→v2
    ├─ FarmService           garagens (Plot_1..8, nome interno antigo), 8 pedestais, renda $/s, vender/equipar
@@ -30,7 +33,12 @@ ServerScriptService
    ├─ WheelService          roleta da sorte (8 h grátis + giros por Robux), ÚNICO ProcessReceipt do jogo
    ├─ EggService            ovos de estrada / santuários (GUARDADO: Features.RoadEggs/Shrines = false)
    ├─ AnimeService          captura por mini-jogo (GUARDADO: Features.CaptureNodes = false)
-   └─ GiftService           presente grátis ($10K)
+   ├─ GiftService           presente grátis ($10K)
+   ├─ ProgressService       XP, nível e parceiro dos personagens (1.9)
+   ├─ VersusService         desafio 1v1: convite, etapas, lojas de F1 e de vitória, recompensas (1.9)
+   ├─ DuelRaceService       modo "Race": corrida 1v1 com F1 e colapso desde a largada (1.9)
+   ├─ BattleSim             simulação da batalha (biblioteca, sem Init) (1.9)
+   └─ BattleService         modo "Battle": monta os lutadores, simula e manda o roteiro (1.9)
 
 StarterPlayer.StarterPlayerScripts
 ├─ ClientMain (LocalScript) ← inicia os módulos do cliente na ordem (StartMenu por último)
@@ -40,11 +48,14 @@ StarterPlayer.StarterPlayerScripts
                             RaceUI, GhostController, EggRouletteUI, BiomeEggs, EscapeFX, GrabPromptUI,
                             HazardController (obstáculos animados, Beta 1.8), EggHatchUI, AnimesPanel
                             (+ guardados: EggNodes, EggShop, EggVisuals, EncounterUI, AnimeNodes)
+                            1.9: Platform (1º da ordem), VersusUI, DuelRaceUI, BattleUI, MusicController
 
 ServerStorage
 ├─ ProjectDocs/             Bíblia, ChangeLog, Protocolo de IA, Guia do Bioma 1
 ├─ Tools/WorldBuilder       gera terreno, lobby, biomas, obstáculos, hazards (2.411 linhas, ferramenta de EDIÇÃO)
 ├─ Tools/LobbyBuilder       design alternativo de outra sessão, NUNCA aplicado
+├─ Tools/VersusBuilder      Versus Hall + 3 arenas em Workspace.Map.Versus (1.9)
+├─ Tools/MirrorDump         despeja os scripts para o GitHub (par de tools/place/mirror_from_dump.js) (1.9)
 ├─ LegacyCode/              AnimeModelFactory voxel (1.6) e chibi (1.7)
 └─ Backups/                 "Beta 1.1" (único com TERRENO), "Beta 1.6", "Beta 1.7", "Beta 1.8b" + LEIA-ME de restauração
 
@@ -55,7 +66,8 @@ Workspace
 │  ├─ Plots/Plot_1..8       garagens (Base/Title/Label, Slots/Slot_N, Placed, CarPad, CarSpawn, PlayerSpawn)
 │  ├─ Structures/           Lobby (Plaza, RaceGate, GarageRow, Showroom, HallOfHeroes…), StartLine, Gates, <bioma>
 │  ├─ BoostPads/<bioma>, EggNodes/<bioma>, EggShrines/<bioma> (os 2 últimos vão para ServerStorage em jogo)
-│  └─ BiomeEggs             criado pelo EscapeService ao iniciar o servidor
+│  ├─ BiomeEggs             criado pelo EscapeService ao iniciar o servidor
+│  └─ Versus/               Hall (1400,0,3200) e Arena_sky_ring / _moon_dojo / _lava_arena (x=-1400) (1.9)
 ├─ Cars/                    um carro por jogador (CarService)
 └─ Terrain                  pista + biomas (regerado pelo WorldBuilder; nunca editar à mão)
 ```
@@ -96,7 +108,9 @@ pads de lentidão e passarelas.
 
 GetState, GetGarages, ClaimGarage, DriveCar, ExitCar, BuyCar, EquipCar, UpgradeEngine, ResetCar, StartRace,
 EndRace, GoHome, PlaceAnime, PickUpAnime, SellAnime, EquipBest, GetIncubator, GetWheel, SpinWheel, WheelPack,
-ClaimGift, SaveSettings. As ações guardadas são CollectRoadEgg, BuyEgg, StartEncounter e ResolveEncounter.
+ClaimGift, SaveSettings. Beta 1.9: SetLanguage, SetPartner, VersusPlayers, VersusInvite, VersusRespond,
+VersusCancel, VersusReady, VersusVote, VersusLeave, GetVersusShop, BuyF1, EquipF1, BuyVictoryFx, EquipVictoryFx,
+PickFighter. As ações guardadas são CollectRoadEgg, BuyEgg, StartEncounter e ResolveEncounter.
 
 ## Regras de ouro (resumo do `02_AI_Protocol`)
 

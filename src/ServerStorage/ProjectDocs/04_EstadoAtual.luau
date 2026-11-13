@@ -1,6 +1,11 @@
 --[=[
 ================================================================================
- DRIVE A CAR FOR ANIME — ESTADO ATUAL (Beta 1.8d, 12/11/2026)
+ DRIVE A CAR FOR ANIME — ESTADO ATUAL (Beta 1.9, 13/11/2026)
+
+ BETA 1.9 (13/11): aplicada e SALVA, NÃO publicada. Desafio 1v1 (corrida de F1 + batalha de anime), estrelas, nível,
+ pontos de spin, idiomas EN/PT e UI por aparelho. Resumo em 00_ProjectBible seção 10g; detalhes no topo do
+ 01_ChangeLog. FALTA: testar com 2 jogadores (Test > Start, 2 Players), escolher as músicas (Config.Music) e publicar.
+ O texto abaixo descreve a 1.8d e continua válido para o que a 1.9 não mudou.
  PORTA DE ENTRADA para QUALQUER assistente (Claude, Claude Code do amigo, Roblox Assistant, Rebirth).
  Leia ESTE arquivo primeiro; depois 02_AI_Protocol (regras), 01_ChangeLog (histórico, mais novo no topo)
  e 00_ProjectBible (visão + seções 10b..10f). Onde houver conflito, vale o texto MAIS NOVO.

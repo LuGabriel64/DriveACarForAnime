@@ -1,12 +1,12 @@
-# Beta 1.9 — Projeto (ainda NÃO aplicado no jogo)
+# Beta 1.9 — Projeto (APLICADO no jogo em 13/11/2026)
 
-> **Status em 12/11/2026:** projeto escrito e lógica pura testada fora do Roblox. **Nada disto está no
-> place.** Será aplicado quando um Claude Code estiver ligado ao Roblox Studio (ver
-> [`docs/CONECTAR_STUDIO.md`](../../docs/CONECTAR_STUDIO.md)). Quem aplicar segue o
-> [`07_plano_de_implementacao.md`](07_plano_de_implementacao.md).
+> **Status em 13/11/2026:** **aplicado no place** (versão 113, salva e não publicada). O código que vale é o de
+> `src/` (espelho do place). Os arquivos em `rascunho/` ficam como registro do projeto: os do jogo já foram
+> ajustados ao código real (ex.: `FarmService.CashPerSec`, `ProgressService.FindEntry`, lojas no `VersusService`).
+> O que ficou diferente do projeto e o que falta testar estão em `CHANGELOG.md` (Beta 1.9) e em
+> `estado-atual/07_beta-1.9_aplicacao_em_andamento.md`.
 >
-> **Regra de versão:** se, na hora de aplicar, o place já estiver na Beta 1.9 (feita por outra pessoa ou
-> assistente), este pacote vira a **Beta 2.0**. Confira `Config.Version` antes de começar.
+> Os testes de `testes/` continuam valendo para a lógica pura (`AnimeStats`, `BattleSim`, `Locale`).
 
 ## O que a Beta 1.9 traz
 

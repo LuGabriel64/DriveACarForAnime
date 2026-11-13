@@ -24,6 +24,16 @@
 	Beta 1.8d (auditoria 11/11, item 4): o recorde (MinZ) vem da posição do carro, que é do CLIENTE. Agora o avanço
 	  passa pelo mesmo orçamento de velocidade da fuga (Config.AntiCheat). Velocidade impossível => corrida encerrada
 	  com Reason "invalid", sem contar a distância do salto (MinZ fica onde estava). Necessário antes de um ranking.
+
+	Beta 1.9 (corrida 1v1 — Services.DuelRaceService):
+	  * Start(player, opts): opts.Mode = "Duel" | opts.GridCFrame (vaga no grid) | opts.Car (carro de Config.F1Cars)
+	    | opts.FinishZ (chegada do mapa votado). Sem opts = corrida solo, igual a antes.
+	  * Atributo "RaceMode" do Player: "Solo" | "Duel". Em Duel: sem recorde de distância, sem prêmio por distância,
+	    e no fim o carro NORMAL volta para a garagem (o F1 some). O anti-trapaça é o mesmo (Config.AntiCheat), com
+	    o atributo TopSpeed valendo a velocidade do F1 durante a partida.
+	  * Corrida solo é recusada durante um desafio (MatchId ~= 0).
+	  * OnEnded(fn): fn(player, reason, distance, mode) quando uma corrida termina (o DuelRaceService decide o vencedor).
+	  * Os eventos RaceCountdown e RaceEnded levam o campo Mode.
 ]]
 local Players = game:GetService("Players")
 local PhysicsService = game:GetService("PhysicsService")
@@ -39,7 +49,9 @@ local ZoneService = require(script.Parent.ZoneService)
 local RaceService = {}
 local RC, W = Config.Race, Config.World
 local slots = {}  -- [slot] = player
-local races = {}  -- [player] = { Slot, Token, StartedAt, MinZ, StartHatches }
+local races = {}  -- [player] = { Slot, Token, StartedAt, MinZ, StartHatches, Mode, FinishZ }
+local endedCallbacks = {} -- Beta 1.9: quem quer saber do fim de uma corrida (DuelRaceService)
+function RaceService.OnEnded(fn) table.insert(endedCallbacks, fn) end
 
 -- ---------------------------------------------------------------- utilidades
 local groundParams = RaycastParams.new()
@@ -89,8 +101,12 @@ local function setState(player, state, slot)
 end
 
 -- ---------------------------------------------------------------- iniciar
-function RaceService.Start(player)
+function RaceService.Start(player, opts)
+	opts = opts or {}
+	local duel = opts.Mode == "Duel"
 	if races[player] then return { ok = false, err = "AlreadyRacing" } end
+	-- Beta 1.9: quem está num desafio (sala de espera, votação...) não começa corrida solo
+	if not duel and (player:GetAttribute("MatchId") or 0) ~= 0 then return { ok = false, err = "InMatch" } end
 	if not FarmService.GetPlot(player) then return { ok = false, err = "NoGarage" } end
 	local hum = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
 	if not hum or hum.Health <= 0 then return { ok = false, err = "Dead" } end
@@ -101,20 +117,25 @@ function RaceService.Start(player)
 	slots[slot] = player
 	local data = DataService.Get(player)
 	races[player] = { Slot = slot, Token = token, StartedAt = 0, MinZ = RC.StartLineZ,
-		StartHatches = data and data.Stats.Hatches or 0 }
+		StartHatches = data and data.Stats.Hatches or 0, Mode = duel and "Duel" or "Solo", FinishZ = opts.FinishZ }
+	player:SetAttribute("RaceMode", duel and "Duel" or "Solo") -- antes do RaceState: o cliente lê o modo quando o estado muda
 	setState(player, "Countdown", slot)
 
-	local cf = RaceService.GridCFrame(slot)
+	local cf = opts.GridCFrame or RaceService.GridCFrame(slot)
 	stream(player, cf.Position)
 	-- carro no grid (cria se ainda não existir) e jogador sentado
-	if CarService.GetCar(player) then CarService.Teleport(player, cf) else CarService.Spawn(player, cf, false) end
+	if opts.Car then
+		-- Beta 1.9: carro de F1 só para esta partida. TopSpeed = velocidade dele (o anti-trapaça usa este atributo).
+		CarService.Spawn(player, cf, false, opts.Car)
+		player:SetAttribute("TopSpeed", math.floor(math.min(opts.Car.MaxSpeed, Config.SpeedCap)))
+	elseif CarService.GetCar(player) then CarService.Teleport(player, cf) else CarService.Spawn(player, cf, false) end
 	local car = CarService.GetCar(player)
 	if car and car.PrimaryPart then car.PrimaryPart.Anchored = true end
 	CarService.SeatPlayer(player, car)
 	ZoneService.ResetSafe(player, cf)
 
 	local goAt = workspace:GetServerTimeNow() + RC.Countdown
-	Net.Fire(player, "RaceCountdown", { Slot = slot, GoAt = goAt, Seconds = RC.Countdown })
+	Net.Fire(player, "RaceCountdown", { Slot = slot, GoAt = goAt, Seconds = RC.Countdown, Mode = duel and "Duel" or "Solo" })
 	task.delay(RC.Countdown, function()
 		local r = races[player]
 		if not r or r.Token ~= token then return end -- corrida cancelada no meio da contagem
@@ -142,11 +163,12 @@ function RaceService.End(player, reason)
 	local time = r.StartedAt > 0 and (os.clock() - r.StartedAt) or 0
 	local hatched = data and math.max(0, (data.Stats.Hatches or 0) - r.StartHatches) or 0
 	local best = data and (data.Stats.BestDistance or 0) or 0
-	local newRecord = distance > best
+	local duel = r.Mode == "Duel" -- Beta 1.9: corrida 1v1 não mexe no recorde nem paga por distância (o F1 inflaria os dois)
+	local newRecord = (not duel) and distance > best
 	if data and newRecord then data.Stats.BestDistance = distance end
-	local reward = math.floor(distance / 100) * (RC.CashPer100Studs or 0)
+	local reward = duel and 0 or math.floor(distance / 100) * (RC.CashPer100Studs or 0)
 	if reward > 0 then DataService.AddCash(player, reward) end
-	player:SetAttribute("RaceBest", math.max(best, distance))
+	if not duel then player:SetAttribute("RaceBest", math.max(best, distance)) end
 
 	if player.Parent then
 		-- desce do carro, estaciona na garagem e leva o jogador ao lobby
@@ -155,7 +177,11 @@ function RaceService.End(player, reason)
 		if CarService.IsDriving(player) then CarService.ExitPlayer(player) end
 		local garageCF = FarmService.GetCarSpawn(player)
 		if garageCF then stream(player, garageCF.Position) end
-		if car and garageCF then task.spawn(CarService.Teleport, player, garageCF) end
+		if duel then
+			-- Beta 1.9: o F1 some e o carro normal do jogador volta para a garagem, com os atributos dele
+			if garageCF then CarService.Spawn(player, garageCF, false) else CarService.Despawn(player) end
+			CarService.RefreshAttributes(player)
+		elseif car and garageCF then task.spawn(CarService.Teleport, player, garageCF) end
 		local spawnCF = FarmService.GetPlayerSpawn(player)
 		local char = player.Character
 		if char and spawnCF then
@@ -167,8 +193,10 @@ function RaceService.End(player, reason)
 		setState(player, "Lobby", 0)
 		player:SetAttribute("RaceDistance", 0)
 		Net.Fire(player, "RaceEnded", { Reason = reason or "home", Distance = distance, Time = time, Hatched = hatched,
-			Best = math.max(best, distance), NewRecord = newRecord, Reward = reward })
+			Best = duel and best or math.max(best, distance), NewRecord = newRecord, Reward = reward, Mode = r.Mode })
+		player:SetAttribute("RaceMode", "Solo")
 	end
+	for _, fn in ipairs(endedCallbacks) do task.spawn(fn, player, reason or "home", distance, r.Mode) end
 	return distance
 end
 
@@ -196,6 +224,7 @@ function RaceService.Init()
 		data.Stats.BestDistance = data.Stats.BestDistance or 0
 		player:SetAttribute("RaceBest", data.Stats.BestDistance)
 		setState(player, "Lobby", 0)
+		player:SetAttribute("RaceMode", "Solo")
 		if player.Character then tagCharacter(player.Character) end
 		player.CharacterAdded:Connect(function(char)
 			tagCharacter(char)
@@ -247,7 +276,7 @@ function RaceService.Init()
 						r.LastZ, r.LastT = pos.Z, now
 						if pos.Z < r.MinZ then r.MinZ = pos.Z end
 						player:SetAttribute("RaceDistance", math.max(0, math.floor(RC.StartLineZ - r.MinZ)))
-						if pos.Z <= finishZ() then task.spawn(RaceService.End, player, "finish") end
+						if pos.Z <= (r.FinishZ or finishZ()) then task.spawn(RaceService.End, player, "finish") end
 					end
 				end
 			end

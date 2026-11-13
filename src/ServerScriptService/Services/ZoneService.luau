@@ -66,11 +66,13 @@ local function step(player)
 		player:SetAttribute("Biome", id)
 		Net.Fire(player, "BiomeChanged", id)
 		local data = DataService.Get(player)
-		if biome and data and biome.Order > (data.Stats.BestBiome or 0) then data.Stats.BestBiome = biome.Order end
+		-- Beta 1.9: na corrida 1v1 (RaceMode "Duel") o progresso normal não é pulado: não grava "melhor bioma"
+		if biome and data and player:GetAttribute("RaceMode") ~= "Duel" and biome.Order > (data.Stats.BestBiome or 0) then data.Stats.BestBiome = biome.Order end
 	end
 
 	-- Bloqueio por tier (vale a pé também)
-	if biome and biome.Tier > CarService.GetTier(player) then
+	-- Beta 1.9: sem bloqueio na corrida 1v1 (os carros de F1 não têm tier; a corrida vai até o fim do mapa)
+	if biome and player:GetAttribute("RaceMode") ~= "Duel" and biome.Tier > CarService.GetTier(player) then
 		local zs = biome.ZStart + 60
 		local x = Config.World.RoadX(zs)
 		moveSubject(player, CFrame.new(x, groundY(x, zs) + 5, zs), driving)

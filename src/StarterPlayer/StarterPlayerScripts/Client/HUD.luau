@@ -126,7 +126,7 @@ function HUD.Init()
 	end)
 	local function updateIncome()
 		local cps = lp:GetAttribute("CashPerSec") or 0
-		incomeLabel.Text = cps > 0 and ("⚡ +$" .. Util.FormatNumber(cps) .. "/s") or "🥚 Hatch eggs to earn money!"
+		incomeLabel.Text = cps > 0 and ("⚡ +$" .. Util.FormatNumber(cps) .. "/s") or UIKit.T("🥚 Hatch eggs to earn money!") -- Beta 1.9: idioma
 	end
 	lp:GetAttributeChangedSignal("CashPerSec"):Connect(updateIncome); updateIncome()
 

@@ -137,6 +137,11 @@ return function(Config)
 			{ Id = "moon_dojo",  Name = "Sakura Moon Dojo",    Icon = "🌸", Desc = "Petals, lanterns and a giant full moon",        Origin = Vector3.new(-1400, 0, 3900) },
 			{ Id = "lava_arena", Name = "Volcano Coliseum",    Icon = "🌋", Desc = "A stone arena surrounded by lava falls",        Origin = Vector3.new(-1400, 0, 4600) },
 		},
+		-- Posições RELATIVAS ao Origin da arena (iguais nas 3). O piso do ringue fica em Origin.Y + RingTop.
+		RingTop = 4,
+		FighterOffsets = { Vector3.new(-13, 4, 0), Vector3.new(13, 4, 0) },       -- lutador 1 (esquerda) e 2 (direita)
+		SpectatorOffsets = { Vector3.new(-8, 11, 44), Vector3.new(8, 11, 44) },   -- plateia: onde ficam os avatares dos jogadores
+		StartDelay = 1.5,     -- segundos entre o servidor mandar o roteiro e a cena começar (tempo de carregar a arena)
 		IntroSeconds = 3.5,   -- (replay) apresentação dos dois lutadores
 		OutroSeconds = 4,     -- (replay) nocaute + animação de vitória
 	}

@@ -103,10 +103,49 @@ Testado: extração feita duas vezes, por caminhos diferentes, com resultado id�
 
 ## Jogo
 
-### Beta 1.9 — planejada
+### Beta 1.9 — 13/11/2026 (salva no place, versão 113; **não publicada**)
 
-Projeto em [`planejamento/beta-1.9/`](planejamento/beta-1.9/README.md). Se outra Beta 1.9 for feita antes,
-este pacote vira a Beta 2.0.
+Aplicada no Studio pelo Claude Code do dono (MCP), a partir do projeto em
+[`planejamento/beta-1.9/`](planejamento/beta-1.9/README.md): Etapas A (12 e 13/11), B, C e D (13/11).
+Começou com o modelo Fable 5.2 e terminou com o Opus 5.5.
+
+**Scripts novos (caminho no Explorer):**
+- `ReplicatedStorage.Shared`: `ConfigBeta19`, `AnimeStats`, `Locale` (+ `pt`).
+- `ServerScriptService.Services`: `ProgressService`, `VersusService`, `DuelRaceService`, `BattleSim`,
+  `BattleService`.
+- `StarterPlayerScripts.Client`: `Platform`, `VersusUI`, `DuelRaceUI`, `BattleUI`, `MusicController`.
+- `ServerStorage.Tools`: `VersusBuilder` (Hall e arenas) e `MirrorDump` (espelho para o GitHub sem Python).
+
+**Scripts alterados:** `Config`, `CarFactory` (corpo `f1`), `Main`, `ClientMain`, `DataService` (save v3),
+`FarmService`, `EggRoll`, `IncubatorService`, `WheelService`, `RaceService` (modo Duel), `CarService`,
+`ZoneService`, `EscapeService`, `UIKit`, `StartMenu`, `InventoryPanel`, `WheelPanel`, `LobbyDock`, `HUD`,
+`RaceUI`, `Notify`, `EggRouletteUI`, `BiomeEggs`, `GhostController`, `WorldBuilder` (atalhos) e os 4 `ProjectDocs`.
+
+**Mapa:** `Workspace.Map.Versus` com o Versus Hall em (1400, 0, 3200) e três arenas em x = −1400
+(~250 peças). Backup em `ServerStorage.Backups["Beta 1.8d"]`.
+
+**Diferenças em relação ao projeto:** o `EscapeFX` **não** foi generalizado (risco de quebrar a fuga do ovo);
+a corrida 1v1 tem um visual de colapso próprio e mais simples no `DuelRaceUI`. `GameUI` não ganhou
+`Platform.SafeArea` (mudaria o layout atual sem teste em aparelho).
+
+**Testado (Play no Studio, 1 jogador):**
+- save v3 com a renda igual à de antes;
+- troca de idioma ao vivo;
+- mochila com estrelas, XP e Poder, e a barra de pontos de spin;
+- fuga do ovo completa, com as estrelas aparecendo na roleta e no pedestal;
+- botões novos do dock e o painel de desafio;
+- validações do servidor (sem dinheiro, item inválido, convidar a si mesmo, modo inválido);
+- cena da batalha tocando um roteiro real do `BattleSim`: entrada, golpes, ULT, K.O., vitória e limpeza;
+- placar e colapso da corrida 1v1, com o modo Duel marcado só no cliente.
+
+**Não testado:**
+- **tudo o que precisa de 2 jogadores:** convite, Versus Hall, votação, corrida 1v1 de verdade, batalha
+  disparada pelo servidor, recompensas e saída no meio;
+- dirigir o carro de F1;
+- celular, tablet e TV;
+- música (os IDs estão vazios).
+
+Resumo do que a versão traz:
 
 - **Desafio 1v1:** dois botões novos no dock convidam um jogador do servidor para uma corrida ou uma batalha.
   O convidado aceita ou recusa; depois vêm a sala de espera (Versus Hall), a votação do mapa e 30 s de preparação.

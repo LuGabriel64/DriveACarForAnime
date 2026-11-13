@@ -15,7 +15,7 @@ local Config = {}
 local C = Color3.fromRGB
 
 Config.GameName = "Drive A Car For Anime"
-Config.Version  = "Beta 1.8d"
+Config.Version  = "Beta 1.9"
 
 -- ---------------------------------------------------------------- RECURSOS (liga/desliga sistemas)
 Config.Features = {
@@ -58,6 +58,15 @@ Config.Credits = {
 	{ Role = "Special Thanks",      Names = { "Every beta tester!" } },
 }
 Config.Updates = {
+	{ Version = "Beta 1.9", Date = "Nov 13, 2026", Notes = {
+		"🏁 NEW: 1v1 RACES! Challenge a player, vote the map and race in Formula cars — the track collapses from the start!",
+		"⚔️ NEW: ANIME BATTLES! Pick your strongest fighter, watch the ULTs fly and win rewards",
+		"🏎️ F1 Shop and Victory Effects shop in the new Versus Hall",
+		"⭐ Characters now have 0-5 STARS and LEVELS up to 50: stronger stats and more income",
+		"🎟️ Spin points: play and win to earn free Lucky Wheel spins (100 points = 1 spin)",
+		"🌐 Languages: English and Português",
+		"📱 The interface now fits phones, tablets, PC and consoles",
+	} },
 	{ Version = "Beta 1.8d", Date = "Nov 12, 2026", Notes = {
 		"🧹 Removed a duplicated copy of the whole map: less lag, especially on phones",
 		"✨ No more flickering signs and lights in the garages",

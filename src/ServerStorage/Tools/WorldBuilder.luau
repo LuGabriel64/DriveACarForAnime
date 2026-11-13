@@ -2407,4 +2407,10 @@ function WorldBuilder.BuildLanternGarlands(index)
 	g.Parent = jt
 	return ("%s: %d fileiras de lanternas com varal"):format(b.Name, #rows)
 end
+
+-- Beta 1.9: ilhas do desafio 1v1 (Workspace.Map.Versus). O código mora em Tools.VersusBuilder (módulo separado para
+-- este arquivo não crescer); estes atalhos mantêm a regra "o mapa sai sempre do WorldBuilder".
+function WorldBuilder.BuildVersusHall() return require(script.Parent.VersusBuilder).BuildHall() end
+function WorldBuilder.BuildArena(i) return require(script.Parent.VersusBuilder).BuildArena(i) end
+function WorldBuilder.BuildVersus() return require(script.Parent.VersusBuilder).BuildAll() end
 return WorldBuilder
