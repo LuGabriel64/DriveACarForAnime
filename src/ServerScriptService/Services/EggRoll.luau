@@ -11,9 +11,12 @@
 	  * Os pesos vêm de Config.Rarities (fonte única). Config.EggOdds normaliza pelo total (99,86).
 	Usado por: EscapeService (ovo do bioma) e EggService (sistema antigo, guardado).
 	Não tem Init: não precisa entrar no ORDER do Main.
+	Beta 1.9: Roll devolve também Stars (0..5), sorteadas AQUI com o mesmo Random do servidor (pesos em
+	  Config.Stars.Weights; conta em Shared.AnimeStats.RollStars). As estrelas NÃO entram no "1 in N" (Odds).
 ]]
 local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS:WaitForChild("Shared"):WaitForChild("Config"))
+local AnimeStats = require(RS.Shared:WaitForChild("AnimeStats"))
 
 local EggRoll = {}
 local rng = Random.new()
@@ -68,7 +71,7 @@ function EggRoll.Roll(biomeId, luck)
 	local mut, pMut = EggRoll.Mutation()
 	local size, pSize = EggRoll.Size()
 	local odds = math.max(1, math.floor(1 / (EggRoll.Chance(biomeId, cfg.Id) * pMut * pSize) + 0.5))
-	return { Id = cfg.Id, Mut = mut, Size = size, Odds = odds }
+	return { Id = cfg.Id, Mut = mut, Size = size, Odds = odds, Stars = AnimeStats.RollStars(rng:NextNumber()) }
 end
 
 return EggRoll

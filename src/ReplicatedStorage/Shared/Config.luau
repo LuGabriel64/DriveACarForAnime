@@ -664,4 +664,8 @@ function Config.EggOdds(biomeId, luck)
 	return rows
 end
 
+-- Beta 1.9: estrelas, nível, pontos de spin, idiomas, música, Versus (corrida 1v1 e batalha). Os números moram em
+-- Shared.ConfigBeta19 (módulo separado para este arquivo não crescer mais) e aparecem aqui como Config.*.
+require(script.Parent.ConfigBeta19)(Config)
+
 return Config

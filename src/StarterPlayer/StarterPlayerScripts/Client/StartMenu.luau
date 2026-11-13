@@ -24,12 +24,75 @@ local lp = Players.LocalPlayer
 local StartMenu = {}
 local menuGui, orbitConn, blur
 local inMenu = false
+local T = UIKit.T -- Beta 1.9: textos montados no idioma do jogador
+
+-- ============================================================ idiomas (Beta 1.9)
+-- Bandeira DESENHADA com Frames: o emoji de bandeira não aparece em todo aparelho (no Windows vira "US" / "BR").
+-- kind = Config.Languages[i].FlagKind ("us" | "br"). Idioma novo sem desenho cai num retângulo cinza com o código.
+local function flag(parent, lang, z)
+	local f = new("Frame", { Name = "Flag", Size = UDim2.fromOffset(36, 24), BackgroundColor3 = Color3.new(1, 1, 1), ClipsDescendants = true, BorderSizePixel = 0, ZIndex = z }, parent)
+	UIKit.Stroke(f, 2)
+	if lang.FlagKind == "br" then
+		f.BackgroundColor3 = Color3.fromRGB(0, 156, 59)
+		new("Frame", { Size = UDim2.fromOffset(17, 17), Position = UDim2.fromScale(0.5, 0.5), AnchorPoint = Vector2.new(0.5, 0.5), Rotation = 45,
+			BackgroundColor3 = Color3.fromRGB(255, 223, 0), BorderSizePixel = 0, ZIndex = z + 1 }, f)
+		local dot = new("Frame", { Size = UDim2.fromOffset(11, 11), Position = UDim2.fromScale(0.5, 0.5), AnchorPoint = Vector2.new(0.5, 0.5),
+			BackgroundColor3 = Color3.fromRGB(0, 39, 118), BorderSizePixel = 0, ZIndex = z + 2 }, f)
+		new("UICorner", { CornerRadius = UDim.new(1, 0) }, dot)
+	elseif lang.FlagKind == "us" then
+		for i = 0, 6 do -- 7 listras (vermelha, branca, ...)
+			if i % 2 == 0 then
+				new("Frame", { Size = UDim2.new(1, 0, 1 / 7, 1), Position = UDim2.fromScale(0, i / 7), BackgroundColor3 = Color3.fromRGB(200, 30, 46), BorderSizePixel = 0, ZIndex = z + 1 }, f)
+			end
+		end
+		new("Frame", { Size = UDim2.fromScale(0.44, 4 / 7), BackgroundColor3 = Color3.fromRGB(34, 52, 120), BorderSizePixel = 0, ZIndex = z + 2 }, f)
+	else
+		f.BackgroundColor3 = C.Grey
+		UIKit.Text(f, { Text = string.upper(lang.Code), TextSize = 14, Stroke = 2, ZIndex = z + 1 })
+	end
+	return f
+end
+
+-- Um botão por idioma de Config.Languages (bandeira + nome). O escolhido fica verde. Troca = ação "SetLanguage":
+-- o servidor grava e muda o atributo Lang; o Shared.Locale retraduz a interface inteira na hora.
+local function languageButtons(parent, z, size, vertical)
+	local row = new("Frame", { Name = "Languages", BackgroundTransparency = 1, AutomaticSize = Enum.AutomaticSize.XY, ZIndex = z }, parent)
+	new("UIListLayout", { Padding = UDim.new(0, 8), SortOrder = Enum.SortOrder.LayoutOrder,
+		FillDirection = vertical and Enum.FillDirection.Vertical or Enum.FillDirection.Horizontal }, row)
+	local buttons = {}
+	local function paint()
+		local cur = UIKit.Locale.Get()
+		for code, b in pairs(buttons) do b.BackgroundColor3 = (code == cur) and C.Green or Color3.fromRGB(58, 58, 84) end
+	end
+	for i, lang in ipairs(Config.Languages) do
+		local b = UIKit.Button(row, { Name = lang.Code, Text = "", Size = size, Color = Color3.fromRGB(58, 58, 84), Radius = 12, LayoutOrder = i, ZIndex = z,
+			OnClick = function() Net.Call("SetLanguage", lang.Code); paint() end })
+		b.Label.Visible = false
+		local fl = flag(b, lang, z + 1)
+		fl.Position, fl.AnchorPoint = UDim2.new(0, 12, 0.5, 0), Vector2.new(0, 0.5)
+		UIKit.Text(b, { Name = "LangName", Text = lang.Name, TextSize = 20, Scaled = true, AlignX = Enum.TextXAlignment.Left,
+			Size = UDim2.new(1, -66, 0.7, 0), Position = UDim2.new(0, 58, 0.15, 0), Stroke = 2.5, ZIndex = z + 1 })
+		buttons[lang.Code] = b
+	end
+	lp:GetAttributeChangedSignal("Lang"):Connect(paint)
+	paint()
+	return row
+end
 
 -- ============================================================ painéis (também usados no jogo)
 local function buildSettings()
 	local p = UIKit.Panel({ Name = "Settings", Title = "⚙️ Configs", HeaderColor = Color3.fromRGB(60, 120, 255), Size = UDim2.fromScale(0.5, 0.66), MaxSize = Vector2.new(560, 470) })
-	local list = new("Frame", { Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, ZIndex = 22 }, p.Body)
+	-- Beta 1.9: a lista rola (entrou o interruptor Music e a linha de idioma; não cabe mais tudo no painel)
+	local list = new("ScrollingFrame", { Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, BorderSizePixel = 0, ScrollBarThickness = 6,
+		CanvasSize = UDim2.new(), AutomaticCanvasSize = Enum.AutomaticSize.Y, ScrollingDirection = Enum.ScrollingDirection.Y, ZIndex = 22 }, p.Body)
 	new("UIListLayout", { Padding = UDim.new(0, 10), SortOrder = Enum.SortOrder.LayoutOrder }, list)
+	new("UIPadding", { PaddingRight = UDim.new(0, 10), PaddingTop = UDim.new(0, 3), PaddingLeft = UDim.new(0, 3), PaddingBottom = UDim.new(0, 6) }, list)
+	-- Beta 1.9: idioma (o mesmo seletor do botão "Languages" da tela de início), para trocar no meio do jogo
+	local langRow = new("Frame", { Name = "LanguageRow", Size = UDim2.new(1, 0, 0, 74), BackgroundColor3 = C.CardBg, LayoutOrder = 0, ZIndex = 22 }, list)
+	new("UICorner", { CornerRadius = UDim.new(0, 14) }, langRow); UIKit.Stroke(langRow, 3)
+	UIKit.Text(langRow, { Text = "Language", TextSize = 24, AlignX = Enum.TextXAlignment.Left, Size = UDim2.new(1, -330, 1, 0), Position = UDim2.fromOffset(16, 0), Scaled = true, Stroke = 3, ZIndex = 23 })
+	local langBtns = languageButtons(langRow, 23, UDim2.fromOffset(148, 46), false)
+	langBtns.Position, langBtns.AnchorPoint = UDim2.new(1, -12, 0.5, 0), Vector2.new(1, 0.5)
 	for i, s in ipairs(Config.Settings) do
 		local row = new("Frame", { Size = UDim2.new(1, 0, 0, 74), BackgroundColor3 = C.CardBg, LayoutOrder = i, ZIndex = 22 }, list)
 		new("UICorner", { CornerRadius = UDim.new(0, 14) }, row); UIKit.Stroke(row, 3)
@@ -138,7 +201,7 @@ local function enterGame(index)
 	UIKit.Tween(flash, 0.6, { BackgroundTransparency = 1 })
 	task.delay(0.7, function() menuGui:Destroy(); if blur then blur:Destroy() end end)
 	-- Beta 1.4: dicas do lobby novo (só a pé, PLAY no dock, ovo gigante no fim de cada bioma)
-	Notify.Toast(("🌸 Welcome to the Sakura Lobby! Garage %d is yours."):format(index), "good")
+	Notify.Toast(T("🌸 Welcome to the Sakura Lobby! Garage %d is yours.", index), "good")
 	task.delay(3.5, function() Notify.Toast("▶ Press PLAY (or walk into the Race Gate) to start your solo race!", "info") end)
 	task.delay(7, function() Notify.Toast("🥚 Grab the Giant Egg at the end of a biome and escape back to base!", "info") end)
 end
@@ -176,10 +239,10 @@ local function buildPicker(onBack)
 		if #garages == 0 then return end
 		index = (i - 1) % #garages + 1
 		local g = garages[index]
-		nameL.Text = "GARAGE " .. g.Index
+		nameL.Text = T("GARAGE %d", g.Index)
 		UIKit.Pop(nameL, 1.1)
 		status.BackgroundColor3 = g.Taken and C.Red or C.Green
-		statusL.Text = g.Taken and ("TAKEN" .. (g.Owner and (" by " .. g.Owner) or "")) or "✅ FREE"
+		statusL.Text = g.Taken and (T("TAKEN") .. (g.Owner and (" • " .. g.Owner) or "")) or T("✅ FREE")
 		UIKit.SetButton(choose, g.Taken and "TAKEN" or "CHOOSE!", g.Taken and C.Grey or C.Green, g.Taken)
 		dotPaint()
 		if g.Spawn then
@@ -319,10 +382,28 @@ function StartMenu.Init()
 	end
 
 	local names = Config.Credits[1] and table.concat(Config.Credits[1].Names, " & ") or ""
-	UIKit.Text(title, { Text = "Made with ❤ by " .. names, TextSize = 18, Color = Color3.fromRGB(220, 220, 240), AlignX = Enum.TextXAlignment.Right,
+	-- Beta 1.9: botão "🌐 Languages" no canto superior direito (pedido do dono). Abre a lista de idiomas logo abaixo.
+	local langOpen = false
+	local langList
+	local langBtn = UIKit.Button(title, { Name = "LanguagesButton", Text = "🌐 Languages", Size = UDim2.fromOffset(190, 50), Position = UDim2.new(1, -18, 0, 16),
+		AnchorPoint = Vector2.new(1, 0), Color = Color3.fromRGB(40, 170, 200), TextSize = 24, Radius = 14, ZIndex = 6,
+		OnClick = function()
+			langOpen = not langOpen
+			langList.Visible = langOpen
+			if langOpen then UIKit.Pop(langList, 1.08) end
+		end })
+	langList = new("Frame", { Name = "LanguageList", Size = UDim2.fromOffset(206, 132), Position = UDim2.new(1, -10, 0, 74), AnchorPoint = Vector2.new(1, 0),
+		BackgroundColor3 = C.PanelBg, Visible = false, ZIndex = 6 }, title)
+	new("UICorner", { CornerRadius = UDim.new(0, 14) }, langList); UIKit.Stroke(langList, 3.5)
+	local langCol = languageButtons(langList, 7, UDim2.fromOffset(186, 52), true)
+	langCol.Position = UDim2.fromOffset(10, 10)
+	UIKit.Platform.Apply(langBtn, "Hud"); UIKit.Platform.Apply(langList, "Hud")
+
+	local madeBy = UIKit.Text(title, { Text = T("Made with ❤ by %s", names), TextSize = 18, Color = Color3.fromRGB(220, 220, 240), AlignX = Enum.TextXAlignment.Right,
 		Size = UDim2.fromOffset(600, 24), Position = UDim2.new(1, -20, 1, -16), AnchorPoint = Vector2.new(1, 1), Stroke = 2.5, ZIndex = 5 })
 	UIKit.Text(title, { Text = Config.GameName .. "  •  " .. Config.Version, TextSize = 18, Color = Color3.fromRGB(220, 220, 240), AlignX = Enum.TextXAlignment.Left,
 		Size = UDim2.fromOffset(500, 24), Position = UDim2.new(0, 20, 1, -16), AnchorPoint = Vector2.new(0, 1), Stroke = 2.5, ZIndex = 5 })
+	UIKit.Locale.OnChanged(function() if madeBy.Parent then madeBy.Text = T("Made with ❤ by %s", names) end end)
 end
 
 return StartMenu

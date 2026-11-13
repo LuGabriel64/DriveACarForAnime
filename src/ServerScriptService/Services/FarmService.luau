@@ -8,7 +8,16 @@
 	  * Com a garagem escolhida: os personagens aparecem nos pedestais, a renda começa,
 	    o personagem do jogador nasce A PÉ no "PlayerSpawn" da garagem (também ao renascer),
 	    e quem se inscreveu em OnGarageClaimed é avisado (CarService estaciona o carro).
-	Dados: data.Animes = { {Uid, Id, Mut, Size, Placed, Slot}, ... }
+	Dados: data.Animes = { {Uid, Id, Mut, Size, Placed, Slot, Stars, Level, XP}, ... }
+
+	Beta 1.9: ESTRELAS e NÍVEL.
+	  * incomeOf usa Shared.AnimeStats.Income (base x mutação x tamanho x estrelas x nível). Personagem antigo
+	    (0 estrelas, nível 1) rende EXATAMENTE o mesmo que antes.
+	  * AddAnime(player, id, mut, size, stars): stars vem do EggRoll (servidor), nunca do cliente.
+	  * O evento "Inventory" leva também Stars, Level, XP, XpNext e Power (para a mochila e a batalha).
+	  * A placa do pedestal mostra as estrelas e o nível.
+	  * FarmService.Refresh(player): recalcula a renda, reenvia a mochila e redesenha as placas (usado pelo
+	    ProgressService quando um personagem sobe de nível).
 ]]
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
@@ -17,6 +26,7 @@ local Config = require(Shared.Config)
 local Util = require(Shared.Util)
 local Net = require(Shared.Net)
 local AnimeFactory = require(Shared.AnimeModelFactory)
+local AnimeStats = require(Shared.AnimeStats)
 local DataService = require(script.Parent.DataService)
 
 local FarmService = {}
@@ -24,12 +34,8 @@ local plotOf, placedModels, cashPerSec = {}, {}, {}
 local claimedCallbacks = {}
 
 local function incomeOf(entry)
-	local cfg = Config.AnimeById[entry.Id]
-	if not cfg then return 0 end
-	local mult = 1
-	if entry.Mut and Config.Mutations[entry.Mut] then mult *= Config.Mutations[entry.Mut].Mult end
-	if entry.Size and Config.Sizes[entry.Size] then mult *= Config.Sizes[entry.Size].Mult end
-	return cfg.Income * mult
+	-- Beta 1.9: a conta mora em Shared.AnimeStats (o cliente usa a MESMA função para mostrar os números).
+	return AnimeStats.Income(Config.AnimeById[entry.Id], entry)
 end
 FarmService.IncomeOf = incomeOf
 local function sellValue(entry) return math.floor(incomeOf(entry) * Config.Farm.SellMult) end
@@ -64,8 +70,13 @@ local function sync(player)
 	local data = DataService.Get(player); if not data then return end
 	local list = {}
 	for _, e in ipairs(data.Animes) do
+		local cfg = Config.AnimeById[e.Id]
+		local level = AnimeStats.Level(e)
 		list[#list + 1] = { Uid = e.Uid, Id = e.Id, Mut = e.Mut, Size = e.Size, Placed = e.Placed or false,
-			Income = incomeOf(e), Sell = sellValue(e) }
+			Income = incomeOf(e), Sell = sellValue(e),
+			-- Beta 1.9
+			Stars = AnimeStats.Stars(e), Level = level, XP = e.XP or 0, XpNext = AnimeStats.XpToNext(level),
+			Power = cfg and math.floor(AnimeStats.Power(cfg, e) + 0.5) or 0 }
 	end
 	Net.Fire(player, "Inventory", list, data.PlotSlots)
 end
@@ -88,7 +99,7 @@ local function spawnModel(player, entry)
 
 	local rar = Config.Rarities[cfg.Rarity]
 	local gui = Instance.new("BillboardGui")
-	gui.Name = "Tag"; gui.Adornee = model.PrimaryPart; gui.Size = UDim2.fromOffset(200, 78)
+	gui.Name = "Tag"; gui.Adornee = model.PrimaryPart; gui.Size = UDim2.fromOffset(200, 96)
 	gui.StudsOffsetWorldSpace = Vector3.new(0, model:GetExtentsSize().Y + 2.5, 0)
 	gui.MaxDistance = 130; gui.AlwaysOnTop = false
 	local function label(y, h, text, color, size)
@@ -106,7 +117,9 @@ local function spawnModel(player, entry)
 	local subL = label(22, 18, sub, entry.Mut and Config.Mutations[entry.Mut].Color or Config.RarityText(rar), 13)
 	if rar.Rainbow then subL:SetAttribute("Rainbow", true) end
 	if rar.Void and not entry.Mut then subL:SetAttribute("Void", true) end -- Beta 1.7: SECRET preto -- o cliente anima o arco-íris
-	label(42, 30, "$" .. Util.FormatNumber(incomeOf(entry)) .. "/s", Color3.fromRGB(90, 255, 80), 24)
+	-- Beta 1.9: linha de estrelas + nível ("★★★☆☆  Lv 7")
+	label(40, 16, AnimeStats.StarText(AnimeStats.Stars(entry)) .. "  Lv " .. AnimeStats.Level(entry), Color3.fromRGB(255, 214, 70), 14)
+	label(58, 30, "$" .. Util.FormatNumber(incomeOf(entry)) .. "/s", Color3.fromRGB(90, 255, 80), 24)
 	gui.Parent = model.PrimaryPart
 
 	model.Parent = plot.Placed
@@ -132,9 +145,11 @@ local function unplaceEntry(player, entry)
 end
 
 -- Concede um personagem novo (usado pelo EggService). Retorna entry, colocadoNaGaragem
-function FarmService.AddAnime(player, animeId, mut, size)
+-- Beta 1.9: stars (0..5) vem do sorteio do servidor (EggRoll -> IncubatorService). Ausente = 0.
+function FarmService.AddAnime(player, animeId, mut, size, stars)
 	local data = DataService.Get(player); if not data then return nil end
-	local entry = { Uid = data.NextUid, Id = animeId, Mut = mut, Size = size, Placed = false }
+	local entry = { Uid = data.NextUid, Id = animeId, Mut = mut, Size = size, Placed = false,
+		Stars = math.clamp(math.floor(tonumber(stars) or 0), 0, Config.Stars.Max), Level = 1, XP = 0 }
 	data.NextUid += 1
 	table.insert(data.Animes, entry)
 	data.Index[animeId] = true
@@ -145,6 +160,19 @@ function FarmService.AddAnime(player, animeId, mut, size)
 	recompute(player, data); sync(player)
 	return entry, placed
 end
+
+-- Beta 1.9: algo mudou o valor de um personagem (subiu de nível): renda + mochila + placas dos pedestais.
+function FarmService.Refresh(player)
+	local data = DataService.Get(player); if not data then return end
+	if plotOf[player] then
+		for _, e in ipairs(data.Animes) do
+			if e.Placed and e.Slot then spawnModel(player, e) end
+		end
+	end
+	recompute(player, data); sync(player)
+end
+-- Renda atual ($/s) de um jogador (0 sem garagem). Usado pelo VersusService para o prêmio do vencedor.
+function FarmService.CashPerSec(player) return cashPerSec[player] or 0 end
 
 -- ---------------------------------------------------------------- garagens (escolha)
 local function plotsSorted()

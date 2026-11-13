@@ -9,6 +9,7 @@ local RS = game:GetService("ReplicatedStorage")
 local Shared = RS:WaitForChild("Shared")
 local Config = require(Shared.Config)
 local Net = require(Shared.Net)
+local Locale = require(Shared.Locale) -- Beta 1.9: avisos no idioma do jogador
 local CarService = require(script.Parent.CarService)
 local DataService = require(script.Parent.DataService)
 
@@ -52,7 +53,7 @@ local function step(player)
 	if pos.Y < -30 then
 		local cf = lastSafe[player] or CFrame.new(Config.Lobby.Origin + Vector3.new(0, 10, 0))
 		moveSubject(player, cf + Vector3.new(0, 8, 0), driving)
-		Net.Fire(player, "Toast", "🛟 Back on the road!", "info")
+		Net.Fire(player, "Toast", Locale.For(player, "🛟 Back on the road!"), "info")
 		return
 	end
 
@@ -75,7 +76,7 @@ local function step(player)
 		moveSubject(player, CFrame.new(x, groundY(x, zs) + 5, zs), driving)
 		local need
 		for _, c in ipairs(Config.Cars) do if c.Tier == biome.Tier then need = c.Name end end
-		Net.Fire(player, "Toast", ("🔒 %s needs a Tier %d car (%s)!"):format(biome.Name, biome.Tier, need or "?"), "error")
+		Net.Fire(player, "Toast", Locale.For(player, "🔒 %s needs a Tier %d car (%s)!", biome.Name, biome.Tier, need or "?"), "error")
 		return
 	end
 

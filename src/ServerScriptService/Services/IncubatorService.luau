@@ -9,6 +9,8 @@
 	Rede: ação "GetIncubator" -> { ok, Slots, List, Now }   |   eventos "Incubator"(state) e "Hatched"(info)
 	Atributos do Player: IncubatorUsed, IncubatorSlots
 	Dependências: DataService, FarmService, Config.Incubator / Config.Rarities
+	Beta 1.9: cada ovo guarda Stars (0..5, sorteadas no EggRoll) e repassa ao FarmService.AddAnime ao chocar.
+	  Ovos antigos (sem o campo) chocam com 0 estrelas.
 ]]
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
@@ -26,7 +28,7 @@ local function stateOf(data)
 	local list = {}
 	for _, e in ipairs(data.Incubator) do
 		list[#list + 1] = { IncId = e.IncId, Biome = e.Biome, Id = e.Id, Mut = e.Mut, Size = e.Size, Odds = e.Odds,
-			Start = e.Start, ReadyAt = e.ReadyAt }
+			Stars = e.Stars or 0, Start = e.Start, ReadyAt = e.ReadyAt }
 	end
 	return { Slots = slots(), List = list, Now = os.time() }
 end
@@ -52,7 +54,7 @@ function IncubatorService.Add(player, biomeId, roll)
 	if #data.Incubator >= slots() then return nil, "Full" end
 	local now = os.time()
 	local entry = { IncId = data.NextIncId, Biome = biomeId, Id = roll.Id, Mut = roll.Mut, Size = roll.Size, Odds = roll.Odds,
-		Start = now, ReadyAt = now + (Config.Rarities[cfg.Rarity].HatchSeconds or 30) }
+		Stars = math.clamp(math.floor(tonumber(roll.Stars) or 0), 0, Config.Stars.Max), Start = now, ReadyAt = now + (Config.Rarities[cfg.Rarity].HatchSeconds or 30) }
 	data.NextIncId += 1
 	table.insert(data.Incubator, entry)
 	IncubatorService.Push(player)
@@ -62,10 +64,10 @@ end
 local function hatch(player, data, index)
 	local e = table.remove(data.Incubator, index)
 	if not e or not Config.AnimeById[e.Id] then return end -- personagem removido do Config: descarta
-	local entry, placed = FarmService.AddAnime(player, e.Id, e.Mut, e.Size)
+	local entry, placed = FarmService.AddAnime(player, e.Id, e.Mut, e.Size, e.Stars)
 	if not entry then table.insert(data.Incubator, index, e); return end -- tenta de novo no próximo ciclo
 	data.Stats.Hatches = (data.Stats.Hatches or 0) + 1
-	Net.Fire(player, "Hatched", { Id = e.Id, Mut = e.Mut, Size = e.Size, Odds = e.Odds, Placed = placed,
+	Net.Fire(player, "Hatched", { Id = e.Id, Mut = e.Mut, Size = e.Size, Odds = e.Odds, Placed = placed, Stars = entry.Stars or 0,
 		Income = FarmService.IncomeOf(entry), Biome = e.Biome })
 end
 

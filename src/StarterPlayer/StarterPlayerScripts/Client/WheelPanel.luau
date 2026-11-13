@@ -10,6 +10,8 @@
 	  * Registrado em UIKit.Panels["Wheel"] (Open/Close/Toggle) => o botão WHEEL do dock (Client.LobbyDock) abre.
 	Fatia = interseção de dois semiplanos (CanvasGroup + UIGradient de transparência) dentro de um CanvasGroup redondo.
 	O cliente não decide nada: só mostra o que Services.WheelService mandou.
+	Beta 1.9: barra "🎟️ Spin points: 37/100" embaixo do contador (atributo WheelPoints; 100 pontos = 1 giro extra;
+	  +2 por minuto jogado, +10 por vitória 1v1) e textos pelo UIKit.T (idiomas).
 ]]
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -32,6 +34,8 @@ local SIZE = 380              -- diâmetro do disco (px, antes do UIScale)
 local W, H = 470, 650         -- tamanho de desenho da janela
 local Z = 30
 local dim, frame, scaleObj, disc, pointer, spinBtn, timerL, resultL, packBtns
+local pointsFill, pointsL -- Beta 1.9: barra de pontos de spin
+local T = UIKit.T
 local spinning, obj = false, nil
 local offset = 0 -- os.time do servidor - GetServerTimeNow
 
@@ -115,13 +119,20 @@ end
 local function refresh()
 	if not frame then return end
 	local n = available()
-	if not spinning then UIKit.SetButton(spinBtn, ("Spin (%d)"):format(n), n > 0 and C.Green or C.Grey, false) end
+	if not spinning then UIKit.SetButton(spinBtn, T("Spin (%d)", n), n > 0 and C.Green or C.Grey, false) end
 	if nextAt() <= 0 then
 		timerL.Text = "..."
 	elseif freeReady() then
-		timerL.Text = "Free spin ready!"; timerL.TextColor3 = C.Cash
+		timerL.Text = T("Free spin ready!"); timerL.TextColor3 = C.Cash
 	else
-		timerL.Text = "Spin in: " .. clock(nextAt() - serverNow()); timerL.TextColor3 = Color3.fromRGB(235, 235, 245)
+		timerL.Text = T("Spin in: %s", clock(nextAt() - serverNow())); timerL.TextColor3 = Color3.fromRGB(235, 235, 245)
+	end
+	-- Beta 1.9: pontos de spin (o servidor zera a barra e soma 1 giro quando chega a 100)
+	if pointsL then
+		local per = WC.Points.PerSpin
+		local pts = math.clamp(lp:GetAttribute("WheelPoints") or 0, 0, per)
+		pointsL.Text = T("🎟️ Spin points: %d/%d", pts, per)
+		pointsFill.Size = UDim2.fromScale(pts / per, 1)
 	end
 end
 
@@ -131,7 +142,7 @@ local ERR = { Cooldown = "⏳ No spins left! Wait for the free spin or grab a sp
 function WheelPanel.Spin()
 	if spinning then return end
 	if available() <= 0 then
-		Notify.Toast(("⏳ Free spin in %s — or grab a x3 / x10 spin pack!"):format(clock(nextAt() - serverNow())), "info")
+		Notify.Toast(T("⏳ Free spin in %s — or grab a x3 / x10 spin pack!", clock(nextAt() - serverNow())), "info")
 		UIKit.Shake(spinBtn, 6, 0.3)
 		return
 	end
@@ -171,15 +182,15 @@ function WheelPanel.Spin()
 	tw.Completed:Wait()
 	tick:Disconnect()
 	-- resultado
-	local text = prize.Spins and ("🎟️ +%d SPINS!"):format(prize.Spins) or ("+$" .. Util.FormatNumber(prize.Cash))
-	resultL.Text = (prize.Jackpot and "👑 JACKPOT! " or "🎉 ") .. text
+	local text = prize.Spins and T("🎟️ +%d SPINS!", prize.Spins) or ("+$" .. Util.FormatNumber(prize.Cash))
+	resultL.Text = prize.Jackpot and T("👑 JACKPOT! %s", text) or ("🎉 " .. text)
 	resultL.TextColor3 = prize.Color
 	UIKit.Pop(resultL, 1.6)
 	UIKit.Confetti(frame, prize.Color, prize.Jackpot and 90 or 35)
 	UIKit.PlaySound(prize.Jackpot and "Rare" or "Reveal")
 	if prize.Jackpot then UIKit.Rainbow(resultL); UIKit.Shake(frame, 10, 0.6) end
-	Notify.Toast(prize.Spins and ("🎟️ You won %d extra spins!"):format(prize.Spins)
-		or ("🎡 You won $%s on the Lucky Wheel!"):format(Util.FormatNumber(prize.Cash)), "good")
+	Notify.Toast(prize.Spins and T("🎟️ You won %d extra spins!", prize.Spins)
+		or T("🎡 You won $%s on the Lucky Wheel!", Util.FormatNumber(prize.Cash)), "good")
 	task.wait(0.4) -- o servidor entrega o prêmio quando a roda para
 	spinning = false
 	for _, b in ipairs(packBtns) do b:SetAttribute("Disabled", false) end
@@ -225,8 +236,9 @@ function WheelPanel.Init()
 	local function pack(pk, x)
 		local b = UIKit.Button(frame, { Name = "Pack_" .. pk.Key, Text = "R$ " .. pk.Robux, Size = UDim2.fromOffset(118, 74), Position = UDim2.new(0.5, x, 0, rowY),
 			AnchorPoint = Vector2.new(0.5, 0), Color = pk.Color, TextSize = 28, Radius = 14, StrokeThickness = 4, ZIndex = Z + 12, OnClick = function() buyPack(pk) end })
-		UIKit.Text(frame, { Text = pk.Key .. " Spins", TextSize = 20, Size = UDim2.fromOffset(130, 24), Position = UDim2.new(0.5, x, 0, rowY + 80), AnchorPoint = Vector2.new(0.5, 0),
+		local caption = UIKit.Text(frame, { Text = "x" .. T("%d Spins", pk.Spins), TextSize = 20, Size = UDim2.fromOffset(130, 24), Position = UDim2.new(0.5, x, 0, rowY + 80), AnchorPoint = Vector2.new(0.5, 0),
 			Stroke = 3, ZIndex = Z + 12 })
+		UIKit.Locale.OnChanged(function() caption.Text = "x" .. T("%d Spins", pk.Spins) end)
 		table.insert(packBtns, b)
 		return b
 	end
@@ -238,6 +250,16 @@ function WheelPanel.Init()
 	UIKit.Shine(spinBtn, 2)
 	timerL = UIKit.Text(frame, { Name = "Timer", Text = "", TextSize = 21, Size = UDim2.fromOffset(220, 26), Position = UDim2.new(0.5, 0, 0, rowY + 81), AnchorPoint = Vector2.new(0.5, 0),
 		Stroke = 3, ZIndex = Z + 12 })
+
+	-- Beta 1.9: barra de pontos de spin (embaixo do contador). Passar o mouse/tocar mostra a regra num aviso.
+	local bar = new("TextButton", { Name = "SpinPoints", Text = "", AutoButtonColor = false, Size = UDim2.fromOffset(300, 26),
+		Position = UDim2.new(0.5, 0, 0, rowY + 112), AnchorPoint = Vector2.new(0.5, 0), BackgroundColor3 = Color3.fromRGB(26, 22, 40), ZIndex = Z + 12 }, frame)
+	new("UICorner", { CornerRadius = UDim.new(1, 0) }, bar); UIKit.Stroke(bar, 3)
+	local clip = new("Frame", { Size = UDim2.new(1, -6, 1, -6), Position = UDim2.fromOffset(3, 3), BackgroundTransparency = 1, ClipsDescendants = true, ZIndex = Z + 12 }, bar)
+	pointsFill = new("Frame", { Name = "Fill", Size = UDim2.fromScale(0, 1), BackgroundColor3 = Color3.fromRGB(170, 90, 240), BorderSizePixel = 0, ZIndex = Z + 12 }, clip)
+	new("UICorner", { CornerRadius = UDim.new(1, 0) }, pointsFill)
+	pointsL = UIKit.Text(bar, { Name = "Label", Text = "", TextSize = 16, Stroke = 2.5, ZIndex = Z + 13 })
+	bar.Activated:Connect(function() Notify.Toast("🎟️ 100 spin points = 1 free spin!", "info") end)
 
 	obj = { Name = "Wheel", Frame = frame, IsOpen = false }
 	function obj.Open()
@@ -277,6 +299,8 @@ function WheelPanel.Init()
 	end)
 	lp:GetAttributeChangedSignal("WheelNextAt"):Connect(refresh)
 	lp:GetAttributeChangedSignal("WheelTokens"):Connect(refresh)
+	lp:GetAttributeChangedSignal("WheelPoints"):Connect(refresh)
+	UIKit.Locale.OnChanged(refresh) -- textos montados (contador, botão) voltam no idioma novo
 end
 
 return WheelPanel

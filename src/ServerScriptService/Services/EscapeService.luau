@@ -36,6 +36,7 @@ local RS = game:GetService("ReplicatedStorage")
 local Shared = RS:WaitForChild("Shared")
 local Config = require(Shared.Config)
 local Net = require(Shared.Net)
+local Locale = require(Shared.Locale) -- Beta 1.9: avisos no idioma do jogador
 local DataService = require(script.Parent.DataService)
 local CarService = require(script.Parent.CarService)
 local RaceService = require(script.Parent.RaceService)
@@ -59,7 +60,8 @@ local function groundY(x, z)
 	return hit and hit.Position.Y or 0
 end
 
-local function toast(player, text, kind) Net.Fire(player, "Toast", text, kind or "error") end
+-- Beta 1.9: key = texto em inglês (chave do Locale); os argumentos extras entram nos %d / %s.
+local function toast(player, key, ...) Net.Fire(player, "Toast", Locale.For(player, key, ...), "error") end
 
 local ATTRS = { "EscapeBiome", "EscapeEggZ", "EscapeFrontZ0", "EscapeFrontStart", "EscapeSpeed" }
 local function setAttrs(player, e)
@@ -118,16 +120,18 @@ local function tryGrab(player, biome, part)
 	if lastTry[player] and clock - lastTry[player] < 1 then return end
 	lastTry[player] = clock
 
+	-- Beta 1.9: na corrida 1v1 (RaceMode "Duel") não existe ovo: o cliente esconde e o servidor recusa.
+	if player:GetAttribute("RaceMode") == "Duel" then return end
 	if escapes[player] then return toast(player, "🥚 You're already carrying an egg — get it home!") end
 	if (player:GetAttribute("RaceState") or "Lobby") ~= "Racing" then return toast(player, "🏁 Start a race to grab this egg!") end
 	if not CarService.IsDriving(player) then return toast(player, "🚗 Get in your car to carry the egg!") end
 	if biome.Tier > CarService.GetTier(player) then
-		return toast(player, ("🔒 This egg needs a Tier %d car!"):format(biome.Tier))
+		return toast(player, "🔒 This egg needs a Tier %d car!", biome.Tier)
 	end
 	local pos = CarService.GetPosition(player)
 	if not pos or (pos - part.Position).Magnitude > E.PromptDistance + 20 then return toast(player, "Get closer to the egg!") end
 	if IncubatorService.IsFull(player) then
-		return toast(player, ("🥚 Your incubator is full (%d/%d)! Wait for an egg to hatch."):format(Config.Incubator.Slots, Config.Incubator.Slots))
+		return toast(player, "🥚 Your incubator is full (%d/%d)! Wait for an egg to hatch.", Config.Incubator.Slots, Config.Incubator.Slots)
 	end
 
 	local roll = EggRoll.Roll(biome.Id, 1) -- SORTEIO NO SERVIDOR
@@ -147,7 +151,7 @@ local function tryGrab(player, biome, part)
 	print(("[EscapeService] %s pegou o ovo %s => %s (%s) | colapso a %.0f studs/s"):format(player.Name, biome.Id, roll.Id, cfg.Rarity, e.Speed))
 	Net.Fire(player, "EggRoulette", {
 		Biome = biome.Id,
-		Result = { Id = roll.Id, Mut = roll.Mut, Size = roll.Size, Odds = roll.Odds },
+		Result = { Id = roll.Id, Mut = roll.Mut, Size = roll.Size, Odds = roll.Odds, Stars = roll.Stars or 0 }, -- Beta 1.9: + Stars
 		HatchSeconds = Config.Rarities[cfg.Rarity].HatchSeconds,
 		RouletteEnds = t + E.RouletteSeconds,
 		FrontStart = e.FrontStart,

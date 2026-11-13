@@ -36,10 +36,11 @@ function HUD.OnBiome(id)
 		start = { "🏁 START LINE", "Drive forward — good luck!", "🏁 Start Line", Color3.fromRGB(255, 200, 60) },
 	}
 	local sp = special[id] or special.lobby
-	local name = biome and (biome.Emoji .. " " .. biome.Name:upper()) or sp[1]
+	local T = UIKit.T -- Beta 1.9: zonas especiais no idioma do jogador (nomes de bioma ficam em inglês)
+	local name = biome and (biome.Emoji .. " " .. biome.Name:upper()) or T(sp[1])
 	local color = biome and biome.Color or sp[4]
-	local sub = biome and ("Tier " .. biome.Tier .. " zone  •  " .. Config.Eggs[biome.Id].Name .. "s here!") or sp[2]
-	topBiome.Text = biome and (biome.Emoji .. " " .. biome.Name) or sp[3]
+	local sub = biome and (T("Tier %d", biome.Tier) .. "  •  " .. Config.Eggs[biome.Id].Name) or T(sp[2])
+	topBiome.Text = biome and (biome.Emoji .. " " .. biome.Name) or T(sp[3])
 	topPill.BackgroundColor3 = color
 	UIKit.Pop(topPill, 1.15)
 	titleToken += 1
@@ -275,6 +276,14 @@ function HUD.Init()
 		local plots = map and map:WaitForChild("Plots", 30)
 		if plots then scanRainbow(plots) end
 	end)
+
+	-- Beta 1.9: tamanho por aparelho (Client.Platform). Blocos fixos do HUD ficam menores no celular (a pista
+	-- precisa aparecer) e maiores na TV. Só Frames simples: botões do UIKit já têm um UIScale próprio (animação).
+	-- (o menu lateral antigo "Menu" fica de fora: ele já tem um UIScale próprio e dois no mesmo objeto brigam)
+	for name, kind in pairs({ Currency = "Hud", Speedo = "Hud", BiomePill = "Overlay" }) do
+		local o = root:FindFirstChild(name)
+		if o and o:IsA("Frame") then UIKit.Platform.Apply(o, kind) end
+	end
 end
 
 return HUD

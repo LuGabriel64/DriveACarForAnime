@@ -11,6 +11,10 @@
 	Beta 1.8d (auditoria 11/11, item 5): save() só devolve true se o UpdateAsync GRAVOU de verdade. Antes, a trava de
 	  outro servidor cancelava a gravação (transform devolvia nil) e mesmo assim save() dava true => o WheelService
 	  confirmava compra de Robux (PurchaseGranted) sem ter salvo. Formato do save NÃO mudou (Version continua 2).
+	Beta 1.9: save Version 3 — SÓ CAMPOS NOVOS, nada é apagado nem renomeado:
+	  data.Animes[i].Stars/Level/XP, data.Incubator[i].Stars, data.Partner, data.Lang, data.Wheel.Points, data.Versus.
+	  migrate() 2 -> 3 preenche Stars = 0, Level = 1, XP = 0 nos personagens que já existiam (renda IGUAL à de antes).
+	  + ação "SetLanguage"(code) e atributo "Lang" (idioma do jogador; 1ª vez = idioma da conta Roblox).
 ]]
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -19,6 +23,7 @@ local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS.Shared.Config)
 local Util = require(RS.Shared.Util)
 local Net = require(RS.Shared.Net)
+local Locale = require(RS.Shared.Locale)
 
 local DataService = {}
 local profiles, onLoaded, onLeaving = {}, {}, {}
@@ -41,11 +46,11 @@ end
 
 local function defaults()
 	return {
-		Version = 2, -- Beta 1.6: 2 = elenco novo do bioma 1 (ver migrate())
+		Version = 3, -- Beta 1.6: 2 = elenco novo do bioma 1 | Beta 1.9: 3 = estrelas/nível/versus (ver migrate())
 		Cash = Config.Start.Cash,
 		CarId = "starter",
 		Cars = { starter = { Engine = 0 } },
-		Animes = {},          -- { Uid, Id, Mut, Size, Placed, Slot }
+		Animes = {},          -- { Uid, Id, Mut, Size, Placed, Slot, Stars 0..5, Level 1..50, XP }  (Beta 1.9: + Stars/Level/XP)
 		NextUid = 1,
 		PlotSlots = Config.Farm.StartSlots,
 		GiftClaimed = false,
@@ -60,7 +65,16 @@ local function defaults()
 		-- Pending = Cash sorteado que ainda não foi pago (pago quando a roda para ou no próximo login).
 		-- Beta 1.7: Tokens = giros EXTRAS (pacotes Robux / prêmio "+2 Spins"), PendingSpins = giros ganhos ainda não
 		-- entregues (entram quando a roda para), Receipts = PurchaseIds já entregues (anti-duplicação, guarda os 50 últimos).
-		Wheel = { LastSpin = 0, Spins = 0, Pending = 0, Tokens = 0, PendingSpins = 0, Receipts = {} },
+		-- Beta 1.9: Points = pontos de spin guardados (0..99; 100 viram 1 Token). Ver WheelService.AddPoints.
+		Wheel = { LastSpin = 0, Spins = 0, Pending = 0, Tokens = 0, PendingSpins = 0, Receipts = {}, Points = 0 },
+		-- Beta 1.9: desafio 1v1 (Services.VersusService / DuelRaceService / BattleService).
+		--   F1 = carros de fórmula (só corrida 1v1) | Fx = animações de vitória | Stats = placar pessoal.
+		-- data.Partner (Uid do personagem que ganha XP na corrida 1v1) e data.Lang ("en" | "pt") começam nil.
+		Versus = {
+			F1 = { Owned = { f1_rookie = true }, Equipped = "f1_rookie" },
+			Fx = { Owned = { confetti = true }, Equipped = "confetti" },
+			Stats = { RaceWins = 0, RaceLosses = 0, BattleWins = 0, BattleLosses = 0, Streak = 0, BestStreak = 0 },
+		},
 	}
 end
 
@@ -73,15 +87,25 @@ end
 
 -- Beta 1.6: MIGRAÇÃO de saves. Version 1 -> 2: troca os Ids do elenco anterior do bioma 1 pelo elenco novo
 -- (Config.AnimeMigrations) no inventário, na incubadora e no Index. Roda uma vez por save (depois Version = 2).
+-- Beta 1.9: Version 2 -> 3: estrelas, nível e XP nos personagens que já existiam. Listas não são preenchidas pelo
+-- reconcile(), por isso o laço. Stars = 0 e Level = 1 dão multiplicador x1 => a renda de quem já joga NÃO muda.
 local function migrate(data)
-	if (data.Version or 1) >= 2 then return end
-	local map = Config.AnimeMigrations or {}
-	for _, e in ipairs(data.Animes or {}) do if map[e.Id] then e.Id = map[e.Id] end end
-	for _, e in ipairs(data.Incubator or {}) do if map[e.Id] then e.Id = map[e.Id] end end
-	local idx = {}
-	for id, v in pairs(data.Index or {}) do idx[map[id] or id] = v end
-	data.Index = idx
-	data.Version = 2
+	if (data.Version or 1) < 2 then
+		local map = Config.AnimeMigrations or {}
+		for _, e in ipairs(data.Animes or {}) do if map[e.Id] then e.Id = map[e.Id] end end
+		for _, e in ipairs(data.Incubator or {}) do if map[e.Id] then e.Id = map[e.Id] end end
+		local idx = {}
+		for id, v in pairs(data.Index or {}) do idx[map[id] or id] = v end
+		data.Index = idx
+		data.Version = 2
+	end
+	if data.Version < 3 then
+		for _, e in ipairs(data.Animes or {}) do
+			e.Stars = e.Stars or 0; e.Level = e.Level or 1; e.XP = e.XP or 0
+		end
+		for _, e in ipairs(data.Incubator or {}) do e.Stars = e.Stars or 0 end
+		data.Version = 3
+	end
 end
 
 local function acquire(player)
@@ -154,6 +178,11 @@ local function loadPlayer(player)
 	reconcile(data, defaults())
 	data.Version = oldVersion -- reconcile não sobrescreve, mas garante que saves sem Version contem como 1
 	migrate(data)
+	-- Beta 1.9: idioma. Primeira entrada (ou código inválido) => detecta pelo idioma da conta Roblox.
+	if not Locale.IsValid(data.Lang) then
+		local okLoc, loc = pcall(function() return player.LocaleId end)
+		data.Lang = Locale.Detect(okLoc and loc or "")
+	end
 	profiles[player] = { Data = data, Persistent = persistent, LastSave = os.clock() }
 	DataService.PushAttributes(player)
 	for _, fn in ipairs(onLoaded) do task.spawn(fn, player, data) end
@@ -190,6 +219,7 @@ function DataService.PushAttributes(player)
 	player:SetAttribute("CarId", d.CarId)
 	player:SetAttribute("GiftClaimed", d.GiftClaimed)
 	player:SetAttribute("PlotSlots", d.PlotSlots)
+	player:SetAttribute("Lang", d.Lang) -- Beta 1.9 (Shared.Locale lê este atributo no cliente e no servidor)
 	for _, s in ipairs(Config.Settings) do player:SetAttribute("Set_" .. s.Key, d.Settings[s.Key]) end
 end
 function DataService.AddCash(player, amount)
@@ -225,6 +255,14 @@ function DataService.Init()
 		player:SetAttribute("Set_" .. key, value)
 		return { ok = true }
 	end, 0.15)
+	-- Beta 1.9: botão "Languages". Só aceita códigos de Config.Languages (lista branca em Locale.IsValid).
+	Net.Handle("SetLanguage", function(player, code)
+		local d = DataService.Get(player)
+		if not d or type(code) ~= "string" or not Locale.IsValid(code) then return { ok = false, err = "Invalid" } end
+		d.Lang = code
+		player:SetAttribute("Lang", code)
+		return { ok = true, Lang = code }
+	end, 0.3)
 	Players.PlayerAdded:Connect(function(pl) task.spawn(loadPlayer, pl) end)
 	for _, pl in ipairs(Players:GetPlayers()) do task.spawn(loadPlayer, pl) end
 	Players.PlayerRemoving:Connect(onRemoving)

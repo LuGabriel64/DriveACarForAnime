@@ -26,6 +26,11 @@ local EggVisuals = require(script.Parent.EggVisuals)
 local new, C = UIKit.New, UIKit.C
 local lp = Players.LocalPlayer
 
+local T = UIKit.T -- Beta 1.9: textos montados no idioma do jogador
+-- Beta 1.9: cada cartão de personagem mostra também ESTRELAS (sobre o retrato), NÍVEL (selo), barra de XP, PODER de
+-- batalha e o botão SET PARTNER (o parceiro ganha o XP das corridas 1v1; atributo "Partner", 0 = o mais forte).
+-- Os números vêm prontos do servidor no evento "Inventory" (Stars, Level, XP, XpNext, Power).
+
 local InventoryPanel = {}
 local panel
 local tabs, pages = {}, {}
@@ -72,6 +77,30 @@ local function charCard(e, order)
 	if rar.Rainbow then UIKit.Rainbow(rl) end
 	UIKit.Text(f, { Text = cfg.Name, TextSize = 16, Scaled = true, Size = UDim2.new(1, -10, 0, 20), Position = UDim2.fromOffset(5, 127), Stroke = 2.5, ZIndex = 23 })
 	UIKit.Text(f, { Text = "$" .. Util.FormatNumber(e.Income) .. "/s", TextSize = 18, Color = C.Cash, Size = UDim2.new(1, -10, 0, 20), Position = UDim2.fromOffset(5, 148), Stroke = 2.5, ZIndex = 23 })
+	-- Beta 1.9: estrelas (faixa sobre o retrato) e nível (selo no canto)
+	local stars = e.Stars or 0
+	UIKit.Text(icon, { Name = "Stars", Text = string.rep("★", stars) .. string.rep("☆", Config.Stars.Max - stars), TextSize = 17,
+		Color = stars > 0 and C.Gold or Color3.fromRGB(200, 200, 215), Size = UDim2.new(1, 0, 0, 20), Position = UDim2.new(0, 0, 1, -21), Stroke = 2.5, ZIndex = 26 })
+	local lvl = new("Frame", { Name = "Level", Size = UDim2.fromOffset(48, 22), Position = UDim2.new(1, -3, 0, 3), AnchorPoint = Vector2.new(1, 0),
+		BackgroundColor3 = Color3.fromRGB(24, 22, 38), ZIndex = 26 }, icon)
+	new("UICorner", { CornerRadius = UDim.new(0, 8) }, lvl); UIKit.Stroke(lvl, 2)
+	UIKit.Text(lvl, { Text = T("Lv %d", e.Level or 1), TextSize = 14, Scaled = true, Size = UDim2.fromScale(0.88, 0.8), Position = UDim2.fromScale(0.06, 0.1), Stroke = 2, ZIndex = 27 })
+	-- barra de XP (cheia e dourada no nível máximo)
+	local xpBar = new("Frame", { Name = "XP", Size = UDim2.new(1, -16, 0, 15), Position = UDim2.fromOffset(8, 171), BackgroundColor3 = Color3.fromRGB(18, 16, 28), ZIndex = 23 }, f)
+	new("UICorner", { CornerRadius = UDim.new(1, 0) }, xpBar); UIKit.Stroke(xpBar, 2)
+	local frac = e.XpNext and math.clamp((e.XP or 0) / e.XpNext, 0, 1) or 1
+	local xpFill = new("Frame", { Size = UDim2.fromScale(math.max(frac, 0.02), 1), BackgroundColor3 = e.XpNext and Color3.fromRGB(70, 170, 255) or C.Gold, BorderSizePixel = 0, ZIndex = 23 }, xpBar)
+	new("UICorner", { CornerRadius = UDim.new(1, 0) }, xpFill)
+	UIKit.Text(xpBar, { Text = e.XpNext and T("XP %d/%d", e.XP or 0, e.XpNext) or T("MAX LEVEL"), TextSize = 11, Stroke = 2, ZIndex = 24 })
+	UIKit.Text(f, { Text = "⚔️ " .. T("Power") .. " " .. Util.FormatNumber(e.Power or 0), TextSize = 14, Color = Color3.fromRGB(255, 150, 120),
+		Size = UDim2.new(1, -10, 0, 17), Position = UDim2.fromOffset(5, 189), Stroke = 2.5, ZIndex = 23 })
+	local partner = (lp:GetAttribute("Partner") or 0) == e.Uid
+	UIKit.Button(f, { Name = "Partner", Text = partner and "⭐ PARTNER" or "SET PARTNER", Size = UDim2.new(1, -16, 0, 28), Position = UDim2.new(0, 8, 1, -72),
+		Color = partner and C.Gold or Color3.fromRGB(120, 80, 220), TextSize = 15, ZIndex = 24,
+		OnClick = function()
+			if partner then Notify.Toast("Your partner earns XP when you race!", "info"); return end
+			call("SetPartner", e.Uid)
+		end })
 	UIKit.Button(f, { Text = e.Placed and "UNEQUIP" or "EQUIP", Size = UDim2.new(1, -16, 0, 32), Position = UDim2.new(0, 8, 1, -38),
 		Color = e.Placed and C.Blue or C.Green, TextSize = 18, ZIndex = 24,
 		OnClick = function() call(e.Placed and "PickUpAnime" or "PlaceAnime", e.Uid) end })
@@ -90,7 +119,7 @@ local function refreshCharacters()
 		if e.Placed then placed += 1; cps += e.Income end
 		charCard(e, i)
 	end
-	charInfo.Text = ('🐾 Equipped <font color="#57e63c">%d/%d</font>   ⚡ <font color="#57e63c">$%s/s</font>'):format(placed, State.PlotSlots or 8, Util.FormatNumber(cps))
+	charInfo.Text = T('🐾 Equipped <font color="#57e63c">%d/%d</font>   ⚡ <font color="#57e63c">$%s/s</font>', placed, State.PlotSlots or 8, Util.FormatNumber(cps))
 	if #list == 0 then
 		UIKit.Text(charScroll, { Text = "No characters yet! Race to the end of a biome, grab the Giant Egg and escape back to base.",
 			TextSize = 20, Wrapped = true, Color = Color3.fromRGB(190, 190, 210), Size = UDim2.fromOffset(440, 90), LayoutOrder = 1, Stroke = 2, ZIndex = 23 })
@@ -173,10 +202,10 @@ local function refreshCars()
 		UIKit.Text(f, { Text = car.Name, TextSize = 22, Scaled = true, Size = UDim2.fromScale(0.92, 0.11), Position = UDim2.fromScale(0.04, 0.03), Stroke = 3, ZIndex = 23 })
 		local holder = new("Frame", { Size = UDim2.fromScale(1, 0.42), Position = UDim2.fromScale(0, 0.15), BackgroundTransparency = 1, ZIndex = 23 }, f)
 		UIKit.Viewport(holder, CarFactory.Build(car, true), { Dir = Vector3.new(0.7, 0.45, -1), Zoom = 1.0, ZIndex = 23 })
-		UIKit.Text(f, { Text = ("Tier %d  •  🚀 %d km/h"):format(car.Tier, car.MaxSpeed), TextSize = 17, Scaled = true, Size = UDim2.fromScale(0.92, 0.09),
+		UIKit.Text(f, { Text = T("Tier %d  •  🚀 %d km/h", car.Tier, car.MaxSpeed), TextSize = 17, Scaled = true, Size = UDim2.fromScale(0.92, 0.09),
 			Position = UDim2.fromScale(0.04, 0.6), Stroke = 2.5, ZIndex = 23 })
 		if owned then
-			UIKit.Text(f, { Text = "🔧 Engine Lv " .. tostring(cs.Owned[car.Id]), TextSize = 15, Scaled = true, Size = UDim2.fromScale(0.92, 0.07),
+			UIKit.Text(f, { Text = T("🔧 Engine Lv %d", cs.Owned[car.Id]), TextSize = 15, Scaled = true, Size = UDim2.fromScale(0.92, 0.07),
 				Position = UDim2.fromScale(0.04, 0.7), Color = Color3.fromRGB(230, 240, 255), Stroke = 2, ZIndex = 23 })
 		end
 		local b = UIKit.Button(f, { Text = "", Size = UDim2.fromScale(0.88, 0.14), Position = UDim2.fromScale(0.06, 0.82), ZIndex = 24, TextSize = 20 })
@@ -186,7 +215,7 @@ local function refreshCars()
 			UIKit.SetButton(b, "SELECT", C.Green, false)
 			b.Activated:Connect(function()
 				if not atBase() then Notify.Toast("🏠 Switch cars at your base!", "error"); return end
-				if call("EquipCar", car.Id) then Notify.Toast("🚗 " .. car.Name .. " selected!", "good") end
+				if call("EquipCar", car.Id) then Notify.Toast("🚗 " .. T("%s selected!", car.Name), "good") end
 			end)
 		else
 			UIKit.SetButton(b, "🔒 CAR SHOP", C.Orange, false)
@@ -292,7 +321,8 @@ function InventoryPanel.Init()
 		Color = C.Orange, TextSize = 18, ZIndex = 24, OnClick = function() if call("EquipBest") then Notify.Toast("⭐ Best characters equipped!", "good") end end })
 	charScroll = new("ScrollingFrame", { Size = UDim2.new(1, 0, 1, -54), Position = UDim2.fromOffset(0, 54), BackgroundTransparency = 1, BorderSizePixel = 0,
 		ScrollBarThickness = 6, AutomaticCanvasSize = Enum.AutomaticSize.Y, CanvasSize = UDim2.new(), ZIndex = 22 }, pc)
-	new("UIGridLayout", { CellSize = UDim2.fromOffset(148, 214), CellPadding = UDim2.fromOffset(8, 8), SortOrder = Enum.SortOrder.LayoutOrder }, charScroll)
+	-- Beta 1.9: célula mais alta (era 148 x 214): + barra de XP, Poder e botão de parceiro
+	new("UIGridLayout", { CellSize = UDim2.fromOffset(148, 284), CellPadding = UDim2.fromOffset(8, 8), SortOrder = Enum.SortOrder.LayoutOrder }, charScroll)
 	new("UIPadding", { PaddingTop = UDim.new(0, 4), PaddingLeft = UDim.new(0, 2) }, charScroll)
 
 	-- INCUBATOR
@@ -332,7 +362,7 @@ function InventoryPanel.Init()
 		local cfg = info and Config.AnimeById[info.Id]
 		if not cfg then return end
 		local rar = Config.Rarities[cfg.Rarity]
-		Notify.Toast(("🐣 %s hatched! +$%s/s %s"):format(cfg.Name, Util.FormatNumber(info.Income or 0), info.Placed and "(in your garage)" or "(in your backpack)"), "good")
+		Notify.Toast(T("🐣 %s hatched! +$%s/s %s", cfg.Name, Util.FormatNumber(info.Income or 0), T(info.Placed and "(in your garage)" or "(in your backpack)")), "good")
 		UIKit.Confetti(UIKit.GetGui(), rar.Color, 16 + rar.Order * 6)
 		UIKit.PlaySound(rar.Order >= 4 and "Rare" or "Reveal")
 	end)
@@ -342,6 +372,9 @@ function InventoryPanel.Init()
 		if panel.IsOpen and current == "Incubator" then tickIncubator() end
 	end)
 	setupGaragePrompt()
+	-- Beta 1.9: trocou o parceiro ou o idioma => redesenha os cartões
+	lp:GetAttributeChangedSignal("Partner"):Connect(refresh)
+	UIKit.Locale.OnChanged(refresh)
 end
 
 return InventoryPanel

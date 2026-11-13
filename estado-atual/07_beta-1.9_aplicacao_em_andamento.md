@@ -3,7 +3,27 @@
 > Escrito pelo Claude Code local do dono (app desktop, MCP `Roblox_Studio`). **Leia antes de continuar a 1.9.**
 > A sessão parou porque o Studio deixou de responder ao MCP logo depois de um Play de teste.
 
-## Resumo
+## ATUALIZAÇÃO 13/11/2026 — Etapa A testada, salva e espelhada
+
+- O Studio voltou e a Etapa A estava inteira no place (o Team Create guardou as edições).
+- Corrigido: um comentário no meio de uma linha do `InventoryPanel` (erro de sintaxe que derrubava a mochila e o
+  dock); `UIKit.Pop` voltava a escala para 1 quando a tela mudava durante a animação; o menu lateral antigo do HUD
+  ficou fora do `Platform.Apply` (já tinha `UIScale` próprio).
+- **Testado em Play (1 jogador, janela de 1530 x 572):** tela de início em PT/EN trocando ao vivo; botão Idiomas;
+  mochila com ★, nível, XP, Poder e VIRAR PARCEIRO; roleta com "Pontos de giro: 84/100"; fuga do ovo completa
+  (ovo sorteado com estrelas, entregue, chocado, placa do pedestal "☆☆☆☆☆ Lv 1 | $3/s", renda $3/s).
+- **Continua sem teste:** save real na migração 2→3; ovo com 1+ estrelas (o sorteio deu 0★ nas duas vezes);
+  100 pontos virando giro; celular, tablet e TV.
+- Place salvo (**versão 105**, não publicado). `src/` espelhado com `ServerStorage.Tools.MirrorDump` +
+  `tools/place/mirror_from_dump.js` (26 arquivos mudaram; os outros 33 saíram idênticos ao Git).
+- Verificador de sintaxe: em modo Edit, `loadstring(script.Source)` funciona no `execute_luau`. Rode em todos os
+  scripts antes de cada Play (o erro acima teria aparecido na hora).
+- Para ver as telas pelo MCP: `user_mouse_input` com `instance_path` funciona nos botões do dock; `screen_capture`
+  funciona em Play. Se a garagem foi escolhida pelo remote, apague o `PlayerGui.StartMenu` antes (ele não sai sozinho).
+
+O texto abaixo é o registro de 12/11 (antes do teste).
+
+## Resumo (12/11)
 
 - **Etapa A (fundação) foi APLICADA no place**, script por script, pelo MCP.
 - **Não chamei `save_place`.** O place é Team Create, então as edições costumam ficar na sessão da nuvem, mas

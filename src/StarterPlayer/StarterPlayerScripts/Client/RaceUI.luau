@@ -57,7 +57,7 @@ local function countdown(info)
 	local overlay = new("Frame", { Name = "Countdown", Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1, ZIndex = 45 }, gui)
 	local big = UIKit.Text(overlay, { Text = "", TextSize = 150, Size = UDim2.fromOffset(500, 170), Position = UDim2.fromScale(0.5, 0.38),
 		AnchorPoint = Vector2.new(0.5, 0.5), Stroke = 9, ZIndex = 46 })
-	local sub = UIKit.Text(overlay, { Text = ("SLOT %d  •  SOLO RACE"):format(info.Slot), TextSize = 26, Size = UDim2.fromOffset(500, 34),
+	local sub = UIKit.Text(overlay, { Text = UIKit.T("SLOT %d  •  SOLO RACE", info.Slot), TextSize = 26, Size = UDim2.fromOffset(500, 34),
 		Position = UDim2.new(0.5, 0, 0.38, 100), AnchorPoint = Vector2.new(0.5, 0.5), Stroke = 3, ZIndex = 46 })
 	local colors = { [3] = Color3.fromRGB(255, 80, 80), [2] = Color3.fromRGB(255, 190, 40), [1] = Color3.fromRGB(255, 240, 80) }
 	local last
@@ -96,7 +96,7 @@ local function showResults(s)
 	local function stat(y, icon, label, value, color)
 		local f = new("Frame", { Size = UDim2.new(1, 0, 0, 56), Position = UDim2.fromOffset(0, y), BackgroundColor3 = C.CardBg, ZIndex = 22 }, body)
 		new("UICorner", { CornerRadius = UDim.new(0, 12) }, f); UIKit.Stroke(f, 3)
-		UIKit.Text(f, { Text = icon .. "  " .. label, TextSize = 22, AlignX = Enum.TextXAlignment.Left, Size = UDim2.new(0.6, 0, 1, 0), Position = UDim2.fromOffset(16, 0), Stroke = 2.5, ZIndex = 23 })
+		UIKit.Text(f, { Text = icon .. "  " .. UIKit.T(label), TextSize = 22, AlignX = Enum.TextXAlignment.Left, Size = UDim2.new(0.6, 0, 1, 0), Position = UDim2.fromOffset(16, 0), Stroke = 2.5, ZIndex = 23 })
 		UIKit.Text(f, { Text = value, TextSize = 26, Color = color or C.White, AlignX = Enum.TextXAlignment.Right, Size = UDim2.new(0.4, -16, 1, 0), Position = UDim2.fromScale(0.6, 0), Stroke = 3, ZIndex = 23 })
 	end
 	stat(42, "📏", "Distance", Util.FormatNumber(s.Distance) .. " m", C.Cash)
@@ -126,6 +126,7 @@ function RaceUI.Init()
 	panel = new("Frame", { Name = "RacePanel", Size = UDim2.fromOffset(420, 40), Position = UDim2.new(0.5, 0, 0, 48), AnchorPoint = Vector2.new(0.5, 0),
 		BackgroundColor3 = Color3.fromRGB(14, 14, 22), BackgroundTransparency = 0.15, Visible = false }, hud)
 	new("UICorner", { CornerRadius = UDim.new(1, 0) }, panel); UIKit.Stroke(panel, 3)
+	UIKit.Platform.Apply(panel, "Overlay") -- Beta 1.9: menor no celular, maior na TV
 	local row = new("Frame", { Size = UDim2.fromScale(1, 1), BackgroundTransparency = 1 }, panel)
 	new("UIListLayout", { FillDirection = Enum.FillDirection.Horizontal, HorizontalAlignment = Enum.HorizontalAlignment.Center, VerticalAlignment = Enum.VerticalAlignment.Center, Padding = UDim.new(0, 18) }, row)
 	timerL = UIKit.Text(row, { Text = "⏱ 00:00.0", TextSize = 22, Size = UDim2.fromOffset(120, 30), Color = Color3.fromRGB(120, 220, 255), Stroke = 2.5, LayoutOrder = 1 })

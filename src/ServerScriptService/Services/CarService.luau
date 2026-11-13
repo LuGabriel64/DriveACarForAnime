@@ -14,6 +14,7 @@ local RS = game:GetService("ReplicatedStorage")
 local Shared = RS:WaitForChild("Shared")
 local Config = require(Shared.Config)
 local Net = require(Shared.Net)
+local Locale = require(Shared.Locale) -- Beta 1.9: avisos no idioma do jogador
 local CarFactory = require(Shared.CarFactory)
 local DataService = require(script.Parent.DataService)
 local FarmService = require(script.Parent.FarmService)

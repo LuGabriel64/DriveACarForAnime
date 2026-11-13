@@ -9,7 +9,9 @@ local Net = require(RS:WaitForChild("Shared"):WaitForChild("Net"))
 
 -- AnimeService = sistema de CAPTURA (guardado; só registra ações, sem pontos no mapa ele fica inerte).
 -- Beta 1.3: IncubatorService (choco na base) e EscapeService (ovo do bioma + fuga). EggRoll é biblioteca (sem Init).
-local ORDER = { "DataService", "FarmService", "CarService", "ZoneService", "RaceService", "EggService", "IncubatorService", "EscapeService", "WheelService", "AnimeService", "GiftService" } -- Beta 1.5: + WheelService (roleta)
+local ORDER = { "DataService", "FarmService", "CarService", "ZoneService", "RaceService", "EggService", "IncubatorService", "EscapeService", "WheelService",
+	"ProgressService", -- Beta 1.9: XP / nível / parceiro dos personagens
+	"AnimeService", "GiftService" } -- Beta 1.5: + WheelService (roleta)
 local loaded = {}
 for _, name in ipairs(ORDER) do
 	local ok, mod = pcall(require, Services[name])

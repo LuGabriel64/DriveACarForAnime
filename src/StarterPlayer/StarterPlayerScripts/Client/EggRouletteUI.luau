@@ -167,7 +167,10 @@ function EggRouletteUI.Play(info)
 	UIKit.Text(ribbon, { Text = rarWin.Label .. "!", TextSize = 38, Scaled = true, Size = UDim2.fromScale(0.92, 0.82), Position = UDim2.fromScale(0.04, 0.09), Stroke = 4, ZIndex = 63 })
 	UIKit.Shine(ribbon, 1.4)
 	UIKit.Pop(ribbon, 1.5)
-	local oddsL = UIKit.Text(content, { Text = "1 in " .. Util.FormatNumber(info.Result.Odds or 1), TextSize = 30, Size = UDim2.new(1, 0, 0, 34),
+	-- Beta 1.9: as ESTRELAS (0..5) sorteadas pelo servidor aparecem ao lado do "1 in N" (não entram nesse número)
+	local starN = math.clamp(tonumber(info.Result.Stars) or 0, 0, Config.Stars.Max)
+	local starText = "   " .. string.rep("★", starN) .. string.rep("☆", Config.Stars.Max - starN)
+	local oddsL = UIKit.Text(content, { Text = "1 in " .. Util.FormatNumber(info.Result.Odds or 1) .. starText, TextSize = 30, Size = UDim2.new(1, 0, 0, 34),
 		Position = UDim2.fromOffset(0, 196), Stroke = 4, ZIndex = 62 })
 	UIKit.RarityLabel(oddsL, rarWin)
 

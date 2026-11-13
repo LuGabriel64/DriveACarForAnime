@@ -11,7 +11,8 @@ local Config = require(RS:WaitForChild("Shared"):WaitForChild("Config"))
 
 pcall(function() StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false) end)
 
-local ORDER = { "State", "Notify", "DriveController", "CarVisuals", "HUD", "AtmosphereController", "AnimesPanel", "GaragePanel", "GiftPanel" }
+-- Beta 1.9: Platform PRIMEIRO (o UIKit usa para dimensionar a interface por aparelho).
+local ORDER = { "Platform", "State", "Notify", "DriveController", "CarVisuals", "HUD", "AtmosphereController", "AnimesPanel", "GaragePanel", "GiftPanel" }
 if Config.Features.Eggs then
 	table.insert(ORDER, "EggHatchUI")
 	-- Beta 1.3: ovos de estrada e santuários ficam GUARDADOS (Config.Features.RoadEggs / .Shrines)

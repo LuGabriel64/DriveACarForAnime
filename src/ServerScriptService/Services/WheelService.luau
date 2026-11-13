@@ -19,6 +19,11 @@
 	REDE: "GetWheel" -> { ok, NextAt, Now, Tokens } | "SpinWheel" -> { ok, Index, Cash, Spins, Used, NextAt, Now } | { ok=false, err }
 	ATRIBUTOS do Player: WheelNextAt (hora UNIX do próximo grátis), WheelTokens (giros extras)
 	DEPENDÊNCIAS: DataService, Config.Wheel
+
+	Beta 1.9: PONTOS DE SPIN (Config.Wheel.Points). 100 pontos = 1 giro extra (Token); o resto fica guardado em
+	  data.Wheel.Points e aparece no atributo "WheelPoints" (barra "Spin points: 37/100" no WheelPanel).
+	  Fontes: +2 por minuto jogado (laço abaixo, relógio do SERVIDOR) e +10 por vitória 1v1 (VersusService).
+	  API nova: WheelService.AddPoints(player, amount). O cliente nunca manda pontos.
 ]]
 local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -26,6 +31,7 @@ local RS = game:GetService("ReplicatedStorage")
 local Shared = RS:WaitForChild("Shared")
 local Config = require(Shared.Config)
 local Net = require(Shared.Net)
+local Locale = require(Shared.Locale)
 local DataService = require(script.Parent.DataService)
 
 local WheelService = {}
@@ -38,6 +44,7 @@ local function wheelData(data)
 	local w = data.Wheel
 	w.LastSpin = w.LastSpin or 0; w.Spins = w.Spins or 0; w.Pending = w.Pending or 0
 	w.Tokens = w.Tokens or 0; w.PendingSpins = w.PendingSpins or 0; w.Receipts = w.Receipts or {}
+	w.Points = w.Points or 0 -- Beta 1.9
 	return w
 end
 local function nextAt(data) return wheelData(data).LastSpin + WC.Cooldown end
@@ -45,6 +52,25 @@ local function push(player, data)
 	local w = wheelData(data)
 	player:SetAttribute("WheelNextAt", nextAt(data))
 	player:SetAttribute("WheelTokens", w.Tokens)
+	player:SetAttribute("WheelPoints", w.Points) -- Beta 1.9
+end
+
+-- Beta 1.9: soma pontos de spin. Cada PerSpin (100) pontos viram 1 giro extra; o resto fica guardado.
+-- Devolve quantos giros foram ganhos agora. Só o servidor chama (tempo jogado e vitórias 1v1).
+function WheelService.AddPoints(player, amount)
+	local data = DataService.Get(player)
+	if not data or type(amount) ~= "number" or amount ~= amount or amount <= 0 then return 0 end
+	local w = wheelData(data)
+	local P = WC.Points
+	w.Points += math.floor(amount)
+	local spins = w.Points // P.PerSpin
+	if spins > 0 then
+		w.Points -= spins * P.PerSpin
+		w.Tokens += spins
+		Net.Fire(player, "Toast", Locale.For(player, "🎟️ You earned a free spin!"), "good")
+	end
+	push(player, data)
+	return spins
 end
 
 local function roll()
@@ -91,7 +117,7 @@ local function processReceipt(info)
 	if not DataService.SaveSync(player) then
 		return Enum.ProductPurchaseDecision.NotProcessedYet -- o Roblox tenta de novo; o Receipt já anotado evita dar 2x
 	end
-	Net.Fire(player, "Toast", ("🎟️ +%d spins added to your Lucky Wheel!"):format(pack.Spins), "good")
+	Net.Fire(player, "Toast", Locale.For(player, "🎟️ +%d spins added to your Lucky Wheel!", pack.Spins), "good")
 	print(("[WheelService] %s comprou %s (+%d giros) | PurchaseId %s"):format(player.Name, pack.Key, pack.Spins, info.PurchaseId))
 	return Enum.ProductPurchaseDecision.PurchaseGranted
 end
@@ -106,6 +132,17 @@ function WheelService.Init()
 		push(player, data)
 	end)
 	Players.PlayerRemoving:Connect(function(p) spinningUntil[p] = nil end)
+
+	-- Beta 1.9: +PerMinute pontos de spin por minuto jogado. O relógio é do servidor; o Roblox desconecta quem
+	-- fica parado 20 min, o que limita o ganho de quem deixa o jogo aberto.
+	task.spawn(function()
+		while true do
+			task.wait(60)
+			for _, player in ipairs(Players:GetPlayers()) do
+				pcall(WheelService.AddPoints, player, WC.Points.PerMinute)
+			end
+		end
+	end)
 
 	Net.Handle("GetWheel", function(player)
 		local data = DataService.Get(player)

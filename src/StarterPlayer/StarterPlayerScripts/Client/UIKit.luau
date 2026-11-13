@@ -11,6 +11,12 @@
 	  UIKit.Panel(p)                       painel com cabeçalho/fechar/abrir animado (registra em UIKit.Panels)
 	  UIKit.Viewport(parent, model, p)     ViewportFrame enquadrando o modelo
 	  UIKit.Pop / Shake / Confetti / Tween / PlaySound
+
+	Beta 1.9
+	  * IDIOMAS: Text / Button / MenuButton / Panel / SetButton chamam Locale.Bind quando o texto tem tradução
+	    (Shared.Locale). O texto é retraduzido sozinho quando o jogador troca o idioma. Texto dinâmico (sem
+	    tradução na tabela) não é tocado. UIKit.T(key, ...) = atalho de Locale.T para textos montados.
+	  * PLATAFORMA: os painéis abrem no tamanho de Platform.Scale("Panel") (menor no celular, maior na TV).
 ]]
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
@@ -18,8 +24,18 @@ local SoundService = game:GetService("SoundService")
 local Debris = game:GetService("Debris")
 local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS.Shared.Config)
+local Locale = require(RS.Shared.Locale)       -- Beta 1.9: tradução
+local Platform = require(script.Parent.Platform) -- Beta 1.9: tamanho por aparelho
 
 local UIKit = {}
+UIKit.Locale, UIKit.Platform = Locale, Platform
+-- Atalho: UIKit.T("Spin in: %s", tempo) -> texto no idioma do jogador.
+function UIKit.T(key, ...) return Locale.T(key, ...) end
+-- Põe um texto num objeto: traduzido e ligado (retraduz na troca de idioma) se a chave existir; senão, texto puro.
+function UIKit.SetText(obj, text, ...)
+	if type(text) == "string" and Locale.Has(text) then Locale.Bind(obj, text, ...)
+	else Locale.Unbind(obj); obj.Text = (select("#", ...) > 0) and string.format(text, ...) or (text or "") end
+end
 UIKit.Font = Enum.Font.FredokaOne
 UIKit.C = {
 	PanelBg = Color3.fromRGB(14, 14, 22), CardBg = Color3.fromRGB(30, 30, 44),
@@ -79,6 +95,7 @@ function UIKit.Text(parent, p)
 	}, parent)
 	if p.Scaled then new("UITextSizeConstraint", { MaxTextSize = p.TextSize or 24 }, t) end
 	if p.Stroke ~= 0 then UIKit.Stroke(t, p.Stroke or 2.5) end
+	if p.Text and p.Text ~= "" and Locale.Has(p.Text) then Locale.Bind(t, p.Text) end -- Beta 1.9
 	return t
 end
 
@@ -115,7 +132,7 @@ end
 -- Atualiza texto/cor de um botão; disabled=true deixa cinza e sem ação.
 function UIKit.SetButton(b, text, color, disabled)
 	local l = b:FindFirstChild("Label")
-	if l and text then l.Text = text end
+	if l and text then UIKit.SetText(l, text) end -- Beta 1.9: traduz se houver tradução
 	if color then b.BackgroundColor3 = color end
 	b:SetAttribute("Disabled", disabled or false)
 end
@@ -162,8 +179,9 @@ function UIKit.Panel(p)
 		for _, other in pairs(UIKit.Panels) do if other ~= obj and other.IsOpen then other.Close() end end
 		obj.IsOpen = true
 		holder.Visible = true
-		scale.Scale = 0.6
-		tween(scale, 0.3, { Scale = 1 }, Enum.EasingStyle.Back)
+		local full = Platform.Scale("Panel") -- Beta 1.9: tamanho final por aparelho (antes: sempre 1)
+		scale.Scale = 0.6 * full
+		tween(scale, 0.3, { Scale = full }, Enum.EasingStyle.Back)
 		holder.Position = UDim2.fromScale(0.5, 0.58)
 		tween(holder, 0.35, { Position = UDim2.fromScale(0.5, 0.5) }, Enum.EasingStyle.Back)
 		dim.Visible = true
@@ -173,7 +191,7 @@ function UIKit.Panel(p)
 	function obj.Close()
 		if not obj.IsOpen then return end
 		obj.IsOpen = false
-		local tw = tween(scale, 0.16, { Scale = 0.6 }, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+		local tw = tween(scale, 0.16, { Scale = 0.6 * Platform.Scale("Panel") }, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
 		tween(holder, 0.16, { Position = UDim2.fromScale(0.5, 0.56) }, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
 		tween(dim, 0.18, { BackgroundTransparency = 1 })
 		tw.Completed:Connect(function() if not obj.IsOpen then holder.Visible = false; dim.Visible = false end end)
@@ -192,8 +210,12 @@ function UIKit.OpenPanel(name) local p = UIKit.Panels[name]; if p then p.Open() 
 -- ------------------------------------------------------------ efeitos
 function UIKit.Pop(obj, amount)
 	local s = obj:FindFirstChildOfClass("UIScale") or new("UIScale", { Scale = 1 }, obj)
-	s.Scale = amount or 1.15
-	tween(s, 0.4, { Scale = 1 }, Enum.EasingStyle.Elastic)
+	-- Beta 1.9: se o objeto usa Platform.Apply, o tamanho de repouso é o do aparelho (atributo "Rest"), não 1
+	local rest = s:GetAttribute("Rest") or 1
+	s.Scale = rest * (amount or 1.15)
+	local tw = tween(s, 0.4, { Scale = rest }, Enum.EasingStyle.Elastic)
+	-- o tamanho de repouso pode mudar DURANTE o pop (janela redimensionada / câmera ficando pronta): confere no fim
+	tw.Completed:Connect(function() if s.Parent then s.Scale = s:GetAttribute("Rest") or 1 end end)
 end
 
 function UIKit.Shake(obj, strength, duration)

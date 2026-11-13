@@ -15,11 +15,11 @@ O jogo está na **Beta 1.8d**: as correções da auditoria foram aplicadas e tes
 |-------|--------|
 | Jogo publicado (o que os jogadores veem) | Beta 1.8b |
 | Place salvo no Studio (Team Create, versão 95) | **Beta 1.8d** |
-| Espelho `src/` no GitHub | igual ao place 1.8d, byte a byte (conferido por checksum) |
+| Espelho `src/` no GitHub | igual ao place na versão 105 (1.8d + Etapa A da 1.9) |
 | Tag git | `beta-1.8d` (commit `17e3993`) |
 | `.rbxl` da 1.8d em `places/` | **falta** (só o dono consegue baixar) |
-| Beta 1.9 | **Etapa A aplicada no place** (não salva, telas não testadas, `src/` não espelhado); B, C e D por fazer |
-| Próximo passo | reabrir o Studio, conferir e testar a Etapa A, `save_place`, espelhar; depois a Etapa B |
+| Beta 1.9 | **Etapa A aplicada, testada, salva (versão 105) e espelhada em `src/`**; B, C e D por fazer |
+| Próximo passo | Etapa B (desafio + corrida 1v1) |
 
 ## Arquivos desta pasta
 
