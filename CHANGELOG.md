@@ -12,7 +12,7 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
-| [Beta 1.9](#beta-19--planejada) | — | 📐 planejada | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
+| [Beta 1.9](#jogo) | 13/11/2026 | 💾 salva no Studio (versão 113), falta teste com 2 jogadores e publicar | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
 | [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
 | [Beta 1.8c](#beta-18c--11112026) | 11/11/2026 | ✅ | Só documentação dentro do place (`04_EstadoAtual`) |
 | [Beta 1.8b](#beta-18b--10112026) | 10/11/2026 | ✅ publicada | Personagens em "blocos anime" |
@@ -32,11 +32,29 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 | [0.1.0](#010--03112026) | 03/11/2026 | ✅ | Fundação do projeto |
 
 Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único com o terreno), `["Beta 1.6"]`,
-`["Beta 1.7"]` e `["Beta 1.8b"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão a partir da 1.8b.
+`["Beta 1.7"]`, `["Beta 1.8b"]` e `["Beta 1.8d"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão a partir da 1.8b.
 
 ---
 
 ## Repositório
+
+### 14/11/2026 — Mapa Cerebral no Obsidian (`cerebro/`) · Claude Code (PC do dono, app desktop)
+
+- Pedido do dono: um "Mapa Cerebral" do jogo no vault do Obsidian dele, com tudo do projeto, atualizado a cada
+  pedido e a cada versão, guardando as imagens de referência (as antigas também, para comparar).
+- Vault mestre: `D:\Arquivos Sistema\Obsidian\DriveACarForAnime\Drive A Car For Anime` (PC do dono). Cópia
+  versionada em **`cerebro/`** (comece por `cerebro/00_Mapa_Cerebral.md`). Não edite `cerebro/` à mão: edite o
+  vault e rode `node tools/vault/vault_tools.js sync`.
+- 94 notas em 16 ramos: visão, sistemas, conteúdo, UI (como é e como deve ser), modelagem, código, uma nota por
+  versão (0.1.0 a 1.9), pedidos do dono, decisões, erros corrigidos, pegadinhas, checklist, estratégias,
+  referências visuais, ideias, pendências, equipe e ferramentas, registro de sessões, modelos de nota.
+  Mapa mental visual em `Mapa_Cerebral.canvas`.
+- Novo `tools/vault/vault_tools.js` (Node, sem Python): `check` (links quebrados, notas inalcançáveis,
+  frontmatter), `canvas` (regera o mapa mental) e `sync` (copia para `cerebro/`). Resultado: 0 links quebrados,
+  0 inalcançáveis.
+- `CLAUDE.md`: seção do Mapa Cerebral (ler no começo, atualizar no fim de cada pedido). Tabela do topo deste
+  arquivo corrigida (a 1.9 ainda aparecia como "planejada").
+- Nada mudou no jogo; o Studio não foi tocado.
 
 ### 12/11/2026 — Beta 1.9, Etapa A aplicada no place (não salva, não espelhada) · Claude Code (PC do dono, app desktop com MCP)
 

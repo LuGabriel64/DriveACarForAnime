@@ -46,6 +46,8 @@ com 1 jogador foi testado; **o que precisa de 2 jogadores ainda não** (ver `07_
 
 ## Onde mais olhar
 
+- `cerebro/00_Mapa_Cerebral.md`: o **Mapa Cerebral** (vault do Obsidian do dono, desde 14/11): ideias, requisitos,
+  decisões, erros, estratégias e referências visuais, ligados entre si.
 - `CHANGELOG.md`: catálogo de todas as versões.
 - `docs/AUDITORIA_2026-11-11.md`: os problemas encontrados no place de 11/11 (quase todos corrigidos na 1.8d).
 - `planejamento/beta-1.9/PROMPTS_PARA_O_STUDIO.md`: os pedidos prontos, um por etapa.

@@ -1,0 +1,36 @@
+---
+title: Decisões
+date: 2026-11-14
+tags: [decisoes, adr]
+---
+
+# Decisões (registro)
+
+Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** são marcadas com 👑.
+
+| # | Decisão | Por quê | Onde mudar |
+|---|---------|---------|------------|
+| 1 | **Pista fantasma**: uma pista para todos, cada um no seu slot, sem se ver | 8 cópias = ~200 mil peças | RaceService, GhostController |
+| 2 | Colapso **visual por jogador**, regra no servidor | pista compartilhada | EscapeService / EscapeFX |
+| 3 | **DataService próprio** em vez de ProfileService | evitar código de terceiros do Toolbox | DataService |
+| 4 | Sistemas antigos **guardados** atrás de `Config.Features` | o dono pode querer de volta | Config.Features |
+| 5 | 👑 Tabela de raridades **normalizada** (soma 99,86) | escolha do dono | Config.Rarities |
+| 6 | 👑 **Elenco estilo DBZ no bioma 1** (1.6), nomes alterados (1.7); não ampliar | o dono assume o risco | Config.Animes, regra 13 |
+| 7 | Obstáculos animados **sem colisão**; punição `Drive.Hit` | carro não fica preso | HazardController |
+| 8 | Corrida 1v1 na **mesma pista** (modo Duel) | cópia = 43 mil peças e manutenção | RaceService, ZoneService |
+| 9 | Carros 1v1 **se veem mas não colidem** | evita empurrão e física entre clientes | grupos de colisão |
+| 10 | Batalha **automática** simulada no servidor | o mais forte vence; sem trapaça; roda no celular | BattleSim |
+| 11 | Nível também aumenta a renda (+1%/nível) | status sobem com o nível | `Config.Levels.IncomePerLevel` |
+| 12 | XP da corrida vai para o **parceiro** | não há personagem em jogo | ProgressService |
+| 13 | Personagens antigos ficam com **0★** | justiça com quem já joga | DataService.migrate |
+| 14 | Prêmio do vencedor = **2 min da renda** (mín. $500) | valor fixo seria enorme ou irrelevante | Config.Versus.Rewards |
+| 15 | Depois de **10 partidas** contra o mesmo adversário, só XP | anti-farm | Rewards.FullRewardsPerOpponent |
+| 16 | Nomes de ULT **originais** | regra 13 (exceção cobre elenco, não golpes) | Config.Battle.Fighters |
+| 17 | Variação de dano ±8% | imprevisível entre iguais | Config.Battle.Sim.Variance |
+| 18 | Bandeiras desenhadas **com Frames** | emoji não é garantido | StartMenu |
+| 19 | Locale próprio (texto em inglês = chave) em vez da tradução automática do Roblox | permite escolher no jogo e versionar | Shared.Locale |
+| 20 | EscapeFX **não** generalizado na 1.9 | risco de quebrar a fuga | DuelRaceUI |
+| 21 | Espelho sem Python (MirrorDump + Node) | PC do dono não tem Python | tools/place |
+| 22 | Mapa duplicado **movido** para backup, não apagado | segurança | Backups["Beta 1.8b"] |
+
+Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

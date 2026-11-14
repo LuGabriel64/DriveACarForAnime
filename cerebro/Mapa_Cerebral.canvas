@@ -1,0 +1,1125 @@
+{
+	"nodes": [
+		{
+			"id": "home",
+			"type": "file",
+			"file": "00_Mapa_Cerebral.md",
+			"x": -200,
+			"y": -60,
+			"width": 400,
+			"height": 120,
+			"color": "6"
+		},
+		{
+			"id": "g0",
+			"type": "group",
+			"label": "01 Visao",
+			"x": -180,
+			"y": -1702,
+			"width": 360,
+			"height": 404,
+			"color": "1"
+		},
+		{
+			"id": "i0",
+			"type": "file",
+			"file": "01_Visao/INDEX.md",
+			"x": -160,
+			"y": -1662,
+			"width": 320,
+			"height": 70,
+			"color": "1"
+		},
+		{
+			"id": "n0_0",
+			"type": "file",
+			"file": "01_Visao/Genero_e_Referencias.md",
+			"x": -160,
+			"y": -1576,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n0_1",
+			"type": "file",
+			"file": "01_Visao/Loop_do_Jogo.md",
+			"x": -160,
+			"y": -1490,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n0_2",
+			"type": "file",
+			"file": "01_Visao/Visao_e_Pilares.md",
+			"x": -160,
+			"y": -1404,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g1",
+			"type": "group",
+			"label": "02 Sistemas",
+			"x": 234,
+			"y": -1846,
+			"width": 680,
+			"height": 920,
+			"color": "2"
+		},
+		{
+			"id": "i1",
+			"type": "file",
+			"file": "02_Sistemas/INDEX.md",
+			"x": 254,
+			"y": -1806,
+			"width": 640,
+			"height": 70,
+			"color": "2"
+		},
+		{
+			"id": "n1_0",
+			"type": "file",
+			"file": "02_Sistemas/Anti_Trapaca.md",
+			"x": 254,
+			"y": -1720,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_1",
+			"type": "file",
+			"file": "02_Sistemas/Batalha_de_Anime.md",
+			"x": 574,
+			"y": -1720,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_2",
+			"type": "file",
+			"file": "02_Sistemas/Carros_e_Direcao.md",
+			"x": 254,
+			"y": -1634,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_3",
+			"type": "file",
+			"file": "02_Sistemas/Corrida_1v1_F1.md",
+			"x": 574,
+			"y": -1634,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_4",
+			"type": "file",
+			"file": "02_Sistemas/Corrida_Solo_Pista_Fantasma.md",
+			"x": 254,
+			"y": -1548,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_5",
+			"type": "file",
+			"file": "02_Sistemas/Desafio_1v1.md",
+			"x": 574,
+			"y": -1548,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_6",
+			"type": "file",
+			"file": "02_Sistemas/Estrelas_Nivel_XP.md",
+			"x": 254,
+			"y": -1462,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_7",
+			"type": "file",
+			"file": "02_Sistemas/Idiomas_Locale.md",
+			"x": 574,
+			"y": -1462,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_8",
+			"type": "file",
+			"file": "02_Sistemas/Incubadora_e_Garagem.md",
+			"x": 254,
+			"y": -1376,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_9",
+			"type": "file",
+			"file": "02_Sistemas/Musica_e_Sons.md",
+			"x": 574,
+			"y": -1376,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_10",
+			"type": "file",
+			"file": "02_Sistemas/Ovo_Gigante_Roleta_Fuga.md",
+			"x": 254,
+			"y": -1290,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_11",
+			"type": "file",
+			"file": "02_Sistemas/Pista_e_Obstaculos.md",
+			"x": 574,
+			"y": -1290,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_12",
+			"type": "file",
+			"file": "02_Sistemas/Recompensas_e_Pontos_de_Spin.md",
+			"x": 254,
+			"y": -1204,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_13",
+			"type": "file",
+			"file": "02_Sistemas/Rede_Net.md",
+			"x": 574,
+			"y": -1204,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_14",
+			"type": "file",
+			"file": "02_Sistemas/Roleta_da_Sorte.md",
+			"x": 254,
+			"y": -1118,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_15",
+			"type": "file",
+			"file": "02_Sistemas/Save_DataService.md",
+			"x": 574,
+			"y": -1118,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n1_16",
+			"type": "file",
+			"file": "02_Sistemas/Sistemas_Guardados.md",
+			"x": 254,
+			"y": -1032,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g2",
+			"type": "group",
+			"label": "03 Conteudo",
+			"x": 881,
+			"y": -1349,
+			"width": 360,
+			"height": 576,
+			"color": "3"
+		},
+		{
+			"id": "i2",
+			"type": "file",
+			"file": "03_Conteudo/INDEX.md",
+			"x": 901,
+			"y": -1309,
+			"width": 320,
+			"height": 70,
+			"color": "3"
+		},
+		{
+			"id": "n2_0",
+			"type": "file",
+			"file": "03_Conteudo/Biomas.md",
+			"x": 901,
+			"y": -1223,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n2_1",
+			"type": "file",
+			"file": "03_Conteudo/Lobby_Sakura_Night.md",
+			"x": 901,
+			"y": -1137,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n2_2",
+			"type": "file",
+			"file": "03_Conteudo/Personagens.md",
+			"x": 901,
+			"y": -1051,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n2_3",
+			"type": "file",
+			"file": "03_Conteudo/Raridades_e_Mutacoes.md",
+			"x": 901,
+			"y": -965,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n2_4",
+			"type": "file",
+			"file": "03_Conteudo/Versus_Hall_e_Arenas.md",
+			"x": 901,
+			"y": -879,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g3",
+			"type": "group",
+			"label": "04 UI UX",
+			"x": 1206,
+			"y": -819,
+			"width": 360,
+			"height": 490,
+			"color": "4"
+		},
+		{
+			"id": "i3",
+			"type": "file",
+			"file": "04_UI_UX/INDEX.md",
+			"x": 1226,
+			"y": -779,
+			"width": 320,
+			"height": 70,
+			"color": "4"
+		},
+		{
+			"id": "n3_0",
+			"type": "file",
+			"file": "04_UI_UX/Estilo_Visual_UIKit.md",
+			"x": 1226,
+			"y": -693,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n3_1",
+			"type": "file",
+			"file": "04_UI_UX/Hierarquia_de_Telas.md",
+			"x": 1226,
+			"y": -607,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n3_2",
+			"type": "file",
+			"file": "04_UI_UX/Interface_Multiplataforma.md",
+			"x": 1226,
+			"y": -521,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n3_3",
+			"type": "file",
+			"file": "04_UI_UX/Requisitos_de_UI.md",
+			"x": 1226,
+			"y": -435,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g4",
+			"type": "group",
+			"label": "05 Modelagem",
+			"x": 1320,
+			"y": -202,
+			"width": 360,
+			"height": 404,
+			"color": "5"
+		},
+		{
+			"id": "i4",
+			"type": "file",
+			"file": "05_Modelagem/INDEX.md",
+			"x": 1340,
+			"y": -162,
+			"width": 320,
+			"height": 70,
+			"color": "5"
+		},
+		{
+			"id": "n4_0",
+			"type": "file",
+			"file": "05_Modelagem/Carros_CarFactory.md",
+			"x": 1340,
+			"y": -76,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n4_1",
+			"type": "file",
+			"file": "05_Modelagem/Mapa_WorldBuilder.md",
+			"x": 1340,
+			"y": 10,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n4_2",
+			"type": "file",
+			"file": "05_Modelagem/Personagens_Blocos_Anime.md",
+			"x": 1340,
+			"y": 96,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g5",
+			"type": "group",
+			"label": "06 Codigo",
+			"x": 1206,
+			"y": 372,
+			"width": 360,
+			"height": 404,
+			"color": "6"
+		},
+		{
+			"id": "i5",
+			"type": "file",
+			"file": "06_Codigo/INDEX.md",
+			"x": 1226,
+			"y": 412,
+			"width": 320,
+			"height": 70,
+			"color": "6"
+		},
+		{
+			"id": "n5_0",
+			"type": "file",
+			"file": "06_Codigo/Arquitetura.md",
+			"x": 1226,
+			"y": 498,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n5_1",
+			"type": "file",
+			"file": "06_Codigo/Convencoes.md",
+			"x": 1226,
+			"y": 584,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n5_2",
+			"type": "file",
+			"file": "06_Codigo/Mapa_de_Scripts.md",
+			"x": 1226,
+			"y": 670,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g6",
+			"type": "group",
+			"label": "07 Versoes",
+			"x": 721,
+			"y": 687,
+			"width": 680,
+			"height": 748,
+			"color": "1"
+		},
+		{
+			"id": "i6",
+			"type": "file",
+			"file": "07_Versoes/INDEX.md",
+			"x": 741,
+			"y": 727,
+			"width": 640,
+			"height": 70,
+			"color": "1"
+		},
+		{
+			"id": "n6_0",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.1.md",
+			"x": 741,
+			"y": 813,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_1",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.2.md",
+			"x": 1061,
+			"y": 813,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_2",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.3.md",
+			"x": 741,
+			"y": 899,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_3",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.4.md",
+			"x": 1061,
+			"y": 899,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_4",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.5.md",
+			"x": 741,
+			"y": 985,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_5",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.6.md",
+			"x": 1061,
+			"y": 985,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_6",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.7.md",
+			"x": 741,
+			"y": 1071,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_7",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.8.md",
+			"x": 1061,
+			"y": 1071,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_8",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.8b.md",
+			"x": 741,
+			"y": 1157,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_9",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.8c.md",
+			"x": 1061,
+			"y": 1157,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_10",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.8d.md",
+			"x": 741,
+			"y": 1243,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_11",
+			"type": "file",
+			"file": "07_Versoes/Beta_1.9.md",
+			"x": 1061,
+			"y": 1243,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_12",
+			"type": "file",
+			"file": "07_Versoes/v0.1.0.md",
+			"x": 741,
+			"y": 1329,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_13",
+			"type": "file",
+			"file": "07_Versoes/v0.2.0.md",
+			"x": 1061,
+			"y": 1329,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g7",
+			"type": "group",
+			"label": "08 Pedidos e Decisoes",
+			"x": 394,
+			"y": 1184,
+			"width": 360,
+			"height": 404,
+			"color": "2"
+		},
+		{
+			"id": "i7",
+			"type": "file",
+			"file": "08_Pedidos_e_Decisoes/INDEX.md",
+			"x": 414,
+			"y": 1224,
+			"width": 320,
+			"height": 70,
+			"color": "2"
+		},
+		{
+			"id": "n7_0",
+			"type": "file",
+			"file": "08_Pedidos_e_Decisoes/Decisoes.md",
+			"x": 414,
+			"y": 1310,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n7_1",
+			"type": "file",
+			"file": "08_Pedidos_e_Decisoes/Pedidos_do_Dono.md",
+			"x": 414,
+			"y": 1396,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n7_2",
+			"type": "file",
+			"file": "08_Pedidos_e_Decisoes/Requisitos_Permanentes.md",
+			"x": 414,
+			"y": 1482,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g8",
+			"type": "group",
+			"label": "09 Erros e Licoes",
+			"x": -180,
+			"y": 1298,
+			"width": 360,
+			"height": 404,
+			"color": "3"
+		},
+		{
+			"id": "i8",
+			"type": "file",
+			"file": "09_Erros_e_Licoes/INDEX.md",
+			"x": -160,
+			"y": 1338,
+			"width": 320,
+			"height": 70,
+			"color": "3"
+		},
+		{
+			"id": "n8_0",
+			"type": "file",
+			"file": "09_Erros_e_Licoes/Checklist_Antes_de_Mexer.md",
+			"x": -160,
+			"y": 1424,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n8_1",
+			"type": "file",
+			"file": "09_Erros_e_Licoes/Erros_Corrigidos.md",
+			"x": -160,
+			"y": 1510,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n8_2",
+			"type": "file",
+			"file": "09_Erros_e_Licoes/Pegadinhas_Tecnicas.md",
+			"x": -160,
+			"y": 1596,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g9",
+			"type": "group",
+			"label": "10 Estrategias",
+			"x": -754,
+			"y": 1012,
+			"width": 360,
+			"height": 748,
+			"color": "4"
+		},
+		{
+			"id": "i9",
+			"type": "file",
+			"file": "10_Estrategias/INDEX.md",
+			"x": -734,
+			"y": 1052,
+			"width": 320,
+			"height": 70,
+			"color": "4"
+		},
+		{
+			"id": "n9_0",
+			"type": "file",
+			"file": "10_Estrategias/Brainstorm.md",
+			"x": -734,
+			"y": 1138,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n9_1",
+			"type": "file",
+			"file": "10_Estrategias/Escrever_Docs.md",
+			"x": -734,
+			"y": 1224,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n9_2",
+			"type": "file",
+			"file": "10_Estrategias/Fluxo_de_Versao.md",
+			"x": -734,
+			"y": 1310,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n9_3",
+			"type": "file",
+			"file": "10_Estrategias/Manter_o_Vault.md",
+			"x": -734,
+			"y": 1396,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n9_4",
+			"type": "file",
+			"file": "10_Estrategias/Modelar.md",
+			"x": -734,
+			"y": 1482,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n9_5",
+			"type": "file",
+			"file": "10_Estrategias/Programar.md",
+			"x": -734,
+			"y": 1568,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n9_6",
+			"type": "file",
+			"file": "10_Estrategias/Testar.md",
+			"x": -734,
+			"y": 1654,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g10",
+			"type": "group",
+			"label": "11 Referencias Visuais",
+			"x": -1241,
+			"y": 945,
+			"width": 360,
+			"height": 232,
+			"color": "5"
+		},
+		{
+			"id": "i10",
+			"type": "file",
+			"file": "11_Referencias_Visuais/INDEX.md",
+			"x": -1221,
+			"y": 985,
+			"width": 320,
+			"height": 70,
+			"color": "5"
+		},
+		{
+			"id": "n10_0",
+			"type": "file",
+			"file": "11_Referencias_Visuais/Referencias_Antigas.md",
+			"x": -1221,
+			"y": 1071,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g11",
+			"type": "group",
+			"label": "12 Ideias e Roadmap",
+			"x": -1566,
+			"y": 415,
+			"width": 360,
+			"height": 318,
+			"color": "6"
+		},
+		{
+			"id": "i11",
+			"type": "file",
+			"file": "12_Ideias_e_Roadmap/INDEX.md",
+			"x": -1546,
+			"y": 455,
+			"width": 320,
+			"height": 70,
+			"color": "6"
+		},
+		{
+			"id": "n11_0",
+			"type": "file",
+			"file": "12_Ideias_e_Roadmap/Backlog_de_Ideias.md",
+			"x": -1546,
+			"y": 541,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n11_1",
+			"type": "file",
+			"file": "12_Ideias_e_Roadmap/Roadmap.md",
+			"x": -1546,
+			"y": 627,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g12",
+			"type": "group",
+			"label": "13 Pendencias",
+			"x": -1680,
+			"y": -159,
+			"width": 360,
+			"height": 318,
+			"color": "1"
+		},
+		{
+			"id": "i12",
+			"type": "file",
+			"file": "13_Pendencias/INDEX.md",
+			"x": -1660,
+			"y": -119,
+			"width": 320,
+			"height": 70,
+			"color": "1"
+		},
+		{
+			"id": "n12_0",
+			"type": "file",
+			"file": "13_Pendencias/Nao_Testado.md",
+			"x": -1660,
+			"y": -33,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n12_1",
+			"type": "file",
+			"file": "13_Pendencias/Tarefas_do_Dono.md",
+			"x": -1660,
+			"y": 53,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g13",
+			"type": "group",
+			"label": "14 Equipe e Ferramentas",
+			"x": -1566,
+			"y": -776,
+			"width": 360,
+			"height": 404,
+			"color": "2"
+		},
+		{
+			"id": "i13",
+			"type": "file",
+			"file": "14_Equipe_e_Ferramentas/INDEX.md",
+			"x": -1546,
+			"y": -736,
+			"width": 320,
+			"height": 70,
+			"color": "2"
+		},
+		{
+			"id": "n13_0",
+			"type": "file",
+			"file": "14_Equipe_e_Ferramentas/Equipe_e_Colaboracao.md",
+			"x": -1546,
+			"y": -650,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n13_1",
+			"type": "file",
+			"file": "14_Equipe_e_Ferramentas/Ferramentas_MCP_GitHub.md",
+			"x": -1546,
+			"y": -564,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n13_2",
+			"type": "file",
+			"file": "14_Equipe_e_Ferramentas/Plugins_Recomendados.md",
+			"x": -1546,
+			"y": -478,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g14",
+			"type": "group",
+			"label": "15 Registro de Sessoes",
+			"x": -1241,
+			"y": -1263,
+			"width": 360,
+			"height": 404,
+			"color": "3"
+		},
+		{
+			"id": "i14",
+			"type": "file",
+			"file": "15_Registro_de_Sessoes/INDEX.md",
+			"x": -1221,
+			"y": -1223,
+			"width": 320,
+			"height": 70,
+			"color": "3"
+		},
+		{
+			"id": "n14_0",
+			"type": "file",
+			"file": "15_Registro_de_Sessoes/2026-11-12_Beta_1.8d.md",
+			"x": -1221,
+			"y": -1137,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n14_1",
+			"type": "file",
+			"file": "15_Registro_de_Sessoes/2026-11-13_Beta_1.9.md",
+			"x": -1221,
+			"y": -1051,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n14_2",
+			"type": "file",
+			"file": "15_Registro_de_Sessoes/2026-11-14_Criacao_do_Vault.md",
+			"x": -1221,
+			"y": -965,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "g15",
+			"type": "group",
+			"label": " Modelos",
+			"x": -754,
+			"y": -1631,
+			"width": 360,
+			"height": 490,
+			"color": "4"
+		},
+		{
+			"id": "i15",
+			"type": "file",
+			"file": "_Modelos/INDEX.md",
+			"x": -734,
+			"y": -1591,
+			"width": 320,
+			"height": 70,
+			"color": "4"
+		},
+		{
+			"id": "n15_0",
+			"type": "file",
+			"file": "_Modelos/Modelo_Ideia.md",
+			"x": -734,
+			"y": -1505,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n15_1",
+			"type": "file",
+			"file": "_Modelos/Modelo_Referencia_Visual.md",
+			"x": -734,
+			"y": -1419,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n15_2",
+			"type": "file",
+			"file": "_Modelos/Modelo_Sessao.md",
+			"x": -734,
+			"y": -1333,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n15_3",
+			"type": "file",
+			"file": "_Modelos/Modelo_Versao.md",
+			"x": -734,
+			"y": -1247,
+			"width": 300,
+			"height": 70
+		}
+	],
+	"edges": [
+		{
+			"id": "e0",
+			"fromNode": "home",
+			"toNode": "i0",
+			"color": "1"
+		},
+		{
+			"id": "e1",
+			"fromNode": "home",
+			"toNode": "i1",
+			"color": "2"
+		},
+		{
+			"id": "e2",
+			"fromNode": "home",
+			"toNode": "i2",
+			"color": "3"
+		},
+		{
+			"id": "e3",
+			"fromNode": "home",
+			"toNode": "i3",
+			"color": "4"
+		},
+		{
+			"id": "e4",
+			"fromNode": "home",
+			"toNode": "i4",
+			"color": "5"
+		},
+		{
+			"id": "e5",
+			"fromNode": "home",
+			"toNode": "i5",
+			"color": "6"
+		},
+		{
+			"id": "e6",
+			"fromNode": "home",
+			"toNode": "i6",
+			"color": "1"
+		},
+		{
+			"id": "e7",
+			"fromNode": "home",
+			"toNode": "i7",
+			"color": "2"
+		},
+		{
+			"id": "e8",
+			"fromNode": "home",
+			"toNode": "i8",
+			"color": "3"
+		},
+		{
+			"id": "e9",
+			"fromNode": "home",
+			"toNode": "i9",
+			"color": "4"
+		},
+		{
+			"id": "e10",
+			"fromNode": "home",
+			"toNode": "i10",
+			"color": "5"
+		},
+		{
+			"id": "e11",
+			"fromNode": "home",
+			"toNode": "i11",
+			"color": "6"
+		},
+		{
+			"id": "e12",
+			"fromNode": "home",
+			"toNode": "i12",
+			"color": "1"
+		},
+		{
+			"id": "e13",
+			"fromNode": "home",
+			"toNode": "i13",
+			"color": "2"
+		},
+		{
+			"id": "e14",
+			"fromNode": "home",
+			"toNode": "i14",
+			"color": "3"
+		},
+		{
+			"id": "e15",
+			"fromNode": "home",
+			"toNode": "i15",
+			"color": "4"
+		}
+	]
+}

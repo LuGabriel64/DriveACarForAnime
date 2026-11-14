@@ -34,10 +34,28 @@ cada um com o seu Claude Code.
 
    Leia o ChangeLog **e** o cabeçalho do módulo antes de editar.
 
+## Mapa Cerebral (Obsidian) — leia e atualize em TODO pedido
+
+O dono mantém um vault do Obsidian com o "Mapa Cerebral" do jogo: ideias, requisitos, sistemas, UI (como é e
+como deve ser), modelagem, código, versões, pedidos, decisões, erros, estratégias e imagens de referência.
+
+- **Vault mestre** (PC do dono): `D:\Arquivos Sistema\Obsidian\DriveACarForAnime\Drive A Car For Anime`.
+  **Cópia no repositório:** `cerebro/` (leitura para quem não está no PC do dono). Comece por `00_Mapa_Cerebral.md`.
+- **No começo do pedido:** leia `00_Mapa_Cerebral.md`, `13_Pendencias/Tarefas_do_Dono.md`,
+  `09_Erros_e_Licoes/Checklist_Antes_de_Mexer.md` e a nota do sistema que vai mexer.
+- **No fim do pedido** (mesmo sem mudar o jogo), siga `10_Estrategias/Manter_o_Vault.md`: linha em
+  `08_Pedidos_e_Decisoes/Pedidos_do_Dono.md`, notas afetadas, decisões, erros, ideias, nota da versão (se houver),
+  nota da sessão; depois `node tools/vault/vault_tools.js check` e `node tools/vault/vault_tools.js sync`.
+- **Imagens do dono:** salvar em `11_Referencias_Visuais/imagens/` com uma nota (modelo em `_Modelos/`).
+  **Nunca apagar as antigas**: elas servem para comparar o pedido de antes com o de agora.
+- Links em markdown relativos (sem wikilinks), nomes de arquivo sem espaço, frontmatter com `title`.
+- Sem acesso ao D: (nuvem, PC do amigo): edite `cerebro/` e avise no CHANGELOG, para o dono copiar de volta.
+
 ## Mapa rápido
 
 | Preciso de… | Onde está |
 |-------------|-----------|
+| **Mapa Cerebral do jogo (ideias, requisitos, decisões, erros, estratégias)** | `cerebro/00_Mapa_Cerebral.md` (vault do Obsidian) |
 | **Estado atual do jogo, o que foi testado e o que falta (comece aqui)** | `estado-atual/README.md` |
 | Onde fica cada script, biomas, loop, ações de rede | `docs/ESTRUTURA.md` |
 | Problemas conhecidos e como corrigir | `docs/AUDITORIA_2026-11-11.md` |
@@ -143,6 +161,6 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
 - **Colaboração:** o amigo ainda não usa o GitHub. Recomendado: Team Create para o jogo (mesmo place) e o
   amigo como colaborador do repositório com a conta dele. GitHub sozinho não junta dois places.
   Ver `docs/CONECTAR_STUDIO.md`.
-- **Ainda sem conexão:** Obsidian e os demais conectores (referências de UI). O dono vai ligar depois.
+- **Obsidian:** ligado em 14/11/2026 (vault "Mapa Cerebral", cópia em `cerebro/`). Demais conectores ainda não.
 - Ideias de produto ainda na fila: anéis de energia com combo, página Index (coleção), compra de vagas na
   garagem, rebirth, ranking de distância (a auditoria 4, que bloqueava o ranking, foi corrigida na 1.8d).

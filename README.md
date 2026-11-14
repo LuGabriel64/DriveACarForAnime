@@ -9,6 +9,7 @@ choque personagens de anime na garagem e compre carros mais rápidos para chegar
 |------|-------|
 | `CLAUDE.md` | **comece aqui**: regras do projeto e fluxo de trabalho para pessoas e assistentes de IA |
 | `estado-atual/` | **estado atual do jogo**: o que foi feito, testado, não testado e as tarefas do dono |
+| `cerebro/` | **Mapa Cerebral** (vault do Obsidian): ideias, requisitos, decisões, erros, estratégias, referências visuais |
 | `CHANGELOG.md` | todas as versões, da 0.1.0 à Beta 1.8d, e as planejadas |
 | `planejamento/beta-1.9/` | projeto da próxima versão: desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, idiomas |
 | `docs/ESTRUTURA.md` | onde fica cada script no Studio, os biomas, o loop do jogo e as ações de rede |
