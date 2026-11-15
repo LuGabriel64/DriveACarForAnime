@@ -356,9 +356,9 @@
 			"type": "group",
 			"label": "05 Modelagem",
 			"x": 1320,
-			"y": -202,
+			"y": -245,
 			"width": 360,
-			"height": 404,
+			"height": 490,
 			"color": "5"
 		},
 		{
@@ -366,7 +366,7 @@
 			"type": "file",
 			"file": "05_Modelagem/INDEX.md",
 			"x": 1340,
-			"y": -162,
+			"y": -205,
 			"width": 320,
 			"height": 70,
 			"color": "5"
@@ -376,25 +376,34 @@
 			"type": "file",
 			"file": "05_Modelagem/Carros_CarFactory.md",
 			"x": 1340,
-			"y": -76,
+			"y": -119,
 			"width": 300,
 			"height": 70
 		},
 		{
 			"id": "n4_1",
 			"type": "file",
-			"file": "05_Modelagem/Mapa_WorldBuilder.md",
+			"file": "05_Modelagem/Carros_F1_Blender.md",
 			"x": 1340,
-			"y": 10,
+			"y": -33,
 			"width": 300,
 			"height": 70
 		},
 		{
 			"id": "n4_2",
 			"type": "file",
+			"file": "05_Modelagem/Mapa_WorldBuilder.md",
+			"x": 1340,
+			"y": 53,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n4_3",
+			"type": "file",
 			"file": "05_Modelagem/Personagens_Blocos_Anime.md",
 			"x": 1340,
-			"y": 96,
+			"y": 139,
 			"width": 300,
 			"height": 70
 		},
@@ -450,9 +459,9 @@
 			"type": "group",
 			"label": "07 Versoes",
 			"x": 721,
-			"y": 687,
+			"y": 644,
 			"width": 680,
-			"height": 748,
+			"height": 834,
 			"color": "1"
 		},
 		{
@@ -460,7 +469,7 @@
 			"type": "file",
 			"file": "07_Versoes/INDEX.md",
 			"x": 741,
-			"y": 727,
+			"y": 684,
 			"width": 640,
 			"height": 70,
 			"color": "1"
@@ -470,7 +479,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.1.md",
 			"x": 741,
-			"y": 813,
+			"y": 770,
 			"width": 300,
 			"height": 70
 		},
@@ -479,7 +488,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.2.md",
 			"x": 1061,
-			"y": 813,
+			"y": 770,
 			"width": 300,
 			"height": 70
 		},
@@ -488,7 +497,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.3.md",
 			"x": 741,
-			"y": 899,
+			"y": 856,
 			"width": 300,
 			"height": 70
 		},
@@ -497,7 +506,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.4.md",
 			"x": 1061,
-			"y": 899,
+			"y": 856,
 			"width": 300,
 			"height": 70
 		},
@@ -506,7 +515,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.5.md",
 			"x": 741,
-			"y": 985,
+			"y": 942,
 			"width": 300,
 			"height": 70
 		},
@@ -515,7 +524,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.6.md",
 			"x": 1061,
-			"y": 985,
+			"y": 942,
 			"width": 300,
 			"height": 70
 		},
@@ -524,7 +533,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.7.md",
 			"x": 741,
-			"y": 1071,
+			"y": 1028,
 			"width": 300,
 			"height": 70
 		},
@@ -533,7 +542,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.8.md",
 			"x": 1061,
-			"y": 1071,
+			"y": 1028,
 			"width": 300,
 			"height": 70
 		},
@@ -542,7 +551,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.8b.md",
 			"x": 741,
-			"y": 1157,
+			"y": 1114,
 			"width": 300,
 			"height": 70
 		},
@@ -551,7 +560,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.8c.md",
 			"x": 1061,
-			"y": 1157,
+			"y": 1114,
 			"width": 300,
 			"height": 70
 		},
@@ -560,7 +569,7 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.8d.md",
 			"x": 741,
-			"y": 1243,
+			"y": 1200,
 			"width": 300,
 			"height": 70
 		},
@@ -569,25 +578,34 @@
 			"type": "file",
 			"file": "07_Versoes/Beta_1.9.md",
 			"x": 1061,
-			"y": 1243,
+			"y": 1200,
 			"width": 300,
 			"height": 70
 		},
 		{
 			"id": "n6_12",
 			"type": "file",
-			"file": "07_Versoes/v0.1.0.md",
+			"file": "07_Versoes/Beta_2.0.md",
 			"x": 741,
-			"y": 1329,
+			"y": 1286,
 			"width": 300,
 			"height": 70
 		},
 		{
 			"id": "n6_13",
 			"type": "file",
-			"file": "07_Versoes/v0.2.0.md",
+			"file": "07_Versoes/v0.1.0.md",
 			"x": 1061,
-			"y": 1329,
+			"y": 1286,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n6_14",
+			"type": "file",
+			"file": "07_Versoes/v0.2.0.md",
+			"x": 741,
+			"y": 1372,
 			"width": 300,
 			"height": 70
 		},
@@ -773,9 +791,9 @@
 			"type": "group",
 			"label": "11 Referencias Visuais",
 			"x": -1241,
-			"y": 945,
+			"y": 859,
 			"width": 360,
-			"height": 232,
+			"height": 404,
 			"color": "5"
 		},
 		{
@@ -783,7 +801,7 @@
 			"type": "file",
 			"file": "11_Referencias_Visuais/INDEX.md",
 			"x": -1221,
-			"y": 985,
+			"y": 899,
 			"width": 320,
 			"height": 70,
 			"color": "5"
@@ -791,9 +809,27 @@
 		{
 			"id": "n10_0",
 			"type": "file",
-			"file": "11_Referencias_Visuais/Referencias_Antigas.md",
+			"file": "11_Referencias_Visuais/2026-11-15_Beta2_Carros_F1.md",
+			"x": -1221,
+			"y": 985,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n10_1",
+			"type": "file",
+			"file": "11_Referencias_Visuais/2026-11-15_Beta2_Personagens_Bioma1.md",
 			"x": -1221,
 			"y": 1071,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n10_2",
+			"type": "file",
+			"file": "11_Referencias_Visuais/Referencias_Antigas.md",
+			"x": -1221,
+			"y": 1157,
 			"width": 300,
 			"height": 70
 		},
@@ -925,9 +961,9 @@
 			"type": "group",
 			"label": "15 Registro de Sessoes",
 			"x": -1241,
-			"y": -1263,
+			"y": -1306,
 			"width": 360,
-			"height": 404,
+			"height": 490,
 			"color": "3"
 		},
 		{
@@ -935,7 +971,7 @@
 			"type": "file",
 			"file": "15_Registro_de_Sessoes/INDEX.md",
 			"x": -1221,
-			"y": -1223,
+			"y": -1266,
 			"width": 320,
 			"height": 70,
 			"color": "3"
@@ -945,7 +981,7 @@
 			"type": "file",
 			"file": "15_Registro_de_Sessoes/2026-11-12_Beta_1.8d.md",
 			"x": -1221,
-			"y": -1137,
+			"y": -1180,
 			"width": 300,
 			"height": 70
 		},
@@ -954,7 +990,7 @@
 			"type": "file",
 			"file": "15_Registro_de_Sessoes/2026-11-13_Beta_1.9.md",
 			"x": -1221,
-			"y": -1051,
+			"y": -1094,
 			"width": 300,
 			"height": 70
 		},
@@ -963,7 +999,16 @@
 			"type": "file",
 			"file": "15_Registro_de_Sessoes/2026-11-14_Criacao_do_Vault.md",
 			"x": -1221,
-			"y": -965,
+			"y": -1008,
+			"width": 300,
+			"height": 70
+		},
+		{
+			"id": "n14_3",
+			"type": "file",
+			"file": "15_Registro_de_Sessoes/2026-11-15_Beta_2.0_Etapa_A.md",
+			"x": -1221,
+			"y": -922,
 			"width": 300,
 			"height": 70
 		},

@@ -1,7 +1,7 @@
 ---
 title: Mapa Cerebral — Drive A Car For Anime
 date: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-15
 versao_do_jogo: Beta 1.9
 tags: [moc, inicio]
 aliases: [Início, Home, Mapa Mental]
@@ -14,13 +14,13 @@ aliases: [Início, Home, Mapa Mental]
 > versões, erros e estratégias. O Claude Code lê e atualiza este vault **a cada pedido e a cada versão**.
 > Para ver como mapa mental, abra [Mapa_Cerebral.canvas](Mapa_Cerebral.canvas) ou o Graph View (Ctrl+G).
 
-## Estado agora (14/11/2026)
+## Estado agora (15/11/2026)
 
 | | |
 |---|---|
 | Versão no Studio | **Beta 1.9** (salva, versão 113 do place, Team Create) |
 | Versão publicada | Beta 1.8b |
-| Próximo número | Beta 1.9b (ajustes) ou 2.0 |
+| Em andamento | **Beta 2.0** (carros de F1 em malha, piloto automático, combustível): Etapa A feita, nada no jogo ainda → [Beta 2.0](07_Versoes/Beta_2.0.md) |
 | Bloqueio principal | teste com 2 jogadores, músicas, publicar → [Tarefas do dono](13_Pendencias/Tarefas_do_Dono.md) |
 | GitHub | `LuGabriel64/DriveACarForAnime`, `main`, tag `beta-1.9` |
 

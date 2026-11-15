@@ -60,7 +60,9 @@ como deve ser), modelagem, código, versões, pedidos, decisões, erros, estrat�
 | Onde fica cada script, biomas, loop, ações de rede | `docs/ESTRUTURA.md` |
 | Problemas conhecidos e como corrigir | `docs/AUDITORIA_2026-11-11.md` |
 | Todas as versões, da 0.1.0 à planejada 1.9 | `CHANGELOG.md` |
-| Projeto da próxima versão + passo a passo para aplicar | `planejamento/beta-1.9/README.md` e `07_plano_de_implementacao.md` |
+| **Projeto da versão em andamento (Beta 2.0)** | `planejamento/beta-2.0/README.md` |
+| Arte (Blender): scripts, FBX, pinturas, renders | `arte/` |
+| Projeto da Beta 1.9 (aplicada) | `planejamento/beta-1.9/README.md` e `07_plano_de_implementacao.md` |
 | Como ligar o Claude Code ao Roblox Studio | `docs/CONECTAR_STUDIO.md` |
 | O que foi decidido no chat até a Beta 1.2 | `docs/HISTORICO_CHAT.md` |
 
@@ -126,6 +128,15 @@ git diff --stat                                                  # o que mudou d
 ```
 
 No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses pacotes.
+
+## Estado em 15/11/2026
+
+- **Beta 2.0 em andamento.** Projeto e etapas em `planejamento/beta-2.0/README.md`. Feita só a Etapa A (arte):
+  21 carros de Fórmula gerados por script do Blender em `arte/` (FBX + pinturas), mais um estudo de personagem.
+  **Nada da 2.0 está no place.** Próximo: Studio aberto, permissão de upload de assets, Etapa B.
+- Blender: `D:SteamLibrarysteamappscommonBlenderlender.exe --background --python arte/blender/f1_all.py -- <pasta arte>`.
+  O MCP do Blender só responde com o servidor iniciado dentro do Blender; em segundo plano funciona sem ele.
+- Arte: sem logotipos de marcas; personagens em low-poly próprio, sem emblemas e sem modelos baixados da web.
 
 ## Estado em 13/11/2026
 

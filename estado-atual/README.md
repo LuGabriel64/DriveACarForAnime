@@ -4,6 +4,11 @@
 > pelo MCP). Se você é um Claude Code (app, nuvem, PC do amigo) chegando agora, esta pasta resume **tudo** o
 > que foi feito, testado, deixado de lado e o que falta. Nada aqui depende da memória de alguma conversa.
 
+## Em andamento (15/11/2026): Beta 2.0
+
+A Etapa A (arte dos 21 carros de Fórmula no Blender) está em `arte/`. **Nada da 2.0 está no place.** Projeto,
+etapas e o que falta em `planejamento/beta-2.0/README.md`. O texto abaixo descreve a 1.9, que é o que está no Studio.
+
 ## Em uma frase
 
 O jogo está na **Beta 1.9**, aplicada e **salva** no place, mas **ainda não publicada**. Ela traz o desafio 1v1

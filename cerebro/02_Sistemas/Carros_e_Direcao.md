@@ -34,4 +34,7 @@ Apex F-05 ($5B, 400). Sem tier e sem motor. Com boost o mais rápido chega a 640
 ## Visual
 `Client.CarVisuals`: aura de energia no boost ("BoostAura", 1.2), faróis com SpotLight (0.2.0).
 
+## Planejado na Beta 2.0
+21 carros (3 por bioma) em malha de Fórmula; combustível; engine upgrade com teto no carro seguinte; Fuel Engine; primeira pessoa; modo Manual/Automático com piloto automático e skill-checks. Especificação em `planejamento/beta-2.0/README.md`. Ver [Beta 2.0](../07_Versoes/Beta_2.0.md) e [Carros de F1 no Blender](../05_Modelagem/Carros_F1_Blender.md).
+
 Relacionado: [Carros (CarFactory)](../05_Modelagem/Carros_CarFactory.md) · [Pista e obstáculos](Pista_e_Obstaculos.md) · [Corrida 1v1 de F1](Corrida_1v1_F1.md) · [Biomas](../03_Conteudo/Biomas.md)

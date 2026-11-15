@@ -6,109 +6,10 @@
   "hideUnresolved": false,
   "showOrphans": true,
   "collapse-color-groups": true,
-  "colorGroups": [
-    {
-      "query": "path:01_Visao",
-      "color": {
-        "a": 1,
-        "rgb": 16739029
-      }
-    },
-    {
-      "query": "path:02_Sistemas",
-      "color": {
-        "a": 1,
-        "rgb": 4172287
-      }
-    },
-    {
-      "query": "path:03_Conteudo",
-      "color": {
-        "a": 1,
-        "rgb": 8115786
-      }
-    },
-    {
-      "query": "path:04_UI_UX",
-      "color": {
-        "a": 1,
-        "rgb": 16756768
-      }
-    },
-    {
-      "query": "path:05_Modelagem",
-      "color": {
-        "a": 1,
-        "rgb": 12611839
-      }
-    },
-    {
-      "query": "path:06_Codigo",
-      "color": {
-        "a": 1,
-        "rgb": 4247776
-      }
-    },
-    {
-      "query": "path:07_Versoes",
-      "color": {
-        "a": 1,
-        "rgb": 16769126
-      }
-    },
-    {
-      "query": "path:08_Pedidos_e_Decisoes",
-      "color": {
-        "a": 1,
-        "rgb": 16734810
-      }
-    },
-    {
-      "query": "path:09_Erros_e_Licoes",
-      "color": {
-        "a": 1,
-        "rgb": 16744512
-      }
-    },
-    {
-      "query": "path:10_Estrategias",
-      "color": {
-        "a": 1,
-        "rgb": 6348960
-      }
-    },
-    {
-      "query": "path:11_Referencias_Visuais",
-      "color": {
-        "a": 1,
-        "rgb": 16748736
-      }
-    },
-    {
-      "query": "path:12_Ideias_e_Roadmap",
-      "color": {
-        "a": 1,
-        "rgb": 10526975
-      }
-    },
-    {
-      "query": "path:13_Pendencias",
-      "color": {
-        "a": 1,
-        "rgb": 16724016
-      }
-    },
-    {
-      "query": "file:00_Mapa_Cerebral",
-      "color": {
-        "a": 1,
-        "rgb": 16777215
-      }
-    }
-  ],
+  "colorGroups": [],
   "collapse-display": true,
-  "showArrow": true,
-  "textFadeMultiplier": -1,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
   "nodeSizeMultiplier": 1,
   "lineSizeMultiplier": 1,
   "collapse-forces": true,
@@ -116,6 +17,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.5087618855792537,
+  "scale": 0.2588386562181592,
   "close": true
 }

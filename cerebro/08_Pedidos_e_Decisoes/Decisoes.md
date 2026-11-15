@@ -32,5 +32,11 @@ Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** sã
 | 20 | EscapeFX **não** generalizado na 1.9 | risco de quebrar a fuga | DuelRaceUI |
 | 21 | Espelho sem Python (MirrorDump + Node) | PC do dono não tem Python | tools/place |
 | 22 | Mapa duplicado **movido** para backup, não apagado | segurança | Backups["Beta 1.8b"] |
+| 23 | Carros gerados por **script do Blender** (paramétrico), não esculpidos à mão | reproduzível, versionado, 21 carros de 3 carrocerias | `arte/blender/` |
+| 24 | Pintura dos carros por textura + cor por vértice, **sem logotipos** de marcas | assets autocontidos e sem marca de terceiros | `f1_themes.py` |
+| 25 | Os 7 ids de carro atuais viram a classe A do bioma; B e C são ids novos | nenhum save quebra | Config.Cars |
+| 26 | Combustível medido no **servidor**; piloto automático no **cliente**, validado pelo servidor | o cliente é dono da física | RaceService, Client.Autopilot |
+| 27 | Personagens em **low-poly próprio**, inspirado nas referências; sem cópia fiel, sem emblemas, sem modelos baixados da web | obra e marca de terceiros; risco de remoção e de punição da conta | `planejamento/beta-2.0/README.md` |
+| 28 | Tanque cheio a cada largada; combustível desligado na corrida 1v1 | simplicidade; equilibrar depois | Config (Beta 2.0) |
 
 Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

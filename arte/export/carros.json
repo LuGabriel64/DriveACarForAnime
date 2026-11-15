@@ -1,0 +1,575 @@
+[
+ {
+  "id": "warrior_a",
+  "name": "Turtle Trainer",
+  "biome": "warrior",
+  "body": "A",
+  "tris": 8524,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 184
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "warrior_b",
+  "name": "Prince Vanguard",
+  "biome": "warrior",
+  "body": "B",
+  "tris": 8316,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 220,
+   "Glass": 12
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "warrior_c",
+  "name": "Golden Aura",
+  "biome": "warrior",
+  "body": "C",
+  "tris": 9458,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 552,
+   "Glass": 540,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 162
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "sakura_a",
+  "name": "Petal Runner",
+  "biome": "sakura",
+  "body": "A",
+  "tris": 9908,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 1568
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "sakura_b",
+  "name": "Shrine GT",
+  "biome": "sakura",
+  "body": "B",
+  "tris": 8224,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 140
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "sakura_c",
+  "name": "Moon Blossom",
+  "biome": "sakura",
+  "body": "C",
+  "tris": 9412,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 612,
+   "Glass": 540,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 56
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "dunes_a",
+  "name": "Sand Skipper",
+  "biome": "dunes",
+  "body": "A",
+  "tris": 8436,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 24,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 84
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "dunes_b",
+  "name": "Pharaoh",
+  "biome": "dunes",
+  "body": "B",
+  "tris": 8256,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 108,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 76
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "dunes_c",
+  "name": "Sunset Scarab",
+  "biome": "dunes",
+  "body": "C",
+  "tris": 9048,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 220,
+   "Glass": 540,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 84
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "tundra_a",
+  "name": "Snow Fox",
+  "biome": "tundra",
+  "body": "A",
+  "tris": 8440,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 100
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "tundra_b",
+  "name": "Glacier",
+  "biome": "tundra",
+  "body": "B",
+  "tris": 8182,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Glass": 98
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "tundra_c",
+  "name": "Aurora",
+  "biome": "tundra",
+  "body": "C",
+  "tris": 9208,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 436,
+   "Glass": 568,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "volcano_a",
+  "name": "Ember",
+  "biome": "volcano",
+  "body": "A",
+  "tris": 8604,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 264
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "volcano_b",
+  "name": "Magma Vein",
+  "biome": "volcano",
+  "body": "B",
+  "tris": 8224,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 96,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 56
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "volcano_c",
+  "name": "Inferno Titan",
+  "biome": "volcano",
+  "body": "C",
+  "tris": 9084,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 312,
+   "Glass": 540,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 28
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "city_a",
+  "name": "Street Volt",
+  "biome": "city",
+  "body": "A",
+  "tris": 8432,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 88,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 16
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "city_b",
+  "name": "Cyber Circuit",
+  "biome": "city",
+  "body": "B",
+  "tris": 8288,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 200,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 16
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "city_c",
+  "name": "Glitch Phantom",
+  "biome": "city",
+  "body": "C",
+  "tris": 9308,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 552,
+   "Glass": 552,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "celestial_a",
+  "name": "Cloud Hopper",
+  "biome": "celestial",
+  "body": "A",
+  "tris": 9212,
+  "parts": {
+   "Body": 3164,
+   "Trim": 1436,
+   "Glow": 12,
+   "Wheel_FR": 932,
+   "Wheel_FL": 932,
+   "Wheel_RR": 932,
+   "Wheel_RL": 932,
+   "Acc": 872
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "celestial_b",
+  "name": "Star Archer",
+  "biome": "celestial",
+  "body": "B",
+  "tris": 8430,
+  "parts": {
+   "Body": 3340,
+   "Trim": 1436,
+   "Glow": 300,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 58
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ },
+ {
+  "id": "celestial_c",
+  "name": "Origin Comet",
+  "biome": "celestial",
+  "body": "C",
+  "tris": 9394,
+  "parts": {
+   "Body": 3764,
+   "Trim": 1144,
+   "Glow": 530,
+   "Glass": 540,
+   "Wheel_FR": 824,
+   "Wheel_FL": 824,
+   "Wheel_RR": 824,
+   "Wheel_RL": 824,
+   "Acc": 120
+  },
+  "wheels": {
+   "fx": 3.9,
+   "fy": -6.0,
+   "rx": 3.9,
+   "ry": 5.6,
+   "fr": 1.5,
+   "rr": 1.62,
+   "fw": 1.5,
+   "rw": 1.95
+  }
+ }
+]

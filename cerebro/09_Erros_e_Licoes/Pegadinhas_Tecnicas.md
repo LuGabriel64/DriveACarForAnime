@@ -1,7 +1,7 @@
 ---
 title: Pegadinhas técnicas
 date: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [erros, mcp, roblox, git]
 ---
 
@@ -38,5 +38,12 @@ tags: [erros, mcp, roblox, git]
 - PowerShell 5.1 não tem `&&`. O Git Bash tem `sed`/`grep`.
 - **Sem Python** no PC do dono; há Node (`D:\node`). Heredoc longo no Bash falhou ao escrever as notas do vault → use a ferramenta de escrita.
 - Git converte LF em CRLF: ignore `\r` ao comparar checksums.
+
+## Blender
+- O Blender aberto **não basta**: o servidor MCP precisa ser iniciado dentro dele (porta 9876). Sem isso, use `blender --background --python script.py` (caminho: `D:\SteamLibrary\steamapps\common\Blender\blender.exe`).
+- Blender 5.3: o motor de render chama `BLENDER_EEVEE` (não existe `BLENDER_EEVEE_NEXT`); renderiza sem janela.
+- Luz de área muito forte estoura o clay; sol e preenchimento bastam. Chão brilhante cria um reflexo branco: use rugosidade alta.
+- Para exportar com nomes limpos (`Body`, `Trim`...), renomeie os objetos só durante a exportação (o Blender não aceita dois objetos com o mesmo nome).
+- Script com aspas simples dentro de heredoc do Bash falha neste PC: grave o script com a ferramenta de escrita e rode o arquivo.
 
 Relacionado: [Erros corrigidos](Erros_Corrigidos.md) · [Checklist antes de mexer](Checklist_Antes_de_Mexer.md) · [Testar](../10_Estrategias/Testar.md) · [Ferramentas](../14_Equipe_e_Ferramentas/Ferramentas_MCP_GitHub.md)

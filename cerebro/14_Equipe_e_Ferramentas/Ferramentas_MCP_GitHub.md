@@ -23,6 +23,11 @@ tags: [ferramentas, mcp, github]
 2. O Claude Code grava as saídas em arquivo e roda `node tools/place/mirror_from_dump.js <partes...>`.
 3. Com Python: `python tools/place/place_tool.py extract places/<arquivo>.rbxl`.
 
+## Blender
+- Blender 5.3 (Steam) em `D:\SteamLibrary\steamapps\common\Blender\blender.exe`. O MCP `Blender` (porta 9876) só responde com o servidor iniciado dentro do Blender.
+- Trabalho em segundo plano: `blender --background --python arte/blender/f1_all.py -- <pasta arte>`.
+- Blender → Roblox: FBX (frente −Z, cima Y, 1 unidade = 1 stud) enviado por `open_cloud_invoke` (`/assets/v1/assets`; precisa dos escopos `asset:read` e `asset:write` e da pasta aprovada) e inserido com `insert_asset`.
+
 ## Vault → GitHub
 `node tools/vault/vault_tools.js sync` copia este vault para `cerebro/` no repositório (sem `.obsidian/workspace*.json`).
 O vault mestre é o do D:; não edite `cerebro/` à mão.

@@ -8,6 +8,7 @@ tags: [moc, sessoes]
 
 Uma nota por conversa de trabalho (mais nova no topo). Use o [modelo de sessão](../_Modelos/Modelo_Sessao.md).
 
+- [2026-11-15 — Beta 2.0, Etapa A](2026-11-15_Beta_2.0_Etapa_A.md): 21 carros de Fórmula no Blender e o projeto da versão.
 - [2026-11-14 — Criação do Mapa Cerebral](2026-11-14_Criacao_do_Vault.md): este vault.
 - [2026-11-13 — Beta 1.9 aplicada](2026-11-13_Beta_1.9.md): Etapas A a D no Studio.
 - [2026-11-12 — Beta 1.8d e conexão ao Studio](2026-11-12_Beta_1.8d.md): primeira sessão local com MCP.

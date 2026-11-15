@@ -8,3 +8,7 @@ __pycache__/
 # SO
 .DS_Store
 Thumbs.db
+
+# renders individuais (a folha arte/renders/carros_f1.png fica)
+arte/renders/carros/
+*.blend1

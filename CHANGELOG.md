@@ -12,6 +12,7 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
+| Beta 2.0 | em andamento (15/11/2026) | 🎨 Etapa A: arte dos 21 carros pronta; nada no jogo ainda | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
 | [Beta 1.9](#jogo) | 13/11/2026 | 💾 salva no Studio (versão 113), falta teste com 2 jogadores e publicar | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
 | [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
 | [Beta 1.8c](#beta-18c--11112026) | 11/11/2026 | ✅ | Só documentação dentro do place (`04_EstadoAtual`) |
@@ -37,6 +38,26 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 ---
 
 ## Repositório
+
+### 15/11/2026 — Beta 2.0, Etapa A: 21 carros de Fórmula no Blender · Claude Code (PC do dono, Fable 5.2)
+
+- Pedido do dono (Beta 2.0): carros de F1 modelados no Blender (3 por bioma, pintura do bioma, acessórios), Mini
+  Goku voando junto, elenco do bioma 1 remodelado, primeira pessoa, Manual/Automático com piloto automático e
+  skill-checks, combustível e upgrades. Projeto, etapas e especificação em `planejamento/beta-2.0/README.md`.
+- **Feito (só arte, fora do jogo):** nova pasta `arte/`.
+  - `arte/blender/f1lib.py`, `f1_build.py`, `f1_themes.py`, `f1_all.py`: gerador paramétrico em Python do Blender
+    (roda com `blender --background`); 3 carrocerias (A Rookie, B Pro, C Hyper), 21 pinturas por código, acessórios.
+  - `arte/export/`: 21 FBX (8 a 10 mil triângulos; objetos Body, Trim, Glow, Glass, Acc, Wheel_*), 21 pinturas PNG e
+    `carros.json`; estudo de personagem `mini_gokun_classic.fbx` e `mini_gokun_violet.fbx` (`char_mini.py`).
+  - `arte/renders/carros_f1.png` (folha com os 21) e `arte/blend/f1_carros.blend`.
+- **Testado:** os scripts geram sem erro e os renders foram conferidos. **NÃO testado:** importar no Roblox,
+  escala, cor por vértice, Neon, dirigir. **Nada foi aplicado no place**: o Studio estava fechado.
+- Sem logotipos de marcas nos carros; personagens em low-poly próprio, sem emblemas e sem modelos baixados
+  (decisão registrada no projeto e em `cerebro/08_Pedidos_e_Decisoes/Decisoes.md`, linha 27).
+- Vault: 20 imagens de referência do dono em `cerebro/11_Referencias_Visuais/imagens/` com duas notas; nota da
+  versão, sessão, decisões 23 a 28 e a estratégia de modelagem no Blender.
+- **Para continuar:** abrir o Studio, liberar `asset:read`/`asset:write` e a pasta `arte/export` nas permissões do
+  Assistant, e seguir a Etapa B do projeto.
 
 ### 14/11/2026 — Mapa Cerebral no Obsidian (`cerebro/`) · Claude Code (PC do dono, app desktop)
 

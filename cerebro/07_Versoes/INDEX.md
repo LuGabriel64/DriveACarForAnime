@@ -25,7 +25,8 @@ estas notas resumem e ligam cada versão aos sistemas que ela mexeu.
 | 11/11 | [Beta 1.8c](Beta_1.8c.md) | só documentação: auditoria e integração |
 | 12/11 | [Beta 1.8d](Beta_1.8d.md) | Map duplicado, anti-trapaça, save seguro |
 | 13/11 | [Beta 1.9](Beta_1.9.md) | **desafio 1v1, F1, batalha, estrelas, nível, idiomas** (salva) |
-| — | próxima | Beta 1.9b (ajustes) ou 2.0 → [Roadmap](../12_Ideias_e_Roadmap/Roadmap.md) |
+| 15/11 | [Beta 2.0](Beta_2.0.md) | **em andamento**: carros de F1 em malha (21), piloto automático, combustível, primeira pessoa |
+| — | depois | ver [Roadmap](../12_Ideias_e_Roadmap/Roadmap.md) |
 
 Ao criar uma versão nova: copie o [modelo de versão](../_Modelos/Modelo_Versao.md).
 

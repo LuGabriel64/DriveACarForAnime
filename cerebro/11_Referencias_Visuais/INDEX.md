@@ -1,7 +1,7 @@
 ---
 title: 11 Referências visuais — índice
 date: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [moc, referencias, imagens]
 ---
 
@@ -27,7 +27,8 @@ era pedido antes e como é pedido agora.
 
 | Data | Tema | Nota | Aplicada em |
 |------|------|------|-------------|
-| — | (nenhuma imagem salva ainda) | — | — |
+| 15/11/2026 | Carros de Fórmula 1 (8 imagens) | [Carros F1](2026-11-15_Beta2_Carros_F1.md) | `arte/` (21 carros, ainda fora do jogo) |
+| 15/11/2026 | Personagens do bioma 1 (12 imagens) | [Personagens do bioma 1](2026-11-15_Beta2_Personagens_Bioma1.md) | estudo do Mini Gokun |
 
 ## Referências antigas (sem arquivo)
 Imagens que o dono mandou antes do vault existir: [Referências antigas](Referencias_Antigas.md).

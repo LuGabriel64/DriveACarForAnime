@@ -1,7 +1,7 @@
 ---
 title: Pedidos do dono
 date: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-15
 tags: [requisitos, historico]
 ---
 
@@ -28,5 +28,6 @@ Do mais antigo para o mais novo. **A cada prompt novo, acrescente uma linha.**
 | 12/11 | Conectar Claude Code ao Studio; Etapa 0; criar `estado-atual/` com todos os pedidos | [1.8d](../07_Versoes/Beta_1.8d.md) |
 | 12–13/11 | **Beta 1.9**: 1v1 corrida de F1 e batalha de anime, estrelas, nível, recompensas, pontos de spin, overlays por plataforma, idiomas; aplicar no Studio | [1.9](../07_Versoes/Beta_1.9.md) |
 | 14/11 | Criar o **Mapa Cerebral** no Obsidian com tudo do projeto; atualizar a cada prompt e versão; guardar imagens (antigas e novas); estratégias; dicas de plugins | este vault → [sessão](../15_Registro_de_Sessoes/2026-11-14_Criacao_do_Vault.md) |
+| 15/11 | **Beta 2.0**: carros de F1 no Blender (3 por bioma, pintura do bioma, acessórios), Mini Goku voando junto e como personagem Épico com 2 skins, elenco do bioma 1 remodelado + Secret e Mítico novos, primeira pessoa, Manual/Automático com piloto automático e skill-checks, combustível, teto no engine upgrade e Fuel Engine | [Beta 2.0](../07_Versoes/Beta_2.0.md): Etapa A (arte dos carros) feita; resto projetado → [sessão](../15_Registro_de_Sessoes/2026-11-15_Beta_2.0_Etapa_A.md) |
 
 Relacionado: [Decisões](Decisoes.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Requisitos de UI](../04_UI_UX/Requisitos_de_UI.md) · [Linha do tempo](../07_Versoes/INDEX.md)

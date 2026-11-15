@@ -43,4 +43,7 @@ Cada bioma tem as 7 raridades (o sorteio depende disso); o bioma 1 tem 2 Common.
 
 Legacy também: Warrior Canyon 1.1 (Kenta, Rio, Bao, Raika, Ryuen, Garon, The Nameless Champion) e Verdant Plains 0.1.
 
+## Planejado na Beta 2.0
+Novos no bioma 1: **Mini Gokun** (Epic, 2 skins), **Majin Vegita** (Mythic) e **Super Gokun** (Secret, com aura); o elenco do bioma 1 passa a ter malhas próprias. Ver [Beta 2.0](../07_Versoes/Beta_2.0.md) e as [referências](../11_Referencias_Visuais/2026-11-15_Beta2_Personagens_Bioma1.md).
+
 Relacionado: [Raridades e mutações](Raridades_e_Mutacoes.md) · [Personagens blocos anime](../05_Modelagem/Personagens_Blocos_Anime.md) · [Batalha de anime](../02_Sistemas/Batalha_de_Anime.md) · [Decisões](../08_Pedidos_e_Decisoes/Decisoes.md)
