@@ -9,11 +9,11 @@
 
 | # | Pedido | Etapa | Estado |
 |---|--------|-------|--------|
-| 1 | Carros de **Fórmula 1 modelados no Blender** para os carros do jogo, com pintura ligada ao bioma | A | ✅ 1ª versão (21 FBX + pinturas) |
+| 1 | Carros de **Fórmula 1 modelados no Blender** para os carros do jogo, com pintura ligada ao bioma | A | ✅ 1ª versão (21 FBX + pinturas), **aprovada pelo dono em 16/11** |
 | 2 | **3 carros por bioma** (21 no total) | A / C | ✅ arte · ⏳ Config e loja |
 | 3 | Carros do bioma 1 com as cores do tema e **acessórios** | A | ✅ 1ª versão |
-| 4 | **Mini Goku voando junto** do carro, com animação | B | ⏳ modelo em estudo |
-| 5 | Personagem **Mini Goku**, Épico, com **2 skins** (cor da roupa) | B / D | ⏳ |
+| 4 | **Mini Goku voando junto** do carro, com animação | B | ⏳ modelo v2 pronto (`mini_gokun_v2_*.fbx`); falta importar e animar |
+| 5 | Personagem **Mini Goku**, Épico, com **2 skins** (cor da roupa) | B / D | ⏳ arte v2 nas 2 skins; falta o jogo |
 | 6 | Elenco do bioma 1 **remodelado** pelas imagens de referência; novo **Secret** (Goku Super Saiyajin, com aura) e novo **Mítico** (Majin Vegeta) | D | ⏳ ver "Fidelidade e propriedade intelectual" |
 | 7 | Corrida em **primeira pessoa** (podendo voltar para a terceira) | C | ⏳ projetado |
 | 8 | Escolha **Manual / Automático** antes da contagem | C | ⏳ projetado |
@@ -22,6 +22,28 @@
 | 11 | **Combustível** limitado | C | ⏳ projetado |
 | 12 | **Engine upgrade** com teto na velocidade base do carro seguinte; novo upgrade de **motor de combustível** | C | ⏳ projetado |
 | 13 | Integrar ao GitHub e ao Obsidian | todas | ✅ nesta sessão |
+
+## Atualização de 16/11/2026 — personagens v2
+
+O dono aprovou os carros e pediu outro estilo para os personagens: anime 2.5D com cel-shading, músculos, rosto másculo e
+nuvem com fumaça (9 imagens novas, guardadas em `cerebro/11_Referencias_Visuais/`). A arte de personagem foi refeita:
+
+| Arquivo | O que é |
+|---------|---------|
+| `arte/blender/sdflib.py` | escultura por campos de distância + cel-shading pintado nos vértices |
+| `arte/blender/char_hero.py` | Gokun, Super Gokun (aura), Mini Gokun clássico e violeta, a partir de um corpo só |
+| `arte/export/gokun.fbx`, `super_gokun.fbx`, `mini_gokun_v2_classic.fbx`, `mini_gokun_v2_violet.fbx` | saídas (56 a 63 mil triângulos: versão de vitrine) |
+| `arte/export/personagens.json` | peças, triângulos, juntas (pivôs) e escala |
+| `arte/renders/gokun.png`, `super_gokun.png`, `mini_gokun_v2_classic.png`, `mini_gokun_v2_violet.png` | folhas (frente, 3/4, costas, rosto) |
+
+Como funciona, números e limites: `cerebro/05_Modelagem/Personagens_SDF_Blender.md`. A v1 (`char_mini.py`) fica guardada.
+
+**Antes de importar personagens no Roblox:** gerar a versão de jogo (15 a 20 mil triângulos por personagem, nenhuma peça
+acima de 10 mil) baixando os alvos de `shell_from(...)` em `char_hero.py`.
+
+**Bloqueio da Etapa B (16/11):** o Studio está ligado, mas o upload foi recusado porque a pasta `arte\export` não está
+na lista de pastas aprovadas (Assistant Settings → MCP Permissions → pastas de upload). O jogo é de um grupo
+(id 879120012), então o `creationContext.creator` do upload é `{"groupId":"879120012"}`.
 
 ## Etapas
 

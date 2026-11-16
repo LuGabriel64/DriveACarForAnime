@@ -12,3 +12,4 @@ Thumbs.db
 # renders individuais (a folha arte/renders/carros_f1.png fica)
 arte/renders/carros/
 *.blend1
+arte/renders/personagens/

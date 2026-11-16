@@ -18,14 +18,16 @@ Projeto completo: `planejamento/beta-2.0/README.md` no repositório.
 
 | Etapa | Conteúdo | Estado |
 |-------|----------|--------|
-| A | arte dos 21 carros no Blender (FBX + pinturas) | ✅ versão 1 |
-| B | importar no Roblox, `CarFactory` com malhas, companheiro voador | ⏳ precisa do Studio e da permissão de upload |
+| A | arte dos 21 carros no Blender (FBX + pinturas) | ✅ versão 1, **aprovada pelo dono em 16/11** |
+| B | importar no Roblox, `CarFactory` com malhas, companheiro voador | ⏳ Studio ligado; falta o dono aprovar a pasta `arte\export` para upload |
 | C | 21 carros no Config, combustível, upgrades, primeira pessoa, Manual/Auto, piloto automático, skill-checks | ⏳ projetado |
-| D | personagens do bioma 1 em malha + 3 novos | ⏳ estudo do Mini Gokun feito |
+| D | personagens do bioma 1 em malha + 3 novos | ⏳ arte v2 de Gokun, Super Gokun e Mini Gokun (2 skins) feita; faltam os outros e a importação |
 | E | fechamento, testes, tag | ⏳ |
 
 **Feito em 15/11:** gerador paramétrico (`arte/blender/`), 21 carros exportados, folha de renders, estudo do
 Mini Gokun em 2 skins, 20 imagens de referência guardadas com nota.
+
+**Feito em 16/11:** personagens v2 por [escultura SDF](../05_Modelagem/Personagens_SDF_Blender.md) (o dono pediu estilo anime 2.5D com cel-shading): Gokun, Super Gokun com aura, Mini Gokun nas 2 skins sobre a nuvem com fumaça. Resultado e as 9 referências em [Referências 16/11](../11_Referencias_Visuais/2026-11-16_Gokun_Referencias_v2.md). A v1 ficou guardada. O upload para o Roblox foi recusado (pasta não aprovada).
 
 **Testado:** geração e render (conferidos na imagem). **Não testado:** tudo no Roblox.
 

@@ -38,5 +38,9 @@ Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** sã
 | 26 | Combustível medido no **servidor**; piloto automático no **cliente**, validado pelo servidor | o cliente é dono da física | RaceService, Client.Autopilot |
 | 27 | Personagens em **low-poly próprio**, inspirado nas referências; sem cópia fiel, sem emblemas, sem modelos baixados da web | obra e marca de terceiros; risco de remoção e de punição da conta | `planejamento/beta-2.0/README.md` |
 | 28 | Tanque cheio a cada largada; combustível desligado na corrida 1v1 | simplicidade; equilibrar depois | Config (Beta 2.0) |
+| 29 | Personagens deixam de ser blocos: escultura por SDF com cel-shading pintado nos vértices (dono pediu estilo anime 2.5D, 16/11) | o estudo v1 ficou "boneco de blocos"; o dono quer músculo, sombra e rosto másculo | `arte/blender/sdflib.py`, `char_hero.py` |
+| 30 | Um corpo só, reaproveitado: adulto, Super (cabelo + aura) e Mini (mesmas peças achatadas) | consistência entre personagem e companheiro; menos trabalho por variante | `char_hero.py` (`chibi`) |
+| 31 | Versões antigas da arte ficam guardadas no repositório (pedido do dono) | comparar o antes e o depois | `arte/blender/char_mini.py`, `arte/export/mini_gokun_*.fbx` |
+| 32 | Carros de Fórmula v1 **aprovados** pelo dono em 16/11 | "O dos carros está perfeito" | `arte/export/` |
 
 Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

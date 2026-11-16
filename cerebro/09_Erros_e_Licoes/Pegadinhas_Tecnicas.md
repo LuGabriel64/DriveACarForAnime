@@ -30,6 +30,9 @@ tags: [erros, mcp, roblox, git]
   carro anda por `PivotTo` no cliente a cada Heartbeat; pegar o ovo com `InputHoldBegin/End` depois de o prompt
   aparecer; **pegar o ovo e voltar numa única chamada** (a roleta dura 6 s e o colapso começa 3 s depois).
 - Batalha sem 2 jogadores: no contexto Server, `require` do **BattleSim** (biblioteca) e `Remotes.Event:FireClient(p, "BattleScript", roteiro)`.
+- **Upload de assets** (`open_cloud_invoke` em `/assets/v1/assets`): liberar os escopos não basta; a **pasta** do arquivo tem de estar na lista de pastas aprovadas (Assistant Settings → MCP Permissions). Erro: "is not inside a directory approved for uploads". Não contornar copiando o arquivo.
+- O jogo pertence a um **grupo** (`game.CreatorType = Group`, id 879120012): no upload, `creationContext.creator` é `{groupId}`, não `{userId}`.
+- Erro "Server's protocol version is not supported" ao ligar o MCP: resolve reiniciando o app do Claude / recriando o conector; depois os `mcp__Roblox_Studio__*` voltam.
 - `user_mouse_input` com `instance_path` funciona no dock, falhou no START do menu (use coordenadas: JOGAR ~765,197; ESCOLHER ~765,433).
 
 ## Git e Windows
@@ -47,3 +50,8 @@ tags: [erros, mcp, roblox, git]
 - Script com aspas simples dentro de heredoc do Bash falha neste PC: grave o script com a ferramenta de escrita e rode o arquivo.
 
 Relacionado: [Erros corrigidos](Erros_Corrigidos.md) · [Checklist antes de mexer](Checklist_Antes_de_Mexer.md) · [Testar](../10_Estrategias/Testar.md) · [Ferramentas](../14_Equipe_e_Ferramentas/Ferramentas_MCP_GitHub.md)
+- **SDF (personagens):** `np.sin(np.pi * 1.0)` em float32 dá um número negativo minúsculo; elevar a 0,7 vira NaN e a malha sai em espinhos. Sempre `np.maximum(..., 0)` antes da potência.
+- **Mechas de cabelo:** se a mecha sai radial do centro da cabeça, "para fora" e "ao longo" são o mesmo vetor e a seção colapsa em agulha. Use um eixo de referência fixo (frente, ou Z para as mechas que apontam para a frente/trás).
+- **Aura e efeitos translúcidos:** só atrás e dos lados; na frente tapam o personagem.
+- **Sombra cel pintada:** com a luz de frente quase não há sombra; a luz tem de vir de lado e de cima (e uma contraluz para as costas).
+- **Mirim a partir do adulto:** escalar a cabeça leva junto o toco do pescoço; abaixe a cabeça e achate um pouco no Z, senão o rosto fica comprido.
