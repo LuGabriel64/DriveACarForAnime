@@ -4,10 +4,11 @@
 > pelo MCP). Se você é um Claude Code (app, nuvem, PC do amigo) chegando agora, esta pasta resume **tudo** o
 > que foi feito, testado, deixado de lado e o que falta. Nada aqui depende da memória de alguma conversa.
 
-## Em andamento (15/11/2026): Beta 2.0
+## Em andamento (16/11/2026): Beta 2.0
 
-A Etapa A (arte dos 21 carros de Fórmula no Blender) está em `arte/`. **Nada da 2.0 está no place.** Projeto,
-etapas e o que falta em `planejamento/beta-2.0/README.md`. O texto abaixo descreve a 1.9, que é o que está no Studio.
+A arte está em `arte/`: 21 carros de Fórmula (aprovados pelo dono) e os personagens v2 (Gokun, Super Gokun, Mini Gokun).
+**Nada da 2.0 está no place**: o upload espera o dono aprovar a pasta `arte\export` no Studio. Projeto, etapas e o que
+falta em `planejamento/beta-2.0/README.md`. O texto abaixo descreve a 1.9, que é o que está no Studio.
 
 ## Em uma frase
 

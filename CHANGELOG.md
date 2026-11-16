@@ -39,6 +39,29 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 
 ## Repositório
 
+### 16/11/2026 — Beta 2.0: personagens v2 por escultura SDF (Gokun, Super Gokun, Mini Gokun) · Claude Code (PC do dono, Fable 5.2)
+
+- Pedido do dono: religar o Studio; **carros aprovados**; refazer o Mini Gokun, o Gokun e o Gokun Super no estilo de 9
+  imagens novas (anime 2.5D com cel-shading, músculos definidos, rosto másculo, nuvem com fumaça); guardar os modelos
+  antigos; aplicar no Studio o que já foi testado.
+- **Feito (só arte, fora do jogo):**
+  - `arte/blender/sdflib.py`: escultura por campos de distância (primitivas, união suave, dobras de tecido, surface
+    nets em numpy, redução, cel-shading pintado nos vértices com sombra projetada e linhas nos vincos).
+  - `arte/blender/char_hero.py`: um corpo esculpido (cabeça, tronco, braço, perna), cabelo em mechas facetadas, rosto
+    em polígonos, nuvem com rastro de fumaça, aura; variantes Gokun, Super Gokun, Mini Gokun (clássico e violeta).
+  - Saídas: `arte/export/gokun.fbx`, `super_gokun.fbx`, `mini_gokun_v2_classic.fbx`, `mini_gokun_v2_violet.fbx`,
+    `personagens.json` (peças, triângulos, juntas, escala); folhas em `arte/renders/<id>.png`.
+  - **v1 guardada**, como o dono pediu: `arte/blender/char_mini.py`, `arte/export/mini_gokun_classic.fbx`,
+    `mini_gokun_violet.fbx`, `arte/renders/mini_gokun_frente.png` e `_costas.png`.
+- **Studio:** o MCP voltou a ligar (place na Beta 1.9, modo Edit). **Nada foi aplicado no jogo.** O upload do primeiro
+  carro foi recusado: a pasta `arte\export` não está na lista de pastas aprovadas para upload (Assistant Settings →
+  MCP Permissions). Liberar os escopos não basta. O jogo é de um grupo (id 879120012): o upload usa `groupId`.
+- **Testado:** geração dos 4 personagens e conferência visual dos renders. **Não testado:** importação no Roblox, cor por
+  vértice no MeshPart, escala, desempenho (56 a 63 mil triângulos por personagem é pesado: falta a versão de jogo).
+- **Limites:** arte procedural, não escultura à mão; só o corpo do Gokun existe (faltam Kurilin, Vegita, Master Kamo,
+  Gohen e Majin Vegita). Modelos próprios, sem emblemas e sem nada baixado da web (decisão 27).
+- Mapa Cerebral atualizado (`cerebro/`): 9 imagens de referência, 4 folhas de resultado, notas de modelagem e sessão.
+
 ### 15/11/2026 — Beta 2.0, Etapa A: 21 carros de Fórmula no Blender · Claude Code (PC do dono, Fable 5.2)
 
 - Pedido do dono (Beta 2.0): carros de F1 modelados no Blender (3 por bioma, pintura do bioma, acessórios), Mini

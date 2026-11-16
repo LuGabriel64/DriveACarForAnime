@@ -28,6 +28,7 @@ era pedido antes e como é pedido agora.
 | Data | Tema | Nota | Aplicada em |
 |------|------|------|-------------|
 | 15/11/2026 | Carros de Fórmula 1 (8 imagens) | [Carros F1](2026-11-15_Beta2_Carros_F1.md) | `arte/` (21 carros, ainda fora do jogo) |
+| 16/11/2026 | Gokun adulto, Super e estilo cel-shading (9 imagens) | [Referências 16/11](2026-11-16_Gokun_Referencias_v2.md) | personagens v2: Gokun, Super Gokun, Mini Gokun (fora do jogo) |
 | 15/11/2026 | Personagens do bioma 1 (12 imagens) | [Personagens do bioma 1](2026-11-15_Beta2_Personagens_Bioma1.md) | estudo do Mini Gokun |
 
 ## Referências antigas (sem arquivo)

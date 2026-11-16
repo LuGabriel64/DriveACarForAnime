@@ -129,6 +129,16 @@ git diff --stat                                                  # o que mudou d
 
 No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses pacotes.
 
+## Estado em 16/11/2026
+
+- **Carros de Fórmula aprovados pelo dono.** Personagens refeitos por escultura SDF (`arte/blender/sdflib.py` e
+  `char_hero.py`): Gokun, Super Gokun e Mini Gokun (2 skins). A v1 em blocos (`char_mini.py`) fica guardada.
+  Como funciona: `cerebro/05_Modelagem/Personagens_SDF_Blender.md`.
+- **Nada da 2.0 está no place.** O MCP do Studio liga, mas o upload de assets é recusado até o dono aprovar a pasta
+  `arte\export` em Assistant Settings → MCP Permissions (lista de pastas, separada dos escopos).
+- O jogo pertence a um grupo (id 879120012): uploads usam `creationContext.creator = {groupId}`.
+- Personagens: `"D:/SteamLibrary/steamapps/common/Blender/blender.exe" --background --python arte/blender/char_hero.py -- <pasta arte>`.
+
 ## Estado em 15/11/2026
 
 - **Beta 2.0 em andamento.** Projeto e etapas em `planejamento/beta-2.0/README.md`. Feita só a Etapa A (arte):

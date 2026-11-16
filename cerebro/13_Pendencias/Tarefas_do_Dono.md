@@ -1,7 +1,7 @@
 ---
 title: Tarefas do dono
 date: 2026-11-14
-updated: 2026-11-15
+updated: 2026-11-16
 tags: [pendencias, dono]
 ---
 
@@ -10,10 +10,13 @@ tags: [pendencias, dono]
 Espelho do `estado-atual/03_tarefas_do_dono.md` do repositório. Marque `[x]` quando fizer.
 
 ## Agora (Beta 2.0)
-- [ ] **Abrir o Roblox Studio** no place (sem ele o Claude não aplica nada no jogo).
-- [ ] **Liberar o upload de assets**: Studio → Assistant Settings → MCP Permissions → escopos `asset:read` e `asset:write`, e aprovar a pasta `C:\Users\Lucas Gabriel\Documents\DriveACarForAnime\arte\export`.
-- [ ] **Olhar os carros** (`arte/renders/carros_f1.png`, ou a [nota de referência](../11_Referencias_Visuais/2026-11-15_Beta2_Carros_F1.md)) e dizer o que mudar.
-- [ ] **Decidir a fidelidade dos personagens** (ver [Beta 2.0](../07_Versoes/Beta_2.0.md) e a decisão 27).
+- [x] Abrir o Roblox Studio e religar o MCP (feito em 16/11).
+- [x] Olhar os carros (aprovados em 16/11).
+- [ ] **Aprovar a pasta de upload** (é isto que trava a importação): Studio → Assistant Settings → MCP Permissions →
+      lista de pastas aprovadas para upload → adicionar `C:\Users\Lucas Gabriel\Documents\DriveACarForAnime\arte\export`.
+      Liberar os escopos não basta: a pasta é uma lista à parte. Sem isso o Claude não consegue subir FBX nem PNG.
+- [ ] **Dizer se o estilo v2 dos personagens serve** ([resultado](../11_Referencias_Visuais/2026-11-16_Gokun_Referencias_v2.md)): rosto, músculos, sombra, nuvem.
+      Com o sim, o Claude faz o resto do elenco do bioma 1 no mesmo corpo.
 - [ ] (Opcional) Ligar o servidor MCP dentro do Blender.
 
 ## Antes (Beta 1.9)

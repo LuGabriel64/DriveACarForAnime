@@ -14,14 +14,14 @@ aliases: [Início, Home, Mapa Mental]
 > versões, erros e estratégias. O Claude Code lê e atualiza este vault **a cada pedido e a cada versão**.
 > Para ver como mapa mental, abra [Mapa_Cerebral.canvas](Mapa_Cerebral.canvas) ou o Graph View (Ctrl+G).
 
-## Estado agora (15/11/2026)
+## Estado agora (16/11/2026)
 
 | | |
 |---|---|
 | Versão no Studio | **Beta 1.9** (salva, versão 113 do place, Team Create) |
 | Versão publicada | Beta 1.8b |
-| Em andamento | **Beta 2.0** (carros de F1 em malha, piloto automático, combustível): Etapa A feita, nada no jogo ainda → [Beta 2.0](07_Versoes/Beta_2.0.md) |
-| Bloqueio principal | teste com 2 jogadores, músicas, publicar → [Tarefas do dono](13_Pendencias/Tarefas_do_Dono.md) |
+| Em andamento | **Beta 2.0**: carros aprovados (21 FBX), personagens v2 por escultura SDF (Gokun, Super, Mini); **nada no jogo ainda** → [Beta 2.0](07_Versoes/Beta_2.0.md) |
+| Bloqueio principal | aprovar a pasta `arte\export` para upload no Studio; teste com 2 jogadores, músicas, publicar → [Tarefas do dono](13_Pendencias/Tarefas_do_Dono.md) |
 | GitHub | `LuGabriel64/DriveACarForAnime`, `main`, tag `beta-1.9` |
 
 ## O jogo em uma frase
