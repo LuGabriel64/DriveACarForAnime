@@ -60,3 +60,8 @@ Relacionado: [Erros corrigidos](Erros_Corrigidos.md) · [Checklist antes de mexe
 - **CharacterRig:** `Rig.new` memoriza onde cada peça está na hora; criar o rig com o boneco já posado dobra a pose. Sempre criar em repouso.
 - **Pose sem tornozelo:** o pé gira com a canela. Para o pé ficar chato, coxa e canela têm de somar zero (`a` e `b`); a linha `GROUND` do Blender mostra a altura de cada pé.
 - **`save_place`:** a primeira chamada pode responder "Target is not reachable" e mesmo assim salvar; a segunda diz "NotNeeded". Confira antes de repetir.
+- **Importador de modelos do Roblox:** gira cada modelo num ângulo qualquer em volta do eixo vertical (vimos de 0,04° a 180°) e o coloca longe da origem. Desfaça o giro por uma referência do próprio modelo (as 4 rodas no carro; os dois braços no personagem), não pelo pivô.
+- **Cor por vértice do FBX funciona no MeshPart** (o `Color` da peça fica cinza e é ignorado). A pintura com textura do Body vira `TextureID`.
+- **Malha recém-inserida demora a aparecer:** a primeira captura de tela sai com peças faltando. Tire outra antes de concluir que deu errado.
+- **Achar a origem do Blender no Roblox:** o MeshPart fica no centro da caixa da malha; compare com `tools/art/fbx_bounds.py` e a diferença é o deslocamento.
+- **Git sem identidade:** o `git merge` também precisa de `-c user.name=... -c user.email=...`, não só o commit.

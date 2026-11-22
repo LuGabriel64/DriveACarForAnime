@@ -55,8 +55,8 @@ Os períodos das ondas dividem 4 s, então a animação fecha em laço.
 
 - **Testado:** poses e vídeo no Blender. No Studio (modo Edit), com um boneco de blocos (`Rig.DebugProxy`), 117 pontos
   de referência batem com a conta do Blender (diferença máxima de 0,0008 stud).
-- **Não testado:** com as malhas reais (ainda não importadas), no Play, no celular, no ViewportFrame, com muitos
-  personagens na tela.
+- **Testado em 22/11 com as malhas reais** (`ReplicatedStorage.Assets.Characters`, modo Edit): poses e pés no chão iguais ao Blender.
+- **Não testado:** no Play, no celular, no ViewportFrame, com muitos personagens na tela.
 
 ## Limites
 

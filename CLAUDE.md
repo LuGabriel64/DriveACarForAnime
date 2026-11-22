@@ -138,10 +138,13 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
 - **Animação de parado:** a pose mora em `IDLE` (`char_hero.py`); `node tools/art/anims_to_luau.js` gera
   `Shared.CharacterAnims`; `Shared.CharacterRig` anima por peças rígidas (só no cliente). Ver
   `cerebro/05_Modelagem/Animacao_Idle_CharacterRig.md`.
-- **No place (salvo, não publicado):** `Backups["Beta 1.9"]`, `Shared.CharacterRig` e `Shared.CharacterAnims` (ninguém
-  os chama ainda) e a entrada "Beta 2.0 (em andamento, parte 1)" no ChangeLog. `Config.Version` continua "Beta 1.9".
-- **Malhas fora do place:** o upload de assets é recusado até o dono aprovar a pasta `arte\export` em Assistant
-  Settings → MCP Permissions (lista de pastas, separada dos escopos). Não contornar copiando arquivos.
+- **No place (salvo, versão 129, não publicado):** `Backups["Beta 1.9"]`, `Shared.CharacterRig`, `Shared.CharacterAnims`
+  e `ReplicatedStorage.Assets` (ninguém os usa ainda); entradas "Beta 2.0 (em andamento, partes 1 e 2)" no ChangeLog.
+  `Config.Version` continua "Beta 1.9".
+- **Malhas no place (22/11):** 21 carros e 4 personagens em `ReplicatedStorage.Assets` (formato no `LEIA-ME` da pasta;
+  IDs em `arte/export/assets_roblox.json`). **O jogo ainda não os usa**: próximo passo é o `CarFactory`/garagem/vitrine.
+  A pasta `arte\export` está aprovada para upload; cada upload cria um asset permanente, então não reenvie o que já tem ID.
+  O importador gira o modelo: normalize pelo próprio modelo (rodas, braços).
 - O jogo pertence a um grupo (id 879120012): uploads usam `creationContext.creator = {groupId}`.
 - Personagens: `"D:/SteamLibrary/steamapps/common/Blender/blender.exe" --background --python arte/blender/char_hero.py -- <pasta arte>`.
 

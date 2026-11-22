@@ -33,6 +33,12 @@ Vídeo das três animações: [idle_personagens.mp4](imagens/2026-11-16_resultad
 
 Para comparar com a v2: ![Gokun v2](imagens/2026-11-16_resultado_gokun_v2.png)
 
+## No Roblox (22/11)
+
+![personagens no Roblox](imagens/2026-11-22_roblox_personagens_perto.jpg)
+
+A sombra pintada soma com a luz do Roblox, então ficam um pouco mais escuros que no Blender.
+
 ## O que mudou da v2 para a v3
 
 - **Rosto:** saiu a mandíbula quadrada; entrou rosto em V com bochecha, queixo pequeno, órbita rasa e grande.

@@ -38,6 +38,10 @@ Forma sem pintura: ![clay](imagens/2026-11-15_resultado_carros_clay_v1.png)
 **Antes × agora:** até a Beta 1.9 os carros eram montados com peças do Roblox pelo `CarFactory` (estilo
 voxel) e só o 1v1 tinha um corpo "f1" simples. Agora são malhas feitas no Blender, uma por carro.
 
+## No Roblox (22/11/2026)
+
+Os 21 carros importados, com pintura e cores por vértice: ![carros no Roblox](imagens/2026-11-22_roblox_carros.jpg)
+
 **Aplicada em:** `arte/` no repositório (ainda não importada no jogo).
 
 Relacionado: [Referências visuais](INDEX.md) · [Carros de F1 no Blender](../05_Modelagem/Carros_F1_Blender.md) · [Beta 2.0](../07_Versoes/Beta_2.0.md) · [Referências antigas](Referencias_Antigas.md)
