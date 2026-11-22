@@ -15,7 +15,7 @@ local Config = {}
 local C = Color3.fromRGB
 
 Config.GameName = "Drive A Car For Anime"
-Config.Version  = "Beta 1.9"
+Config.Version  = "Beta 2.0"
 
 -- ---------------------------------------------------------------- RECURSOS (liga/desliga sistemas)
 Config.Features = {
@@ -29,6 +29,9 @@ Config.Features = {
 	Shrines = false,      -- santuários pagos / Egg Shop (Beta 1.1) — GUARDADO. true = volta a funcionar
 	-- Beta 1.4: dock flutuante (GARAGE / INVENTORY / PLAY / SHOP / GIFT) no lugar do menu lateral e do botão RACE.
 	LobbyDock = true,     -- false = volta o menu lateral antigo do HUD + botão RACE (RaceUI)
+	-- Beta 2.0: carros e personagens de MALHA (ReplicatedStorage.Assets, feitos no Blender). false = volta tudo para os
+	-- modelos por peças (CarFactory / AnimeModelFactory antigos) sem mexer em mais nada.
+	MeshArt = true,
 }
 
 -- ---------------------------------------------------------------- DADOS
@@ -58,6 +61,12 @@ Config.Credits = {
 	{ Role = "Special Thanks",      Names = { "Every beta tester!" } },
 }
 Config.Updates = {
+	{ Version = "Beta 2.0", Date = "Nov 22, 2026", Notes = {
+		"🏎️ ALL-NEW CARS: every car is now a real Formula racer with its own biome paint job",
+		"🔥 NEW SECRET in Azure Planet: Super Gokun, with a golden aura!",
+		"☁️ NEW EPIC in Azure Planet: Mini Gokun, riding his flying cloud",
+		"✨ Gokun has a brand-new 3D model, and the new fighters move in their own idle poses",
+	} },
 	{ Version = "Beta 1.9", Date = "Nov 13, 2026", Notes = {
 		"🏁 NEW: 1v1 RACES! Challenge a player, vote the map and race in Formula cars — the track collapses from the start!",
 		"⚔️ NEW: ANIME BATTLES! Pick your strongest fighter, watch the ULTs fly and win rewards",
@@ -313,6 +322,15 @@ Config.Cars = {
 	{ Id = "neon_phantom",    Name = "Neon Phantom",     Tier = 6, Price = 1000000000,  MaxSpeed = 390, Accel = 240, Turn = 2.25, Grip = 9.5,  Color = C(170, 70, 255),  Accent = C(70, 240, 255) },
 	{ Id = "celestial_comet", Name = "Celestial Comet",  Tier = 7, Price = 15000000000, MaxSpeed = 520, Accel = 300, Turn = 2.30, Grip = 10.0, Color = C(255, 236, 150), Accent = C(255, 255, 255) },
 }
+-- Beta 2.0: malha de cada carro (ReplicatedStorage.Assets.Cars, classe A do bioma do tier). Os Ids, preços e números
+-- NÃO mudam (saves continuam válidos). Sem Features.MeshArt ou sem o asset, o CarFactory usa a carroceria antiga.
+Config.CarMeshes = {
+	starter = "warrior_a", sakura_gt = "sakura_a", dune_racer = "dunes_a", frost_runner = "tundra_a",
+	magma_reaper = "volcano_a", neon_phantom = "city_a", celestial_comet = "celestial_a",
+}
+if Config.Features.MeshArt then
+	for _, c in ipairs(Config.Cars) do c.Mesh = c.Mesh or Config.CarMeshes[c.Id] end
+end
 -- ---------------------------------------------------------------- PISTA (Beta 1.6)
 -- Liga/desliga peças de obstáculo no WorldBuilder.BuildBiome (o sorteio dos obstáculos não muda).
 -- Desafios novos: WorldBuilder.BuildChallenges(i) — passarelas elevadas, pads de lentidão e pontes temáticas.
@@ -499,7 +517,7 @@ Config.Animes = {
 	-- Para voltar aos originais: marque estes como Legacy e tire o Legacy do bloco "Beta 1.3" abaixo.
 	-- Beta 1.7: NOMES levemente alterados a pedido do dono (Gokun, Kurilin, Vegita, Master Kamo, Gohen, Cello, Pikollo,
 	-- Majin Bubu). Os Ids (goku, kuririn...) NÃO mudaram => saves continuam válidos, sem migração.
-	A("goku",    "Gokun",         "warrior", "Common",    3,     { Skin = S1, Hair = C(20,20,26), Style = "spiky", Eyes = C(25,25,35), Outfit = C(255,128,30), Outfit2 = C(255,128,30), Acc = {"belt"}, AccColor = C(40,80,200), BeltColor = C(40,80,200), Under = C(40,80,200), Sleeve = C(40,80,200), Wrist = C(40,80,200), Shoe = C(40,70,170), BootTrim = C(210,40,40), Gi = true, Expression = "confident" }),
+	A("goku",    "Gokun",         "warrior", "Common",    3,     { Skin = S1, Hair = C(20,20,26), Style = "spiky", Eyes = C(25,25,35), Outfit = C(255,128,30), Outfit2 = C(255,128,30), Acc = {"belt"}, AccColor = C(40,80,200), BeltColor = C(40,80,200), Under = C(40,80,200), Sleeve = C(40,80,200), Wrist = C(40,80,200), Shoe = C(40,70,170), BootTrim = C(210,40,40), Gi = true, Expression = "confident", Mesh = "gokun" }),
 	A("kuririn", "Kurilin",       "warrior", "Common",    4,     { Bald = true, Skin = S1, Hair = S1, Style = "short", Eyes = C(25,25,35), Outfit = C(255,128,30), Outfit2 = C(255,128,30), Acc = {"belt"}, AccColor = C(40,80,200), BeltColor = C(40,80,200), Under = C(40,80,200), Sleeve = C(255,128,30), Wrist = C(40,80,200), Shoe = C(40,70,170), Gi = true, Expression = "happy" }),
 	A("vegeta",  "Vegita",        "warrior", "Uncommon",  9,     { Skin = S1, Hair = C(20,20,26), Style = "flame", Eyes = C(25,25,35), Outfit = C(245,245,245), Outfit2 = C(30,40,140), Acc = {"mecha"}, AccColor = C(230,190,70), Under = C(30,40,140), Sleeve = C(30,40,140), LongSleeve = true, Gloves = C(250,250,250), Shoe = C(250,250,250), BootTrim = C(230,190,70), Expression = "angry" }),
 	A("kame",    "Master Kamo",   "warrior", "Rare",      28,    { Bald = true, Skin = S2, Hair = S2, Style = "short", Eyes = C(25,25,35), Outfit = C(235,90,40), Outfit2 = C(40,90,200), Acc = {"visor","beard"}, AccColor = C(230,40,50), Under = C(255,230,170), Sleeve = C(235,90,40), Shoe = C(140,90,50), Expression = "happy", Brow = C(250,250,250) }),
@@ -507,6 +525,10 @@ Config.Animes = {
 	A("cell",    "Cello",         "warrior", "Legendary", 380,   { Bald = true, Skin = C(235,230,240), Hair = C(25,25,32), Style = "short", Eyes = C(170,60,200), Outfit = C(150,220,60), Outfit2 = C(150,220,60), Acc = {"crest","wings"}, AccColor = C(25,25,32), Under = C(25,25,32), Sleeve = C(150,220,60), LongSleeve = true, Gloves = C(235,230,240), Shoe = C(25,25,32), Expression = "angry", Brow = C(25,25,32) }),
 	A("piccolo", "Pikollo",       "warrior", "Mythic",    2200,  { Bald = true, Skin = C(110,200,90), Hair = C(110,200,90), Style = "short", Eyes = C(25,25,35), Outfit = C(60,40,140), Outfit2 = C(60,40,140), Acc = {"turban","antenna","cape","belt"}, AccColor = C(245,245,245), BeltColor = C(70,110,220), Under = C(40,30,90), Sleeve = C(60,40,140), Wrist = C(200,60,60), Shoe = C(120,80,50), Gi = true, Expression = "angry", Brow = C(60,120,50) }),
 	A("buu",     "Majin Bubu",    "warrior", "Secret",    12000, { Bald = true, Skin = C(255,165,190), Hair = C(255,165,190), Style = "short", Eyes = C(25,25,35), Outfit = C(255,165,190), Outfit2 = C(245,240,225), Acc = {"headtail","belt","cape"}, AccColor = C(120,40,150), BeltColor = C(25,25,32), Under = C(120,40,150), Sleeve = C(255,165,190), Gloves = C(250,250,250), Shoe = C(240,200,60), Expression = "happy", Brow = C(30,30,40) }),
+	-- Beta 2.0 (pedido do dono, 15/11): dois novos no bioma 1, com MALHA (Look.Mesh = ReplicatedStorage.Assets.Characters).
+	-- O resto do Look é o modelo por peças, usado só se a malha faltar (ou Features.MeshArt = false).
+	A("super_goku", "Super Gokun", "warrior", "Secret",    12000, { Skin = S1, Hair = C(255,214,80), Style = "flame", Eyes = C(40,190,170), Outfit = C(255,128,30), Outfit2 = C(255,128,30), Acc = {"belt"}, AccColor = C(40,80,200), BeltColor = C(40,80,200), Under = C(40,80,200), Sleeve = C(40,80,200), Wrist = C(40,80,200), Shoe = C(40,70,170), BootTrim = C(210,40,40), Gi = true, Expression = "angry", Mesh = "super_gokun" }),
+	A("mini_goku",  "Mini Gokun",  "warrior", "Epic",      100,   { Skin = S1, Hair = C(20,20,26), Style = "spiky", Eyes = C(25,25,35), Outfit = C(255,128,30), Outfit2 = C(255,128,30), Acc = {"belt","tail","staff"}, AccColor = C(40,80,200), BeltColor = C(40,80,200), Under = C(40,80,200), Sleeve = C(40,80,200), Wrist = C(40,80,200), Shoe = C(40,70,170), BootTrim = C(210,40,40), Gi = true, Expression = "happy", Mesh = "mini_gokun_classic", MeshScale = 0.78 }),
 	-- ===== 1. Azure Planet (Id "warrior") — Beta 1.3: 8 lutadores ORIGINAIS (2 comuns, como pediu o dono).
 	-- Papéis por raridade: lutador novato e monge (Common) | príncipe guerreiro (Uncommon) | velho mestre (Rare) |
 	-- aprendiz da tempestade (Epic) | bio-titã (Legendary) | sábio alienígena (Mythic) | criatura de goma do caos (Secret).

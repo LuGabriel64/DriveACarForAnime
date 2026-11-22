@@ -10,7 +10,14 @@
 	Beta 1.9: cfg.Body == "f1" (Config.F1Cars) => carroceria de FÓRMULA 1 (corrida 1v1): baixa, bico, asa dianteira
 	  e traseira, entradas laterais, halo e rodas expostas. O Chassis, o Seat e as rodas (mesmos WheelPoints) são
 	  IGUAIS aos do carro normal, então a física do DriveController não muda em nada.
+
+	Beta 2.0: cfg.Mesh = id de ReplicatedStorage.Assets.Cars (21 carros de Fórmula feitos no Blender, arte/ no GitHub)
+	  => a carroceria é a MALHA (Body, Trim, Glow, Glass, Acc, Wheel_FL/FR/RL/RR). O Chassis, o Seat (invisível) e os
+	  WheelPoints da física continuam os mesmos; as rodas da malha giram pelas Welds "Wheel_XX" (Client.CarVisuals).
+	  Sem a malha (asset faltando), o carro cai na carroceria antiga por peças: nada quebra.
+	  As Welds das rodas agora usam C0 alinhado ao chassi + C1 (a roda da malha tem eixos quaisquer).
 ]]
+local RS = game:GetService("ReplicatedStorage")
 local CarFactory = {}
 
 CarFactory.WheelRadius = 1.8
@@ -21,6 +28,17 @@ CarFactory.WheelPoints = {
 CarFactory.WheelList = { "FL", "FR", "RL", "RR" }
 CarFactory.Rest = CarFactory.WheelRadius + 1.0     -- distância (centro da roda->chão) com mola relaxada
 CarFactory.RayLength = CarFactory.Rest + 0.8
+
+-- Beta 2.0: carro de malha. Altura do chão (base das rodas da malha) em relação ao centro do Chassis, e o assento.
+CarFactory.MeshGroundY = -2.2 -- medido no Play (22/11): o Chassis parado fica 2,2 studs acima do chão
+CarFactory.MeshSeat = Vector3.new(0, -1.15, -0.1)
+
+function CarFactory.MeshTemplate(cfg)
+	if not (cfg and cfg.Mesh) then return nil end
+	local assets = RS:FindFirstChild("Assets")
+	local cars = assets and assets:FindFirstChild("Cars")
+	return cars and cars:FindFirstChild(cfg.Mesh)
+end
 
 function CarFactory.Build(cfg, preview)
 	local model = Instance.new("Model")
@@ -51,7 +69,23 @@ function CarFactory.Build(cfg, preview)
 	model.PrimaryPart = chassis
 
 	local seatPos = Vector3.new(0, 1.7, 1.6)
-	if cfg.Body == "f1" then
+	local tpl = CarFactory.MeshTemplate(cfg)
+	if tpl then
+		-- Beta 2.0: carroceria de MALHA. O Root da malha (no chão, frente em -Z) vai para MeshGroundY abaixo do Chassis;
+		-- as peças viram filhas diretas do carro (mesmos nomes do FBX).
+		local mesh = tpl:Clone()
+		mesh:PivotTo(CFrame.new(0, CarFactory.MeshGroundY, 0))
+		for _, p in ipairs(mesh:GetDescendants()) do
+			if p:IsA("BasePart") and p.Name ~= "Root" then
+				p.Anchored = preview and true or false
+				p.CanCollide = false; p.CanQuery = false; p.CanTouch = false; p.Massless = true
+				p.Parent = model
+			end
+		end
+		mesh:Destroy()
+		seatPos = cfg.SeatPos or CarFactory.MeshSeat
+		model:SetAttribute("Mesh", cfg.Mesh)
+	elseif cfg.Body == "f1" then
 		-- Beta 1.9: carroceria de Fórmula 1 (peças só visuais; frente = -Z)
 		seatPos = Vector3.new(0, 0.2, 0.9)
 		local red = Color3.fromRGB(255, 50, 60)
@@ -111,18 +145,20 @@ function CarFactory.Build(cfg, preview)
 	-- Assento (VehicleSeat lê as teclas/analógico/toque automaticamente)
 	local seat
 	if preview then
-		seat = part("Seat", Vector3.new(2.8, 0.6, 2.8), seatPos, dark)
+		seat = part("Seat", Vector3.new(2.8, 0.6, 2.8), seatPos, dark, tpl and { Transparency = 1 } or nil)
 	else
 		seat = Instance.new("VehicleSeat")
 		seat.Name = "Seat"; seat.Size = Vector3.new(2.8, 0.6, 2.8)
 		seat.CFrame = CFrame.new(seatPos); seat.Color = dark; seat.Material = Enum.Material.SmoothPlastic
 		seat.MaxSpeed = 0; seat.Torque = 0; seat.TurnSpeed = 0   -- desliga a física legada; usamos o DriveController
 		seat.CanCollide = false; seat.Massless = true
+		if tpl then seat.Transparency = 1 end
 		seat.Parent = model
 	end
 
 	-- Rodas (somente visuais; a Weld permite girar/esterçar no cliente)
 	local wheels = {}
+	if not tpl then -- (o carro de malha já trouxe as rodas Wheel_XX)
 	for _, key in ipairs(CarFactory.WheelList) do
 		local pos = CarFactory.WheelPoints[key]
 		local w = part("Wheel_" .. key, Vector3.new(1.7, CarFactory.WheelRadius * 2, CarFactory.WheelRadius * 2), pos, dark, {
@@ -130,6 +166,7 @@ function CarFactory.Build(cfg, preview)
 		})
 		part("Hub_" .. key, Vector3.new(1.8, 1.6, 1.6), pos, accent, { Shape = Enum.PartType.Cylinder, Name = "Hub_" .. key })
 		wheels[key] = w
+	end
 	end
 
 	if not preview then
@@ -141,7 +178,10 @@ function CarFactory.Build(cfg, preview)
 				if isWheel then
 					local weld = Instance.new("Weld")
 					weld.Name = p.Name; weld.Part0 = chassis; weld.Part1 = p
-					weld.C0 = chassis.CFrame:Inverse() * p.CFrame
+					-- Beta 2.0: C0 alinhado ao chassi (o CarVisuals gira em volta do X do C0) + C1 com a orientação da peça
+					local c0 = CFrame.new((chassis.CFrame:Inverse() * p.CFrame).Position)
+					weld.C0 = c0
+					weld.C1 = p.CFrame:Inverse() * chassis.CFrame * c0
 					weld.Parent = p
 				elseif isHub then
 					local key = p.Name:sub(5)

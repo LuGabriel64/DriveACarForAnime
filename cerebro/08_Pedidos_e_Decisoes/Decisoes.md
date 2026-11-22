@@ -49,5 +49,10 @@ Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** sã
 | 37 | Versões antigas de arte vão para `arte/arquivo/<nome>_vN/`; `arte/export/` só tem o que é atual | o dono pediu para guardar; a pasta de upload fica limpa | `arte/arquivo/` |
 | 38 | Malhas importadas ficam em `ReplicatedStorage.Assets` (não no Workspace), **sem PackageLink**, com `Root` no chão e frente em -Z | o importador gira o modelo; a correção só vale na cópia local; os sistemas clonam de um lugar só | `ReplicatedStorage.Assets.LEIA-ME` |
 | 39 | Personagens no jogo usam a **versão de jogo** (`*_v3_game.fbx`) | 24 a 27 mil triângulos cabem no celular; a vitrine (66 a 73 mil) fica só para render | `arte/export/assets_roblox.json` |
+| 40 | A Beta 2.0 sai em partes: **2.0** = malhas + animação; 2.0b combustível; 2.0c piloto automático; 2.0d primeira pessoa + 21 carros | entregar o que já está testado sem esperar o resto; cada parte com backup e tag | `CHANGELOG.md` |
+| 41 | Os 7 carros atuais usam a malha da **classe A** do bioma; os 5 F1 do 1v1 usam B/C; Ids e números iguais | save e economia não mudam; as outras malhas ficam para a loja de 21 carros | `Config.CarMeshes`, `Config.F1Meshes` |
+| 42 | Super Gokun = **Secret** ($12.000/s) e Mini Gokun = **Epic** ($100/s) no bioma 1, dividindo o sorteio com Majin Bubu e Gohen | pedido de 15/11; renda igual à da raridade | `Config.Animes` |
+| 43 | Tudo da malha atrás de `Config.Features.MeshArt` | regra do projeto: sistema antigo guardado, volta com uma chave | `Shared.Config` |
+| 44 | Peças de malha com `Color` **branco** | a cor da peça multiplica a cor por vértice; branco = cor do Blender; preto = silhueta; mutação = tinta | `ReplicatedStorage.Assets` |
 
 Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

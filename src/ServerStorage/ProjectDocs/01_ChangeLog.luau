@@ -4,6 +4,26 @@
 ]]
 return {
 	{
+		Date = "2026-11-22", Author = "Claude Code (Lu, via MCP; Opus 5.5)", Version = "Beta 2.0",
+		Summary = "Beta 2.0 APLICADA AO JOGO (pedido do dono: 'Pode fazer e APLICAR AO JOGO'): todos os carros (os 7 da corrida solo e os 5 F1 do 1v1) passam a usar as MALHAS de Fórmula feitas no Blender; Gokun ganha a malha nova; dois personagens novos no bioma 1 — Super Gokun (Secret, com aura) e Mini Gokun (Epic, na nuvem); os personagens de malha se mexem na pose de parado (guarda de luta, carregando energia, acenando na nuvem). Física, Ids, preços e save NÃO mudam. Tudo atrás de Config.Features.MeshArt (false = volta aos modelos por peças). Ainda NÃO entrou: combustível, piloto automático/skill-checks, primeira pessoa, os 21 carros na loja e o resto do elenco em malha (ficam para 2.0b+).",
+		Files = {
+			"ReplicatedStorage.Shared.Config: Version 'Beta 2.0', Features.MeshArt, Updates (Beta 2.0), Config.CarMeshes + Mesh em cada carro, goku.Look.Mesh, NOVOS super_goku (Secret) e mini_goku (Epic)",
+			"ReplicatedStorage.Shared.ConfigBeta19: Config.F1Meshes + Mesh em cada F1; Battle.Fighters super_goku (Champion, 'Golden Fury') e mini_goku (Speedster, 'Cloud Rush')",
+			"ReplicatedStorage.Shared.CarFactory: carroceria de malha (cfg.Mesh), MeshGroundY = -2.2, MeshSeat, Weld das rodas com C0 alinhado + C1",
+			"ReplicatedStorage.Shared.AnimeModelFactory: Look.Mesh => clona a malha (mutação, Secret, Size, MeshScale, atributo AnimId); senão, modelo por peças",
+			"ReplicatedStorage.Shared.CharacterRig: escala do modelo, funciona fora do Workspace, pcall no laço",
+			"StarterPlayer.StarterPlayerScripts.Client.CharacterAnimator (NOVO) + ClientMain (ORDER)",
+			"ReplicatedStorage.Assets: Color branco em todas as MeshParts (a cor da peça multiplica a cor por vértice)",
+			"Backup: ServerStorage.Backups['Beta 1.9'] (feito em 16/11, antes de qualquer mudança da 2.0 nos scripts)",
+		},
+		Notes = {
+			"Testado em Play (1 jogador): sem erros no Output; badge e rodapé 'Beta 2.0'; vitrine do lobby com o F1 novo; corrida solo com o carro de malha (warrior_a): sentado no cockpit, acelera até 69/70 km/h, rodas giram e esterçam; carro estacionado na garagem com a malha; personagens montados pelo AnimeModelFactory no servidor (Gokun, Super, Mini, Gold, Diamond) aparecem e são animados no cliente com StreamingEnabled; Kurilin (peças) continua igual.",
+			"Testado em Edit: sintaxe de todos os scripts; Config novo (pool do bioma 1: Epic = gohan + mini_goku, Secret = buu + super_goku); pose fora do Workspace (ícones).",
+			"NÃO TESTADO: ovo chocando os novos de verdade, ícones do inventário/roleta na tela, batalha com os novos, F1 no 1v1 (precisa de 2 jogadores), celular, muitos jogadores. O avatar sentado e o capacete da malha se sobrepõem um pouco.",
+			"Salvo no Studio (Team Create), NÃO publicado.",
+		},
+	},
+	{
 		Date = "2026-11-22", Author = "Claude Code (Lu, via MCP; Opus 5.5)", Version = "Beta 2.0 (em andamento, parte 2)",
 		Summary = "Malhas da Beta 2.0 no place: os 21 carros de Fórmula e os 4 personagens v3 (Gokun, Super Gokun, Mini Gokun clássico e violeta, versão de jogo) foram enviados ao Roblox (grupo 879120012, 25 assets, todos aprovados) e guardados em ReplicatedStorage.Assets, normalizados (frente em -Z, Root no chão, ancorados). O jogo ainda NÃO usa esses modelos: CarFactory, garagem e vitrine continuam como na 1.9. Config.Version continua 'Beta 1.9'.",
 		Files = {

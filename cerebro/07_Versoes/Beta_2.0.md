@@ -1,10 +1,10 @@
 ---
-title: Beta 2.0 — carros de F1 em malha, piloto automático, combustível (em andamento)
+title: Beta 2.0 — carros de F1 em malha e personagens animados (aplicada; resto em 2.0b+)
 date: 2026-11-15
 updated: 2026-11-22
 tags: [versao, beta-2-0, em-andamento]
 autor: Claude Code (Lu; Fable 5.2)
-status: Etapa A feita (arte); nada aplicado no jogo
+status: aplicada e salva no place (versão 132, 22/11), não publicada; combustível/piloto/primeira pessoa ficam para 2.0b+
 ---
 
 # Beta 2.0 (em andamento desde 15/11/2026)
@@ -32,6 +32,11 @@ Mini Gokun em 2 skins, 20 imagens de referência guardadas com nota.
 **Feito em 16/11 (segundo pedido):** estilo aprovado com ajustes. [v3](../11_Referencias_Visuais/2026-11-16_Gokun_Cabeca_v3.md): rosto fino de anime, pescoço, franja, mãos com dedos, cotovelo e joelho articulados; versão de jogo (24 a 27 mil triângulos); [animação de parado](../05_Modelagem/Animacao_Idle_CharacterRig.md) dos três (guarda de luta, carregando energia, mirim na nuvem). **No place:** backup `Backups["Beta 1.9"]`, `Shared.CharacterRig` e `Shared.CharacterAnims` (sem uso ainda), entrada no ChangeLog, salvo. Versões antigas em `arte/arquivo/`. O upload continua recusado.
 
 **Feito em 22/11:** upload liberado; 25 assets enviados (grupo 879120012) e guardados normalizados em `ReplicatedStorage.Assets`; animação testada com as malhas → [sessão](../15_Registro_de_Sessoes/2026-11-22_Beta_2.0_Malhas_no_Roblox.md).
+
+**APLICADA AO JOGO em 22/11 (place versão 132, não publicada):** todos os carros em malha, Gokun em malha, novos Super Gokun (Secret) e Mini Gokun (Epic), personagens animados (`Client.CharacterAnimator`). Testado no Play: corrida com o carro novo (69/70 km/h, rodas girando), garagem, vitrine, personagens animados. Não testado: ovo chocando os novos, ícones, batalha, 1v1 com 2 jogadores, celular. Lista completa no `CHANGELOG.md` do repositório. Próximas: 2.0b combustível, 2.0c piloto automático, 2.0d primeira pessoa + 21 carros.
+
+![corrida com o carro novo](../11_Referencias_Visuais/imagens/2026-11-22_jogo_corrida_carro_novo.jpg)
+![garagem com os personagens novos](../11_Referencias_Visuais/imagens/2026-11-22_jogo_garagem_personagens.jpg)
 
 **Testado:** geração e render (conferidos na imagem); vídeo das animações; a conta do `CharacterRig` no Studio contra o Blender (boneco de blocos, modo Edit). **Não testado:** malhas no Roblox, animação com as malhas reais, Play, celular.
 

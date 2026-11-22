@@ -128,6 +128,11 @@ return function(Config)
 	}
 	Config.F1ById = {}
 	for _, c in ipairs(Config.F1Cars) do Config.F1ById[c.Id] = c end
+	-- Beta 2.0: malha de cada F1 (ReplicatedStorage.Assets.Cars). Ids e números não mudam.
+	Config.F1Meshes = { f1_rookie = "warrior_b", f1_viper = "city_b", f1_storm = "tundra_b", f1_phantom = "volcano_c", f1_apex = "celestial_c" }
+	if Config.Features.MeshArt then
+		for _, c in ipairs(Config.F1Cars) do c.Mesh = c.Mesh or Config.F1Meshes[c.Id] end
+	end
 
 	-- ------------------------------------------------------------ BATALHA DE ANIME
 	Config.Versus.Battle = {
@@ -216,6 +221,8 @@ return function(Config)
 			cell    = { Class = "Champion",  Ult = "Perfect Nova",      Fx = "light" },
 			piccolo = { Class = "Guardian",  Ult = "Spiral Piercer",    Fx = "beam" },
 			buu     = { Class = "Guardian",  Ult = "Candy Chaos",       Fx = "meteor" },
+			super_goku = { Class = "Champion", Ult = "Golden Fury",      Fx = "light" },   -- Beta 2.0
+			mini_goku  = { Class = "Speedster", Ult = "Cloud Rush",      Fx = "storm" },   -- Beta 2.0
 			-- 2. Sakura Valley
 			hanami  = { Class = "Speedster", Ult = "Petal Dash",        Fx = "blossom" },
 			kiri    = { Class = "Speedster", Ult = "Fox Fire",          Fx = "flame" },

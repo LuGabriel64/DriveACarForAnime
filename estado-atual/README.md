@@ -8,9 +8,9 @@
 
 A arte está em `arte/`: 21 carros de Fórmula (aprovados pelo dono) e os personagens **v3** (Gokun, Super Gokun, Mini
 Gokun em 2 skins; estilo aprovado), com versão de jogo e animação de parado (`arte/renders/idle_personagens.mp4`).
-**No place (22/11):** o motor de animação (`Shared.CharacterRig` + `Shared.CharacterAnims`), o backup `Backups["Beta 1.9"]`
-e as malhas em `ReplicatedStorage.Assets` (21 carros, 4 personagens). **O jogo ainda não usa nada disso**: o próximo passo
-é ligar as malhas ao `CarFactory`, à garagem e à vitrine. Projeto, etapas e o que
+**No place (22/11): Beta 2.0 aplicada e salva (versão 132), não publicada.** Carros em malha, Gokun em malha, novos
+Super Gokun e Mini Gokun, personagens animados. Falta: publicar, teste com 2 jogadores (F1 no 1v1) e o resto da 2.0
+(combustível, piloto automático, primeira pessoa, 21 carros na loja). Ver `CHANGELOG.md`. Projeto, etapas e o que
 falta em `planejamento/beta-2.0/README.md`. O texto abaixo descreve a 1.9, que é o que está no Studio.
 
 ## Em uma frase
