@@ -4,6 +4,21 @@
 ]]
 return {
 	{
+		Date = "2026-11-22", Author = "Claude Code (Lu, via MCP; Opus 5.5)", Version = "Beta 2.0 (em andamento, parte 2)",
+		Summary = "Malhas da Beta 2.0 no place: os 21 carros de Fórmula e os 4 personagens v3 (Gokun, Super Gokun, Mini Gokun clássico e violeta, versão de jogo) foram enviados ao Roblox (grupo 879120012, 25 assets, todos aprovados) e guardados em ReplicatedStorage.Assets, normalizados (frente em -Z, Root no chão, ancorados). O jogo ainda NÃO usa esses modelos: CarFactory, garagem e vitrine continuam como na 1.9. Config.Version continua 'Beta 1.9'.",
+		Files = {
+			"ReplicatedStorage.Assets (NOVO): LEIA-ME, Cars/<21 ids>, Characters/<gokun, super_gokun, mini_gokun_classic, mini_gokun_violet>",
+			"IDs dos assets: arte/export/assets_roblox.json no GitHub (e o atributo AssetId de cada Model)",
+		},
+		Notes = {
+			"Testado em modo Edit: os 21 carros com pintura, cores por vértice e rodas certas, todos virados para o mesmo lado; os 3 personagens animados pelo Shared.CharacterRig com as malhas reais (poses certas, pés no chão).",
+			"O importador do Roblox gira cada modelo num ângulo qualquer em volta do eixo vertical (de 0,04° a 180°): o giro foi desfeito pelas rodas (carros) e pelos braços (personagens). As cópias aqui não são pacotes.",
+			"Iluminação: a sombra já vem pintada na malha e o Roblox soma a dele; os personagens ficam um pouco mais escuros que no Blender.",
+			"NÃO TESTADO: Play, celular, física dos carros novos (ainda não ligados ao CarFactory), desempenho com muitos personagens.",
+			"Salvo no Studio (Team Create), NÃO publicado.",
+		},
+	},
+	{
 		Date = "2026-11-16", Author = "Claude Code (Lu, via MCP; Fable 5.2)", Version = "Beta 2.0 (em andamento, parte 1)",
 		Summary = "Primeira peça da Beta 2.0 no place: o motor de animação dos personagens de MALHA (peças rígidas) e as animações de parado do Gokun (guarda de luta), do Super Gokun (carregando energia) e do Mini Gokun (na nuvem, acenando). Ninguém usa os módulos ainda: as malhas (arte/export/*_v3_game.fbx no GitHub) NÃO foram importadas porque a pasta de upload não está aprovada em Assistant Settings > MCP Permissions. Config.Version continua 'Beta 1.9' até a 2.0 ficar jogável.",
 		Files = {

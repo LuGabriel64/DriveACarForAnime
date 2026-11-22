@@ -12,7 +12,7 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
-| Beta 2.0 | em andamento (16/11/2026) | 🎨 arte dos 21 carros e de 4 personagens pronta; no place só o motor de animação (`Shared.CharacterRig`), sem uso ainda | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
+| Beta 2.0 | em andamento (22/11/2026) | 🎨 21 carros e 4 personagens **importados** no place (`ReplicatedStorage.Assets`) + motor de animação; o jogo ainda não os usa | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
 | [Beta 1.9](#jogo) | 13/11/2026 | 💾 salva no Studio (versão 113), falta teste com 2 jogadores e publicar | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
 | [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
 | [Beta 1.8c](#beta-18c--11112026) | 11/11/2026 | ✅ | Só documentação dentro do place (`04_EstadoAtual`) |
@@ -38,6 +38,24 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 ---
 
 ## Repositório
+
+### 22/11/2026 — Beta 2.0: 21 carros e 4 personagens importados no Roblox · Claude Code (PC do dono, Opus 5.5)
+
+- Pedido do dono: "Tente novamente" (a pasta de upload foi aprovada).
+- **Upload (Open Cloud, grupo 879120012):** 25 assets, todos aprovados: os 21 carros (`arte/export/<id>.fbx`) e os
+  4 personagens de jogo (`arte/export/*_v3_game.fbx`). IDs em `arte/export/assets_roblox.json`.
+- **Studio (salvo, versão 129, não publicado):**
+  - `ReplicatedStorage.Assets` (novo): `LEIA-ME`, `Cars/<21 ids>`, `Characters/<gokun, super_gokun, mini_gokun_classic,
+    mini_gokun_violet>`. Cada modelo: giro do importador desfeito, `Root` no chão (carros: meio das 4 rodas; personagens:
+    pés), frente em -Z, ancorado, sem PackageLink, atributos `AssetId`, `DisplayName` (+ `AnimId` nos personagens).
+  - Entrada "Beta 2.0 (em andamento, parte 2)" no `01_ChangeLog`. Espelho: `src/ReplicatedStorage/Assets/LEIA-ME.luau`.
+  - Nenhum script mudou; o jogo ainda não usa os modelos. `Config.Version` continua "Beta 1.9".
+- Ferramenta nova: `tools/art/fbx_bounds.py` (caixa de cada objeto do FBX, para achar a origem do Blender no Roblox).
+- Capturas do Studio em `arte/renders/roblox/`.
+- Também entrou no `main` o commit dos personagens v3 + `CharacterRig` (16/11), que tinha ficado só no branch.
+- **Testado (modo Edit):** os 21 carros (pintura, cores por vértice, rodas, todos virados para o mesmo lado); os 3
+  personagens animados pelo `CharacterRig` com as malhas reais. **Não testado:** Play, celular, física dos carros novos
+  (ainda não ligados ao `CarFactory`), desempenho com muitos personagens.
 
 ### 16/11/2026 (2) — Beta 2.0: personagens v3 (rosto, mãos), animação de parado e `Shared.CharacterRig` no place · Claude Code (PC do dono, Fable 5.2)
 

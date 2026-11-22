@@ -47,5 +47,7 @@ Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** sã
 | 35 | A pose mora num lugar só (`IDLE` em `char_hero.py`); `CharacterAnims` é arquivo **gerado** | evitar duas versões da mesma animação | `tools/art/anims_to_luau.js` |
 | 36 | Duas densidades por personagem: vitrine (66 a 73 mil triângulos) e jogo (24 a 27 mil) | o jogo roda em celular; a vitrine serve para render e loja | `lod=0.35` |
 | 37 | Versões antigas de arte vão para `arte/arquivo/<nome>_vN/`; `arte/export/` só tem o que é atual | o dono pediu para guardar; a pasta de upload fica limpa | `arte/arquivo/` |
+| 38 | Malhas importadas ficam em `ReplicatedStorage.Assets` (não no Workspace), **sem PackageLink**, com `Root` no chão e frente em -Z | o importador gira o modelo; a correção só vale na cópia local; os sistemas clonam de um lugar só | `ReplicatedStorage.Assets.LEIA-ME` |
+| 39 | Personagens no jogo usam a **versão de jogo** (`*_v3_game.fbx`) | 24 a 27 mil triângulos cabem no celular; a vitrine (66 a 73 mil) fica só para render | `arte/export/assets_roblox.json` |
 
 Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

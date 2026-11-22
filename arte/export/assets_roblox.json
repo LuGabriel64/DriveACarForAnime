@@ -1,0 +1,32 @@
+{
+ "_leia": "IDs dos assets no Roblox (grupo 879120012), enviados pelo Claude Code via Open Cloud em 22/11/2026. Todos aprovados pela moderação. Não reenviar o mesmo arquivo: cada upload cria um asset permanente (só o Creator Dashboard arquiva). No place: ReplicatedStorage.Assets.Cars/<id> e .Characters/<id>, com o atributo AssetId.",
+ "cars": {
+  "warrior_a": "93858293372485",
+  "warrior_b": "108189892118360",
+  "warrior_c": "70835378109558",
+  "sakura_a": "80701622253920",
+  "sakura_b": "115193964035642",
+  "sakura_c": "101708738552214",
+  "dunes_a": "133706102838397",
+  "dunes_b": "125096097791139",
+  "dunes_c": "89947458613560",
+  "tundra_a": "70878066312272",
+  "tundra_b": "71867082551363",
+  "tundra_c": "96361757888152",
+  "volcano_a": "88737474083011",
+  "volcano_b": "108336465317784",
+  "volcano_c": "72542124345491",
+  "city_a": "121660229245702",
+  "city_b": "131009796552647",
+  "city_c": "91672452981650",
+  "celestial_a": "116445542820204",
+  "celestial_b": "135353361849729",
+  "celestial_c": "125038828019789"
+ },
+ "characters": {
+  "gokun": {"file": "gokun_v3_game.fbx", "assetId": "76498009547134"},
+  "super_gokun": {"file": "super_gokun_v3_game.fbx", "assetId": "107002849495720"},
+  "mini_gokun_classic": {"file": "mini_gokun_v3_classic_game.fbx", "assetId": "75367384927995"},
+  "mini_gokun_violet": {"file": "mini_gokun_v3_violet_game.fbx", "assetId": "132525186914342"}
+ }
+}

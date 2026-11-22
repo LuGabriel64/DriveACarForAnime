@@ -12,7 +12,7 @@ Espelho do `estado-atual/03_tarefas_do_dono.md` do repositório. Marque `[x]` qu
 ## Agora (Beta 2.0)
 - [x] Abrir o Roblox Studio e religar o MCP (feito em 16/11).
 - [x] Olhar os carros (aprovados em 16/11).
-- [ ] **Aprovar a pasta de upload** (é isto que trava a importação): Studio → Assistant Settings → MCP Permissions →
+- [x] **Aprovar a pasta de upload** (feito; importação concluída em 22/11): Studio → Assistant Settings → MCP Permissions →
       lista de pastas aprovadas para upload → adicionar `C:\Users\Lucas Gabriel\Documents\DriveACarForAnime\arte\export`.
       Liberar os escopos não basta: a pasta é uma lista à parte. Sem isso o Claude não consegue subir FBX nem PNG.
       Caminho no Studio: aba **Assistant** (ou View → Assistant) → engrenagem **Settings** → **MCP Permissions** → seção de

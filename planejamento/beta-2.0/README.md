@@ -45,6 +45,14 @@ Os arquivos da v2 citados acima foram para `arte/arquivo/personagens_v2/`.
 na lista de pastas aprovadas (Assistant Settings → MCP Permissions → pastas de upload). O jogo é de um grupo
 (id 879120012), então o `creationContext.creator` do upload é `{"groupId":"879120012"}`.
 
+## Atualização de 22/11/2026 — importação feita
+
+A pasta foi aprovada e as malhas estão no place, em `ReplicatedStorage.Assets` (`Cars/<21 ids>`, `Characters/<4 ids>`),
+prontas para clonar. IDs em `arte/export/assets_roblox.json`; formato de cada modelo no `LEIA-ME` da pasta
+(`src/ReplicatedStorage/Assets/LEIA-ME.luau`). **O jogo ainda não usa os modelos.** Próximo: `CarFactory` montando o
+carro com `Assets.Cars[id]` (rodas `Wheel_FL/FR/RL/RR`, `Root` no chão, frente em -Z), garagem e vitrine com
+`Assets.Characters` + `CharacterRig.Play`, depois a Etapa C.
+
 ## Atualização de 16/11/2026 (2) — personagens v3, animação de parado, primeira peça no place
 
 O dono aprovou o estilo e pediu rosto mais fino de anime, mãos com mais detalhe e animações de parado.
