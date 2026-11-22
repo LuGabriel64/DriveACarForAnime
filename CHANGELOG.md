@@ -12,7 +12,7 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
-| Beta 2.0 | em andamento (15/11/2026) | 🎨 Etapa A: arte dos 21 carros pronta; nada no jogo ainda | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
+| Beta 2.0 | em andamento (16/11/2026) | 🎨 arte dos 21 carros e de 4 personagens pronta; no place só o motor de animação (`Shared.CharacterRig`), sem uso ainda | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
 | [Beta 1.9](#jogo) | 13/11/2026 | 💾 salva no Studio (versão 113), falta teste com 2 jogadores e publicar | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
 | [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
 | [Beta 1.8c](#beta-18c--11112026) | 11/11/2026 | ✅ | Só documentação dentro do place (`04_EstadoAtual`) |
@@ -33,11 +33,45 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 | [0.1.0](#010--03112026) | 03/11/2026 | ✅ | Fundação do projeto |
 
 Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único com o terreno), `["Beta 1.6"]`,
-`["Beta 1.7"]`, `["Beta 1.8b"]` e `["Beta 1.8d"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão a partir da 1.8b.
+`["Beta 1.7"]`, `["Beta 1.8b"]`, `["Beta 1.8d"]` e `["Beta 1.9"]`. No GitHub, `places/` guarda o `.rbxl` completo de cada versão a partir da 1.8b.
 
 ---
 
 ## Repositório
+
+### 16/11/2026 (2) — Beta 2.0: personagens v3 (rosto, mãos), animação de parado e `Shared.CharacterRig` no place · Claude Code (PC do dono, Fable 5.2)
+
+- Pedido do dono: estilo v2 **aprovado**; rosto mais fino de anime e menos colado no corpo (imagem de uma cabeça como
+  referência); mãos com mais detalhe; animações de parado (cada um se mexendo numa pose própria); jogar o resto no Studio;
+  guardar as versões de modelo já feitas.
+- **Arte (fora do jogo):**
+  - `arte/blender/char_hero.py` v3: rosto em V com bochecha e queixo pequeno, olhos grandes, sobrancelha em cunha, sorriso
+    com dentes (Super com boca séria), franja por fora do crânio, pescoço mais fino e cabeça 2,4 cm mais alta; mão com
+    quatro dedos, nós, polegar e tendões; braço e perna em duas peças (`ArmL`/`ForeL`, `LegL`/`ShinL`) com esfera no
+    cotovelo e no joelho; fumaça da nuvem virou a peça `Smoke`.
+  - Saídas: `arte/export/gokun_v3.fbx`, `super_gokun_v3.fbx`, `mini_gokun_v3_classic.fbx`, `mini_gokun_v3_violet.fbx`
+    (vitrine, 66 a 73 mil triângulos) e as quatro `*_game.fbx` (**jogo**, 24 a 27 mil; opção `lod=0.35`).
+  - Animações de parado na tabela `IDLE` do mesmo script: `gokun` (guarda de luta), `super` (carregando energia), `mini`
+    (na nuvem, acenando). Saem em `arte/export/personagens_anim.json`, nas folhas `arte/renders/<id>_idle.png` e no vídeo
+    `arte/renders/idle_personagens.mp4`.
+  - **Versões antigas guardadas:** `arte/arquivo/personagens_v1/` (blocos) e `arte/arquivo/personagens_v2/` (FBX, folhas,
+    `char_hero_v2.py`, `sdflib_v2.py`). `arte/export/` passa a ter só o que é atual.
+  - Ferramentas novas: `tools/art/anims_to_luau.js` (gera `Shared.CharacterAnims` a partir do JSON) e
+    `tools/art/rig_reference.py` (pontos de referência do Blender para conferir o rig do Roblox).
+- **Studio (place salvo no Team Create, não publicado):**
+  - `ServerStorage.Backups["Beta 1.9"]` (novo, com LEIA-ME de restauração).
+  - `ReplicatedStorage.Shared.CharacterRig` (novo): anima personagens de malha por peças rígidas
+    (`Rig.Play(model, id)`, `Rig.Stop`, `Rig.new` + `rig:Update(t)`, `Rig.DebugProxy`). Para usar só no cliente.
+  - `ReplicatedStorage.Shared.CharacterAnims` (novo, arquivo gerado): juntas, pose e ondas de `gokun`, `super_gokun`, `mini_gokun`.
+  - Entrada "Beta 2.0 (em andamento, parte 1)" no topo de `ServerStorage.ProjectDocs.01_ChangeLog`.
+  - Nenhum script existente foi alterado e ninguém chama os módulos novos. `Config.Version` continua "Beta 1.9".
+  - `src/` dos três arquivos confere com o place por soma de verificação.
+- **Não feito:** os 21 carros e os personagens **não foram importados**. O upload continua recusado porque a pasta
+  `arte\export` não está nas pastas aprovadas (Assistant Settings → MCP Permissions); a ferramenta proíbe contornar isso.
+- **Testado:** geração e renders; vídeo das animações; no Studio (modo Edit, boneco de blocos) 117 pontos de referência do
+  rig batem com o Blender (diferença máxima de 0,0008 stud). **Não testado:** malhas no Roblox (cor por vértice, escala,
+  peso), animação com as malhas reais, Play, celular, ViewportFrame.
+- Vault: sem acesso especial; editado no D: e copiado para `cerebro/`.
 
 ### 16/11/2026 — Beta 2.0: personagens v2 por escultura SDF (Gokun, Super Gokun, Mini Gokun) · Claude Code (PC do dono, Fable 5.2)
 

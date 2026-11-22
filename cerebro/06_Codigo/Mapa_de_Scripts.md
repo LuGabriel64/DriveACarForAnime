@@ -18,6 +18,8 @@ Caminho no repositório: `src/` espelha o Explorer.
 | CarFactory | modelo do carro (+ corpo f1) |
 | AnimeModelFactory | personagens blocos anime |
 | AnimeStats | estrelas, nível, XP, renda, Poder, status de batalha |
+| CharacterRig (Beta 2.0) | anima personagens de malha por peças rígidas: `Rig.Play(model, id)`; ainda sem uso no jogo → [nota](../05_Modelagem/Animacao_Idle_CharacterRig.md) |
+| CharacterAnims (Beta 2.0) | dados das animações de parado (gerado por `tools/art/anims_to_luau.js`) |
 | Locale (+ pt) | tradução |
 
 ## ServerScriptService.Services

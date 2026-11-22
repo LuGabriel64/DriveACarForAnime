@@ -131,11 +131,17 @@ No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses p
 
 ## Estado em 16/11/2026
 
-- **Carros de Fórmula aprovados pelo dono.** Personagens refeitos por escultura SDF (`arte/blender/sdflib.py` e
-  `char_hero.py`): Gokun, Super Gokun e Mini Gokun (2 skins). A v1 em blocos (`char_mini.py`) fica guardada.
-  Como funciona: `cerebro/05_Modelagem/Personagens_SDF_Blender.md`.
-- **Nada da 2.0 está no place.** O MCP do Studio liga, mas o upload de assets é recusado até o dono aprovar a pasta
-  `arte\export` em Assistant Settings → MCP Permissions (lista de pastas, separada dos escopos).
+- **Carros de Fórmula aprovados pelo dono. Estilo dos personagens aprovado**, agora na **v3** (rosto fino de anime, mãos
+  com dedos, cotovelo e joelho articulados): Gokun, Super Gokun e Mini Gokun (2 skins), por escultura SDF
+  (`arte/blender/sdflib.py` e `char_hero.py`). Importar no Roblox os `arte/export/*_v3_game.fbx` (24 a 27 mil triângulos).
+  Versões antigas em `arte/arquivo/`. Como funciona: `cerebro/05_Modelagem/Personagens_SDF_Blender.md`.
+- **Animação de parado:** a pose mora em `IDLE` (`char_hero.py`); `node tools/art/anims_to_luau.js` gera
+  `Shared.CharacterAnims`; `Shared.CharacterRig` anima por peças rígidas (só no cliente). Ver
+  `cerebro/05_Modelagem/Animacao_Idle_CharacterRig.md`.
+- **No place (salvo, não publicado):** `Backups["Beta 1.9"]`, `Shared.CharacterRig` e `Shared.CharacterAnims` (ninguém
+  os chama ainda) e a entrada "Beta 2.0 (em andamento, parte 1)" no ChangeLog. `Config.Version` continua "Beta 1.9".
+- **Malhas fora do place:** o upload de assets é recusado até o dono aprovar a pasta `arte\export` em Assistant
+  Settings → MCP Permissions (lista de pastas, separada dos escopos). Não contornar copiando arquivos.
 - O jogo pertence a um grupo (id 879120012): uploads usam `creationContext.creator = {groupId}`.
 - Personagens: `"D:/SteamLibrary/steamapps/common/Blender/blender.exe" --background --python arte/blender/char_hero.py -- <pasta arte>`.
 

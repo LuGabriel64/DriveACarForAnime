@@ -27,6 +27,7 @@ era pedido antes e como é pedido agora.
 
 | Data | Tema | Nota | Aplicada em |
 |------|------|------|-------------|
+| 16/11/2026 | Cabeça do Gokun: rosto fino de anime (1 imagem) | [Referência da cabeça](2026-11-16_Gokun_Cabeca_v3.md) | personagens v3 (rosto, mãos, animação de parado), fora do jogo |
 | 15/11/2026 | Carros de Fórmula 1 (8 imagens) | [Carros F1](2026-11-15_Beta2_Carros_F1.md) | `arte/` (21 carros, ainda fora do jogo) |
 | 16/11/2026 | Gokun adulto, Super e estilo cel-shading (9 imagens) | [Referências 16/11](2026-11-16_Gokun_Referencias_v2.md) | personagens v2: Gokun, Super Gokun, Mini Gokun (fora do jogo) |
 | 15/11/2026 | Personagens do bioma 1 (12 imagens) | [Personagens do bioma 1](2026-11-15_Beta2_Personagens_Bioma1.md) | estudo do Mini Gokun |

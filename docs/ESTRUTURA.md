@@ -15,6 +15,8 @@ ReplicatedStorage
 │  ├─ Util, CarFactory (+ corpo "f1", 1.9), AnimeModelFactory (personagens "blocos anime" R6, Beta 1.8b)
 │  ├─ ConfigBeta19          ← números da 1.9 (estrelas, nível, pontos de spin, idiomas, música, Versus, F1, batalha)
 │  ├─ AnimeStats            ← renda e status de batalha de UM personagem (estrelas, nível, XP); servidor e cliente
+│  ├─ CharacterRig          ← (Beta 2.0, sem uso ainda) anima personagens de MALHA por peças rígidas; só no cliente
+│  ├─ CharacterAnims        ← (Beta 2.0) dados das animações de parado; GERADO por tools/art/anims_to_luau.js
 │  └─ Locale (+ pt)         ← tradução EN/PT (texto em inglês = chave)
 └─ Remotes/ Action (RemoteFunction) + Event (RemoteEvent) — use SÓ via Shared.Net
 

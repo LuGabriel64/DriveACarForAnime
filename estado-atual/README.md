@@ -6,8 +6,10 @@
 
 ## Em andamento (16/11/2026): Beta 2.0
 
-A arte está em `arte/`: 21 carros de Fórmula (aprovados pelo dono) e os personagens v2 (Gokun, Super Gokun, Mini Gokun).
-**Nada da 2.0 está no place**: o upload espera o dono aprovar a pasta `arte\export` no Studio. Projeto, etapas e o que
+A arte está em `arte/`: 21 carros de Fórmula (aprovados pelo dono) e os personagens **v3** (Gokun, Super Gokun, Mini
+Gokun em 2 skins; estilo aprovado), com versão de jogo e animação de parado (`arte/renders/idle_personagens.mp4`).
+**No place só entrou o motor de animação** (`Shared.CharacterRig` + `Shared.CharacterAnims`, sem uso ainda) e o backup
+`Backups["Beta 1.9"]`. **As malhas não estão no place**: o upload espera o dono aprovar a pasta `arte\export` no Studio. Projeto, etapas e o que
 falta em `planejamento/beta-2.0/README.md`. O texto abaixo descreve a 1.9, que é o que está no Studio.
 
 ## Em uma frase

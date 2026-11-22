@@ -4,6 +4,21 @@
 ]]
 return {
 	{
+		Date = "2026-11-16", Author = "Claude Code (Lu, via MCP; Fable 5.2)", Version = "Beta 2.0 (em andamento, parte 1)",
+		Summary = "Primeira peça da Beta 2.0 no place: o motor de animação dos personagens de MALHA (peças rígidas) e as animações de parado do Gokun (guarda de luta), do Super Gokun (carregando energia) e do Mini Gokun (na nuvem, acenando). Ninguém usa os módulos ainda: as malhas (arte/export/*_v3_game.fbx no GitHub) NÃO foram importadas porque a pasta de upload não está aprovada em Assistant Settings > MCP Permissions. Config.Version continua 'Beta 1.9' até a 2.0 ficar jogável.",
+		Files = {
+			"ServerStorage.Backups['Beta 1.9'] (NOVO): scripts da 1.9 + LEIA-ME de restauração",
+			"ReplicatedStorage.Shared.CharacterRig (NOVO): Rig.new / rig:Update(t) / Rig.Play / Rig.Stop / Rig.DebugProxy",
+			"ReplicatedStorage.Shared.CharacterAnims (NOVO, GERADO por tools/art/anims_to_luau.js a partir de arte/blender/char_hero.py): juntas, pose e ondas de gokun, super_gokun e mini_gokun",
+		},
+		Notes = {
+			"Testado em modo Edit com um boneco de blocos (Rig.DebugProxy): as três poses aparecem certas e 117 pontos de referência batem com a conta do Blender (tools/art/rig_reference.py), diferença máxima de 0,0008 stud.",
+			"NÃO TESTADO: com as malhas reais (não importadas), no Play, no celular, no ViewportFrame e com muitos personagens na tela.",
+			"Nada do jogo foi alterado: nenhum script existente chama esses módulos. Para desfazer, apague os dois módulos.",
+			"Salvo no Studio (Team Create), NÃO publicado.",
+		},
+	},
+	{
 		Date = "2026-11-13", Author = "Claude Code (Lu, via MCP; Fable 5.2 e depois Opus 5.5)", Version = "Beta 1.9",
 		Summary = "Beta 1.9 inteira (Etapas A, B, C e D do planejamento/beta-1.9 do GitHub): estrelas 0-5 e nível 1-50 nos personagens, XP, pontos de spin, idiomas EN/PT, UI por aparelho, DESAFIO 1v1 (convite, Versus Hall, votação, preparação, resultado), CORRIDA 1v1 com carros de F1 e colapso desde a largada, BATALHA DE ANIME simulada no servidor e encenada no cliente, lojas de F1 e de animações de vitória, música. Save Version 3 (só campos novos).",
 		Files = {

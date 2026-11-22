@@ -8,6 +8,7 @@ tags: [moc, sessoes]
 
 Uma nota por conversa de trabalho (mais nova no topo). Use o [modelo de sessão](../_Modelos/Modelo_Sessao.md).
 
+- [2026-11-16 (2) — Beta 2.0, personagens v3 e animação](2026-11-16_Beta_2.0_Personagens_v3_e_Rig.md): rosto fino, mãos, idle; CharacterRig no Studio; upload ainda bloqueado.
 - [2026-11-15 — Beta 2.0, Etapa A](2026-11-15_Beta_2.0_Etapa_A.md): 21 carros de Fórmula no Blender e o projeto da versão.
 - [2026-11-14 — Criação do Mapa Cerebral](2026-11-14_Criacao_do_Vault.md): este vault.
 - [2026-11-16 — Beta 2.0, personagens v2](2026-11-16_Beta_2.0_Personagens_v2.md): escultura SDF, Gokun, Super e Mini; Studio religado, upload bloqueado pela pasta.
