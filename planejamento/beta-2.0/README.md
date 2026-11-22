@@ -38,12 +38,37 @@ nuvem com fumaça (9 imagens novas, guardadas em `cerebro/11_Referencias_Visuais
 
 Como funciona, números e limites: `cerebro/05_Modelagem/Personagens_SDF_Blender.md`. A v1 (`char_mini.py`) fica guardada.
 
-**Antes de importar personagens no Roblox:** gerar a versão de jogo (15 a 20 mil triângulos por personagem, nenhuma peça
-acima de 10 mil) baixando os alvos de `shell_from(...)` em `char_hero.py`.
+**Versão de jogo:** feita na atualização seguinte (`lod=0.35`, 24 a 27 mil triângulos, nenhuma peça acima de 5,1 mil).
+Os arquivos da v2 citados acima foram para `arte/arquivo/personagens_v2/`.
 
 **Bloqueio da Etapa B (16/11):** o Studio está ligado, mas o upload foi recusado porque a pasta `arte\export` não está
 na lista de pastas aprovadas (Assistant Settings → MCP Permissions → pastas de upload). O jogo é de um grupo
 (id 879120012), então o `creationContext.creator` do upload é `{"groupId":"879120012"}`.
+
+## Atualização de 16/11/2026 (2) — personagens v3, animação de parado, primeira peça no place
+
+O dono aprovou o estilo e pediu rosto mais fino de anime, mãos com mais detalhe e animações de parado.
+
+| Arquivo | O que é |
+|---------|---------|
+| `arte/export/gokun_v3.fbx`, `super_gokun_v3.fbx`, `mini_gokun_v3_classic.fbx`, `mini_gokun_v3_violet.fbx` | v3 de vitrine (66 a 73 mil triângulos) |
+| `arte/export/<id>_game.fbx` | **versão de jogo** (24 a 27 mil): é esta que se importa no Roblox |
+| `arte/export/personagens_anim.json` | animações de parado (pose + ondas), em studs |
+| `arte/renders/idle_personagens.mp4`, `<id>_idle.png`, `gokun_v3_detalhes.png` | vídeo e folhas |
+| `arte/arquivo/personagens_v1/`, `personagens_v2/` | versões antigas guardadas |
+| `src/ReplicatedStorage/Shared/CharacterRig.luau`, `CharacterAnims.luau` | **já no place**: motor de animação por peças rígidas e os dados |
+| `tools/art/anims_to_luau.js`, `tools/art/rig_reference.py` | gerar `CharacterAnims`; conferir o rig contra o Blender |
+
+Peças de cada personagem: `Head`, `Hair`, `Torso`, `ArmL`, `ForeL`, `ArmR`, `ForeR`, `LegL`, `ShinL`, `LegR`, `ShinR`
+(+ `Tail`, `Staff`, `Cloud`, `Smoke` no mirim; + `Aura` no Super).
+
+**Para ligar no jogo (depois do upload):** importar o `_game.fbx`; montar um `Model` com um `Root` invisível nos pés
+(frente em -Z) como `PrimaryPart` e as peças ancoradas com esses nomes, em repouso; no cliente,
+`require(ReplicatedStorage.Shared.CharacterRig).Play(model, "gokun" | "super_gokun" | "mini_gokun")`. Conferir a
+orientação: o FBX sai com a frente do personagem em +Z; o `Root` tem de ficar com a frente em -Z.
+
+**Testado:** a conta do rig no Studio contra o Blender, com boneco de blocos (`Rig.DebugProxy`). **Não testado:** com as
+malhas reais. Detalhes: `cerebro/05_Modelagem/Animacao_Idle_CharacterRig.md`.
 
 ## Etapas
 

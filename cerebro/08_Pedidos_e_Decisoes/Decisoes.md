@@ -42,5 +42,10 @@ Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** sã
 | 30 | Um corpo só, reaproveitado: adulto, Super (cabelo + aura) e Mini (mesmas peças achatadas) | consistência entre personagem e companheiro; menos trabalho por variante | `char_hero.py` (`chibi`) |
 | 31 | Versões antigas da arte ficam guardadas no repositório (pedido do dono) | comparar o antes e o depois | `arte/blender/char_mini.py`, `arte/export/mini_gokun_*.fbx` |
 | 32 | Carros de Fórmula v1 **aprovados** pelo dono em 16/11 | "O dos carros está perfeito" | `arte/export/` |
+| 33 | Estilo de personagem v2/v3 (escultura SDF, cel-shading) **aprovado** pelo dono em 16/11, com ajustes de rosto e mãos | "Ficou muito maneiro! Adorei!" | `arte/blender/char_hero.py` |
+| 34 | Animação por **peças rígidas** calculada em código (pose + ondas), sem Humanoid nem AnimationTrack | funciona com MeshParts soltos, é barata, roda igual no ViewportFrame e a mesma tabela serve ao Blender e ao Roblox | `Shared.CharacterRig`, `Shared.CharacterAnims` |
+| 35 | A pose mora num lugar só (`IDLE` em `char_hero.py`); `CharacterAnims` é arquivo **gerado** | evitar duas versões da mesma animação | `tools/art/anims_to_luau.js` |
+| 36 | Duas densidades por personagem: vitrine (66 a 73 mil triângulos) e jogo (24 a 27 mil) | o jogo roda em celular; a vitrine serve para render e loja | `lod=0.35` |
+| 37 | Versões antigas de arte vão para `arte/arquivo/<nome>_vN/`; `arte/export/` só tem o que é atual | o dono pediu para guardar; a pasta de upload fica limpa | `arte/arquivo/` |
 
 Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

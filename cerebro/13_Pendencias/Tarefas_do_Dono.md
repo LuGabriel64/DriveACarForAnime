@@ -15,8 +15,11 @@ Espelho do `estado-atual/03_tarefas_do_dono.md` do repositório. Marque `[x]` qu
 - [ ] **Aprovar a pasta de upload** (é isto que trava a importação): Studio → Assistant Settings → MCP Permissions →
       lista de pastas aprovadas para upload → adicionar `C:\Users\Lucas Gabriel\Documents\DriveACarForAnime\arte\export`.
       Liberar os escopos não basta: a pasta é uma lista à parte. Sem isso o Claude não consegue subir FBX nem PNG.
-- [ ] **Dizer se o estilo v2 dos personagens serve** ([resultado](../11_Referencias_Visuais/2026-11-16_Gokun_Referencias_v2.md)): rosto, músculos, sombra, nuvem.
-      Com o sim, o Claude faz o resto do elenco do bioma 1 no mesmo corpo.
+      Caminho no Studio: aba **Assistant** (ou View → Assistant) → engrenagem **Settings** → **MCP Permissions** → seção de
+      pastas de upload ("approved upload directories") → **Add** → escolher a pasta acima. Pedido de novo em 16/11 (2).
+- [x] Dizer se o estilo v2 dos personagens serve (aprovado em 16/11, com ajustes de rosto e mãos).
+- [ ] **Dizer se a v3 serve** ([resultado](../11_Referencias_Visuais/2026-11-16_Gokun_Cabeca_v3.md)): rosto, mãos e as três animações de parado
+      (vídeo `arte/renders/idle_personagens.mp4`). Com o sim, o Claude faz o resto do elenco do bioma 1 no mesmo corpo.
 - [ ] (Opcional) Ligar o servidor MCP dentro do Blender.
 
 ## Antes (Beta 1.9)

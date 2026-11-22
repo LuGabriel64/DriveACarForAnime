@@ -55,3 +55,8 @@ Relacionado: [Erros corrigidos](Erros_Corrigidos.md) · [Checklist antes de mexe
 - **Aura e efeitos translúcidos:** só atrás e dos lados; na frente tapam o personagem.
 - **Sombra cel pintada:** com a luz de frente quase não há sombra; a luz tem de vir de lado e de cima (e uma contraluz para as costas).
 - **Mirim a partir do adulto:** escalar a cabeça leva junto o toco do pescoço; abaixe a cabeça e achate um pouco no Z, senão o rosto fica comprido.
+- **Arquivos com CRLF:** `char_hero.py` estava com fim de linha do Windows e o patch por texto (Node) não achava os trechos. Converta para LF antes (`sed -i 's/\r$//'`); o Git reconverte sozinho.
+- **Patch por Node:** texto com crase dentro de template literal fecha o template. Grave o texto num arquivo (JSON ou .txt) e leia.
+- **CharacterRig:** `Rig.new` memoriza onde cada peça está na hora; criar o rig com o boneco já posado dobra a pose. Sempre criar em repouso.
+- **Pose sem tornozelo:** o pé gira com a canela. Para o pé ficar chato, coxa e canela têm de somar zero (`a` e `b`); a linha `GROUND` do Blender mostra a altura de cada pé.
+- **`save_place`:** a primeira chamada pode responder "Target is not reachable" e mesmo assim salvar; a segunda diz "NotNeeded". Confira antes de repetir.

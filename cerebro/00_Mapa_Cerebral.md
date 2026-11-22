@@ -18,9 +18,9 @@ aliases: [Início, Home, Mapa Mental]
 
 | | |
 |---|---|
-| Versão no Studio | **Beta 1.9** (salva, versão 113 do place, Team Create) |
+| Versão no Studio | **Beta 1.9** + primeira peça da 2.0 (`Shared.CharacterRig` e `CharacterAnims`, ainda sem uso); salva, Team Create |
 | Versão publicada | Beta 1.8b |
-| Em andamento | **Beta 2.0**: carros aprovados (21 FBX), personagens v2 por escultura SDF (Gokun, Super, Mini); **nada no jogo ainda** → [Beta 2.0](07_Versoes/Beta_2.0.md) |
+| Em andamento | **Beta 2.0**: carros aprovados (21 FBX); personagens **v3** (rosto fino, mãos, versão de jogo) com [animação de parado](05_Modelagem/Animacao_Idle_CharacterRig.md); **malhas ainda fora do jogo** → [Beta 2.0](07_Versoes/Beta_2.0.md) |
 | Bloqueio principal | aprovar a pasta `arte\export` para upload no Studio; teste com 2 jogadores, músicas, publicar → [Tarefas do dono](13_Pendencias/Tarefas_do_Dono.md) |
 | GitHub | `LuGabriel64/DriveACarForAnime`, `main`, tag `beta-1.9` |
 

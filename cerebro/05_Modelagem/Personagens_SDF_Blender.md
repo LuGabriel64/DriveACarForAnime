@@ -4,7 +4,11 @@ date: 2026-11-16
 tags: [modelagem, blender, personagens, cel-shading, beta-2-0]
 ---
 
-# Personagens por escultura SDF (Beta 2.0, v2 da arte)
+# Personagens por escultura SDF (Beta 2.0; arte na v3 desde 16/11)
+
+> **v3 (16/11, segundo pedido do dia):** rosto fino de anime, mãos com dedos, braço e perna em duas peças e animação de
+> parado. O que mudou está em [Referência da cabeça](../11_Referencias_Visuais/2026-11-16_Gokun_Cabeca_v3.md); a animação em
+> [Animação de parado](Animacao_Idle_CharacterRig.md). A v2 está guardada em `arte/arquivo/personagens_v2/`.
 
 Como os personagens novos são feitos. Substitui o estudo de blocos (`arte/blender/char_mini.py`, guardado).
 
@@ -14,13 +18,18 @@ Como os personagens novos são feitos. Substitui o estudo de blocos (`arte/blend
 |---------|-------|
 | `arte/blender/sdflib.py` | a "escultura": grade, primitivas (elipsoide, cápsula, caixa), união suave, dobras, surface nets, redução, pintura cel |
 | `arte/blender/char_hero.py` | o personagem: cabeça, tronco, braço, perna, cabelo, nuvem, aura; variantes; render e FBX |
-| `arte/export/gokun.fbx`, `super_gokun.fbx`, `mini_gokun_v2_classic.fbx`, `mini_gokun_v2_violet.fbx` | saídas |
+| `arte/export/gokun_v3.fbx`, `super_gokun_v3.fbx`, `mini_gokun_v3_classic.fbx`, `mini_gokun_v3_violet.fbx` | saídas de vitrine (66 a 73 mil triângulos) |
+| `arte/export/<id>_game.fbx` | as mesmas quatro, **versão de jogo** (24 a 27 mil triângulos): é esta que vai para o Roblox |
 | `arte/export/personagens.json` | peças, triângulos, juntas (pivôs) e escala de cada personagem |
-| `arte/renders/<id>.png` | folha de cada um (frente, 3/4, costas, rosto) |
+| `arte/export/personagens_anim.json` | animações de parado (pose + ondas) |
+| `arte/renders/<id>.png`, `<id>_idle.png`, `gokun_v3_detalhes.png`, `idle_personagens.mp4` | folhas, closes de rosto e mão, animação |
+| `arte/arquivo/personagens_v1/`, `personagens_v2/` | versões antigas guardadas (FBX, folhas e scripts) |
 
 ```bash
-"D:/SteamLibrary/steamapps/common/Blender/blender.exe" --background --python arte/blender/char_hero.py -- "<pasta arte>" [gokun super mini_classic mini_violet]
+"D:/SteamLibrary/steamapps/common/Blender/blender.exe" --background --python arte/blender/char_hero.py -- "<pasta arte>" [gokun super mini_classic mini_violet] [lod=0.35] [novideo] [nodetail]
 ```
+
+`lod=0.35` gera a versão de jogo (sufixo `_game`). Sem opções, gera a de vitrine, os closes e o vídeo.
 
 Roda sem o MCP do Blender. Os 4 personagens levam cerca de 2 minutos (a escultura fica em cache em `%TEMP%/dacfa_sdf_cache`).
 
@@ -47,22 +56,27 @@ Roda sem o MCP do Blender. Os 4 personagens levam cerca de 2 minutos (a escultur
 | Mini Gokun | as MESMAS peças achatadas por peça (`chibi`): cabeça 1,85x, tronco 44% da altura, perna 30%; + `Tail`, `Staff`, `Cloud` |
 | Skin violeta | troca só a paleta |
 
-Peças rígidas (um MeshPart cada, animadas por código): `Head`, `Hair`, `Torso`, `ArmL`, `ArmR`, `LegL`, `LegR`.
+Peças rígidas (um MeshPart cada, animadas por código): `Head`, `Hair`, `Torso`, `ArmL`, `ForeL`, `ArmR`, `ForeR`, `LegL`,
+`ShinL`, `LegR`, `ShinR` (+ `Tail`, `Staff`, `Cloud`, `Smoke` no mirim; + `Aura` no Super). Cotovelo e joelho têm uma
+esfera por dentro, para a dobra não abrir buraco. A mão é uma casca própria, esculpida numa grade mais fina.
 
 ## Números (16/11)
 
 | Personagem | Triângulos | Maior peça |
 |------------|-----------|------------|
-| Gokun | 56 299 | Torso 14 500 |
-| Super Gokun | 57 395 | Torso 14 500 |
-| Mini Gokun | 63 431 | Torso 14 500 |
+| Gokun v3 (vitrine) | 66 083 | Torso 14 500 |
+| Super Gokun v3 (vitrine) | 67 079 | Torso 14 500 |
+| Mini Gokun v3 (vitrine) | 73 215 | Torso 14 500 |
+| Gokun v3 **de jogo** | 24 396 | Torso 5 070 |
+| Super Gokun v3 **de jogo** | 25 392 | Torso 5 070 |
+| Mini Gokun v3 **de jogo** | 26 976 | Torso 5 070 |
 
-**Pesado para o jogo.** Antes de importar, gerar uma versão de jogo (meta: 15 a 20 mil por personagem, nenhuma peça
-acima de 10 mil) baixando os alvos de `shell_from(...)`. A versão atual é a de vitrine.
+A versão de jogo (`lod=0.35`) mantém o rosto e a silhueta; perde um pouco das linhas finas de dobra. Números da v2
+(56 a 63 mil) ficam em `arte/arquivo/personagens_v2/personagens.json`.
 
 ## Limites honestos
 
-- Não é escultura à mão no ZBrush: é procedural. Mãos, orelhas e boca são simples.
+- Não é escultura à mão no ZBrush: é procedural. A mão é um punho fechado (não há mão aberta); orelha e boca são simples.
 - A sombra é pintada com luz fixa; no Roblox a iluminação do jogo soma por cima.
 - Só o corpo do Gokun existe. Kurilin, Vegita, Master Kamo, Gohen e Majin Vegita precisam de cabeça, cabelo e roupa próprios
   (o corpo e a biblioteca se reaproveitam).
