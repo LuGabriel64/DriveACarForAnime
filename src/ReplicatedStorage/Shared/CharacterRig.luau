@@ -23,7 +23,11 @@
 	Rig.DebugProxy(animId) monta um boneco de BLOCOS com as mesmas juntas, só para testar a animação sem as malhas.
 
 	TESTADO (16/11/2026, modo Edit, boneco de blocos): as três poses e o movimento batem com o vídeo do Blender.
-	NÃO TESTADO: com as malhas reais (ainda não importadas), no Play, no celular e com muitos personagens na tela.
+	TESTADO (22/11/2026, modo Edit): com as malhas reais de ReplicatedStorage.Assets.Characters.
+
+	Beta 2.0 (22/11): respeita a escala do modelo (model:GetScale(), usada por Size e Look.MeshScale) e funciona fora do
+	Workspace (ViewportFrame: move as peças uma a uma; BulkMoveTo só no Workspace). Update protegido por pcall no laço
+	(com StreamingEnabled uma peça pode sumir no meio).
 ]]
 local RunService = game:GetService("RunService")
 local Anims = require(script.Parent.CharacterAnims)
@@ -64,12 +68,14 @@ function Rig.new(model, animId, opts)
 	self.Phase = opts.Phase or 0
 	self.MaxDistance = opts.MaxDistance or 300
 	local base = root.CFrame * FLIP
+	local s = model:GetScale()
+	self.Scale = s
 	self._nodes, self._parts, self._cfs = {}, {}, {}
 	local byName = {}
 	for _, name in ipairs(Anims.Order) do
 		local part = name ~= "Root" and model:FindFirstChild(name) or nil
 		if name == "Root" or (part and part:IsA("BasePart")) then
-			local j = anim.Joints[name] and toR(anim.Joints[name]) or Vector3.zero
+			local j = (anim.Joints[name] and toR(anim.Joints[name]) or Vector3.zero) * s
 			local pose = anim.Pose[name] or {}
 			local node = {
 				Name = name, Part = part, Parent = byName[Anims.Parents[name] or ""],
@@ -112,14 +118,23 @@ function Rig:Update(t)
 		end
 		local localCF = node.J * rot(v[1], v[2], v[3]) * node.JInv
 		if v[4] ~= 0 or v[5] ~= 0 or v[6] ~= 0 then
-			localCF = CFrame.new(v[4], v[6], -v[5]) * localCF
+			local s = self.Scale
+			localCF = CFrame.new(v[4] * s, v[6] * s, -v[5] * s) * localCF
 		end
 		node.World = node.Parent and (node.Parent.World * localCF) or localCF
 		if node.Index then
 			cfs[node.Index] = base * node.World * node.Rest
 		end
 	end
-	workspace:BulkMoveTo(self._parts, cfs, Enum.BulkMoveMode.FireCFrameChanged)
+	self:_apply()
+end
+
+function Rig:_apply()
+	if self.Root:IsDescendantOf(workspace) then
+		workspace:BulkMoveTo(self._parts, self._cfs, Enum.BulkMoveMode.FireCFrameChanged)
+	else
+		for i, p in ipairs(self._parts) do p.CFrame = self._cfs[i] end
+	end
 end
 
 -- Devolve as peças à pose de repouso (a que tinham no Rig.new).
@@ -128,7 +143,7 @@ function Rig:Reset()
 	for _, node in ipairs(self._nodes) do
 		if node.Index then self._cfs[node.Index] = base * node.Rest end
 	end
-	workspace:BulkMoveTo(self._parts, self._cfs, Enum.BulkMoveMode.FireCFrameChanged)
+	self:_apply()
 end
 
 -- ---------------------------------------------------------------- laço único para todos os personagens tocando
@@ -144,7 +159,7 @@ local function step()
 			playing[model] = nil
 		elseif not camPos or not model:IsDescendantOf(workspace)
 			or (rig.Root.Position - camPos).Magnitude <= rig.MaxDistance then
-			rig:Update(now)
+			if not pcall(rig.Update, rig, now) then playing[model] = nil end
 		end
 	end
 	if next(playing) == nil and conn then

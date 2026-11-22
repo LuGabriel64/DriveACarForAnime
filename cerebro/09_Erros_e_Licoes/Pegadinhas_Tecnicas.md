@@ -65,3 +65,7 @@ Relacionado: [Erros corrigidos](Erros_Corrigidos.md) · [Checklist antes de mexe
 - **Malha recém-inserida demora a aparecer:** a primeira captura de tela sai com peças faltando. Tire outra antes de concluir que deu errado.
 - **Achar a origem do Blender no Roblox:** o MeshPart fica no centro da caixa da malha; compare com `tools/art/fbx_bounds.py` e a diferença é o deslocamento.
 - **Git sem identidade:** o `git merge` também precisa de `-c user.name=... -c user.email=...`, não só o commit.
+- **Play pelo MCP:** os cliques do `user_mouse_input` não chegaram ao menu inicial (22/11). Para testar a corrida, chame `Net.Call("ClaimGarage", i)` e `Net.Call("StartRace")` no datamodel **Client** (o `Shared.Net` do cliente pode; `Services.*` no servidor nunca). A câmera orbital do menu continua ligada: para fotografar, crie uma `Camera` nova e ponha em `workspace.CurrentCamera`.
+- **`require` no execute_luau do Play roda numa cópia à parte dos módulos:** `Rig.IsPlaying` dá false mesmo com o jogo animando. Confira pelo efeito (a peça se mexeu entre duas leituras).
+- **Resposta do execute_luau acima de ~100 mil caracteres é cortada.** Para o espelho, divida em partes de tamanho parecido (todas grandes o bastante para irem para arquivo).
+- **Malha recém-replicada com StreamingEnabled** chega em pedaços (cabelo depois do corpo): o `CharacterAnimator` espera `Torso` e `Head` e recomeça quando outra peça chega.

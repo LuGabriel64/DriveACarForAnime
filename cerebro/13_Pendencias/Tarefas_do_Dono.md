@@ -10,6 +10,10 @@ tags: [pendencias, dono]
 Espelho do `estado-atual/03_tarefas_do_dono.md` do repositório. Marque `[x]` quando fizer.
 
 ## Agora (Beta 2.0)
+- [ ] **Jogar a Beta 2.0 no Studio** e dizer o que achou: carro novo na corrida, garagem com os personagens animados, Super e Mini Gokun (chocar no ovo do bioma 1).
+- [ ] **Publicar** quando aprovar (os jogadores ainda veem a 1.8b) e **baixar o `.rbxl`** como `places/DriveACarForAnime_Beta2.0_2026-11-22.rbxl`.
+- [ ] Testar o 1v1 com 2 jogadores (agora com os F1 em malha).
+- [ ] Apagar a pasta vazia `C:\LUCASG~1` (criada por engano pelo Claude em 22/11; o Claude não tem permissão para apagar pastas na raiz do C:).
 - [x] Abrir o Roblox Studio e religar o MCP (feito em 16/11).
 - [x] Olhar os carros (aprovados em 16/11).
 - [x] **Aprovar a pasta de upload** (feito; importação concluída em 22/11): Studio → Assistant Settings → MCP Permissions →

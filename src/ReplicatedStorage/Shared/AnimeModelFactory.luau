@@ -15,6 +15,12 @@
 	Acessórios: headband scarf hat chefhat foxears tail horns halo crown cape sword wings beanie visor staff
 	            beard turban antenna crest headtail belt mecha
 	Versões antigas: ServerStorage.LegacyCode (voxel Beta 1.0-1.6, chibi Beta 1.7).
+
+	Beta 2.0: Look.Mesh = id de ReplicatedStorage.Assets.Characters (malha do Blender) => Build clona a MALHA em vez de
+	  montar por peças. Mesmo contrato: Model com PrimaryPart "Root" nos pés, frente em -Z, ancorado. Mutação pinta a
+	  malha (Color multiplica a cor por vértice), Secret ganha o anel, Size escala. Look.MeshScale (padrão 0.85) acerta a
+	  altura com a dos outros personagens. O modelo leva o atributo AnimId: o Client.CharacterAnimator toca a animação de
+	  parado (Shared.CharacterRig). Sem a malha (ou Config.Features.MeshArt = false), cai no modelo por peças.
 ]]
 local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS.Shared.Config)
@@ -30,8 +36,63 @@ local EXPR = { -- inclinação (graus) do cílio e da sobrancelha + altura do ol
 	calm      = { Lash = 4,  Brow = 6,  EyeH = 0.4,  Mouth = "smile" },
 }
 
+-- ---------------------------------------------------------------- Beta 2.0: personagem de MALHA
+local function meshTemplate(L)
+	if not (Config.Features.MeshArt and L and L.Mesh) then return nil end
+	local assets = RS:FindFirstChild("Assets")
+	local chars = assets and assets:FindFirstChild("Characters")
+	return chars and chars:FindFirstChild(L.Mesh)
+end
+F.MeshTemplate = meshTemplate
+
+local function buildMesh(cfg, mut, size, tpl)
+	local m = tpl:Clone()
+	m.Name = cfg.Id
+	m:PivotTo(CFrame.new())
+	for _, p in ipairs(m:GetDescendants()) do
+		if p:IsA("BasePart") then
+			p.Anchored = true; p.CanCollide = false; p.CanQuery = false; p.CanTouch = false
+			if p.Name == "Aura" or p.Name == "Root" then p:SetAttribute("NoTint", true) end
+		end
+	end
+	local def = mut and Config.Mutations[mut]
+	if def then
+		for _, p in ipairs(m:GetDescendants()) do
+			if p:IsA("BasePart") and not p:GetAttribute("NoTint") then
+				p.Color = Color3.fromHSV(def.Hue, def.Sat, 1) -- a cor da peça multiplica a cor por vértice
+				p.Material = def.Material
+			end
+		end
+	end
+	if cfg.Rarity == "Secret" then
+		local function ring(name, d, y, color)
+			local p = Instance.new("Part")
+			p.Name = name; p.Shape = Enum.PartType.Cylinder; p.Size = V3(0.3, d, d)
+			p.CFrame = CFrame.new(0, y, 0) * CFrame.Angles(0, 0, rad(90)); p.Color = color; p.Material = Enum.Material.Neon
+			p.Anchored = true; p.CanCollide = false; p.CanQuery = false; p.CanTouch = false; p.CastShadow = false
+			p:SetAttribute("NoTint", true)
+			p.Parent = m
+		end
+		ring("SecretRing", 5.6, 0.18, Color3.fromRGB(20, 20, 26))
+		ring("SecretRingGlow", 4.6, 0.2, Color3.fromRGB(210, 210, 225))
+	end
+	local scale = (cfg.Look and cfg.Look.MeshScale) or 0.85
+	local sz = size and Config.Sizes[size]
+	if sz then scale = scale * sz.Scale end
+	m:ScaleTo(scale)
+	m:SetAttribute("AnimId", tpl:GetAttribute("AnimId"))
+	m:SetAttribute("CharacterMesh", cfg.Look.Mesh)
+	return m
+end
+
 function F.Build(cfg, mut, size)
 	local L = cfg.Look
+	local tpl = meshTemplate(L)
+	if tpl then
+		local ok, m = pcall(buildMesh, cfg, mut, size, tpl)
+		if ok and m then return m end
+		warn("[AnimeModelFactory] malha falhou para " .. tostring(cfg.Id) .. ": " .. tostring(m))
+	end
 	local m = Instance.new("Model")
 	m.Name = cfg.Id
 

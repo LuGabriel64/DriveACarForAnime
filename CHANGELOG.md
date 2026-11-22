@@ -12,7 +12,7 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
-| Beta 2.0 | em andamento (22/11/2026) | 🎨 21 carros e 4 personagens **importados** no place (`ReplicatedStorage.Assets`) + motor de animação; o jogo ainda não os usa | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
+| [Beta 2.0](#beta-20--22112026-salva-no-place-versão-132-não-publicada) | 22/11/2026 | 💾 salva no Studio (versão 132), **não publicada** | Carros de Fórmula em malha, Gokun em malha, novos Super Gokun (Secret) e Mini Gokun (Epic), personagens animados | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
 | [Beta 1.9](#jogo) | 13/11/2026 | 💾 salva no Studio (versão 113), falta teste com 2 jogadores e publicar | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
 | [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
 | [Beta 1.8c](#beta-18c--11112026) | 11/11/2026 | ✅ | Só documentação dentro do place (`04_EstadoAtual`) |
@@ -38,6 +38,12 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 ---
 
 ## Repositório
+
+### 22/11/2026 (2) — Beta 2.0 aplicada ao jogo · Claude Code (PC do dono, Opus 5.5)
+
+- Pedido do dono: "Sim! Pode fazer e APLICAR AO JOGO!" → ver [Beta 2.0](#beta-20--22112026-salva-no-place-versão-132-não-publicada) na seção Jogo.
+- `src/` espelhado do place (8 scripts, `tools/place/mirror_from_dump.js`). Tag `beta-2.0`.
+- Docs: `CLAUDE.md`, `estado-atual/README.md`, `planejamento/beta-2.0/README.md`, `docs/ESTRUTURA.md`, Mapa Cerebral.
 
 ### 22/11/2026 — Beta 2.0: 21 carros e 4 personagens importados no Roblox · Claude Code (PC do dono, Opus 5.5)
 
@@ -216,6 +222,47 @@ Testado: extração feita duas vezes, por caminhos diferentes, com resultado id�
 ---
 
 ## Jogo
+
+### Beta 2.0 — 22/11/2026 (salva no place, versão 132; **não publicada**)
+
+Aplicada no Studio pelo Claude Code do dono (MCP, Opus 5.5), a pedido dele: "Pode fazer e APLICAR AO JOGO!".
+É a primeira parte jogável do [projeto da Beta 2.0](planejamento/beta-2.0/README.md): as malhas do Blender entram no
+jogo. Combustível, piloto automático com skill-checks, primeira pessoa, os 21 carros na loja e o resto do elenco em
+malha ficam para as próximas (2.0b em diante).
+
+**O que muda para o jogador:**
+- Todos os carros (os 7 da corrida solo e os 5 F1 do 1v1) são Fórmulas em malha com a pintura do bioma.
+  Mapa: `starter`→`warrior_a`, `sakura_gt`→`sakura_a`, `dune_racer`→`dunes_a`, `frost_runner`→`tundra_a`,
+  `magma_reaper`→`volcano_a`, `neon_phantom`→`city_a`, `celestial_comet`→`celestial_a`; F1: `f1_rookie`→`warrior_b`,
+  `f1_viper`→`city_b`, `f1_storm`→`tundra_b`, `f1_phantom`→`volcano_c`, `f1_apex`→`celestial_c`.
+- Gokun ganha a malha nova. **Novos no bioma 1:** Super Gokun (Secret, $12.000/s, com aura) e Mini Gokun (Epic, $100/s,
+  na nuvem). Dividem o sorteio da raridade com Majin Bubu (Secret) e Gohen (Epic).
+- Os personagens de malha se mexem na pose de parado (garagem, vitrine, batalha); nos ícones ficam na pose, parados.
+- Física, Ids, preços e save **não mudam**.
+
+**Scripts (caminho no Explorer):**
+- `Shared.Config`: `Version = "Beta 2.0"`, `Features.MeshArt` (false = volta aos modelos por peças), `Updates`,
+  `Config.CarMeshes` + `Mesh` em cada carro, `goku.Look.Mesh`, novos `super_goku` e `mini_goku`.
+- `Shared.ConfigBeta19`: `Config.F1Meshes` + `Mesh` em cada F1; `Battle.Fighters.super_goku` (Champion, "Golden Fury")
+  e `mini_goku` (Speedster, "Cloud Rush").
+- `Shared.CarFactory`: carroceria de malha quando `cfg.Mesh` existe em `Assets.Cars` (`MeshGroundY = -2.2`, assento
+  invisível em `MeshSeat`); Weld das rodas com C0 alinhado ao chassi + C1 (a roda da malha tem eixos quaisquer).
+- `Shared.AnimeModelFactory`: `Look.Mesh` → clona a malha de `Assets.Characters` (mutação pinta a malha, Secret ganha
+  o anel, Size e `Look.MeshScale` escalam, atributo `AnimId`); sem a malha, modelo por peças como antes.
+- `Shared.CharacterRig`: respeita a escala do modelo e funciona fora do Workspace.
+- `Client.CharacterAnimator` (**novo**) + `ClientMain` (ORDER): anima os modelos com `AnimId` (Workspace) e posa os ícones.
+- `ReplicatedStorage.Assets`: `Color` branco em todas as MeshParts (a cor da peça multiplica a cor por vértice;
+  o cinza padrão escurecia tudo).
+- Backup: `ServerStorage.Backups["Beta 1.9"]` (de 16/11, antes de qualquer mudança da 2.0 nos scripts).
+
+**Testado (Play, 1 jogador):** Output sem erros; badge e rodapé "Beta 2.0"; vitrine do lobby com o F1 novo; corrida solo
+com o carro de malha: sentado no cockpit, chega a 69/70 km/h, rodas giram e esterçam; carro estacionado na garagem;
+personagens montados no servidor (Gokun, Super, Mini, Gold, Diamond) aparecem e são animados no cliente com
+StreamingEnabled. **Em Edit:** sintaxe de todos os scripts, Config novo, pose fora do Workspace.
+
+**Não testado:** chocar os novos num ovo de verdade, ícones do inventário e da roleta na tela, batalha com os novos,
+F1 no 1v1 (precisa de 2 jogadores), celular, muitos jogadores. O avatar sentado e o capacete da malha se sobrepõem um
+pouco. Os cliques automáticos não funcionam no menu inicial: o teste chamou `ClaimGarage`/`StartRace` pelo Net do cliente.
 
 ### Beta 1.9 — 13/11/2026 (salva no place, versão 113; **não publicada**)
 

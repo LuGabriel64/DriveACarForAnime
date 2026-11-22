@@ -17,6 +17,7 @@ ReplicatedStorage
 │  ├─ AnimeStats            ← renda e status de batalha de UM personagem (estrelas, nível, XP); servidor e cliente
 │  ├─ CharacterRig          ← (Beta 2.0, sem uso ainda) anima personagens de MALHA por peças rígidas; só no cliente
 │  ├─ CharacterAnims        ← (Beta 2.0) dados das animações de parado; GERADO por tools/art/anims_to_luau.js
+│  │   (Client.CharacterAnimator anima no cliente todo modelo com o atributo AnimId)
 ├─ Assets/                 (Beta 2.0) malhas importadas: Cars/<21 ids>, Characters/<4 ids>; ver o LEIA-ME da pasta
 │  └─ Locale (+ pt)         ← tradução EN/PT (texto em inglês = chave)
 └─ Remotes/ Action (RemoteFunction) + Event (RemoteEvent) — use SÓ via Shared.Net

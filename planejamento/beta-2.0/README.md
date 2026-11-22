@@ -45,6 +45,17 @@ Os arquivos da v2 citados acima foram para `arte/arquivo/personagens_v2/`.
 na lista de pastas aprovadas (Assistant Settings → MCP Permissions → pastas de upload). O jogo é de um grupo
 (id 879120012), então o `creationContext.creator` do upload é `{"groupId":"879120012"}`.
 
+## Atualização de 22/11/2026 (2) — APLICADA AO JOGO (Beta 2.0, place versão 132)
+
+Feito: `CarFactory` com malha (todos os 12 carros da Config), `AnimeModelFactory` com malha (Gokun + novos Super Gokun
+Secret e Mini Gokun Epic), `Client.CharacterAnimator`. Atrás de `Config.Features.MeshArt`. Diferenças do projeto:
+- as malhas ficaram em `Assets.Characters` (não `Assets.Animes`) e o personagem aponta com `Look.Mesh`;
+- os 7 carros atuais usam a classe A do bioma e os F1 do 1v1 usam B/C; as outras 9 malhas esperam a loja de 21 carros;
+- skin violeta do Mini e Majin Vegita ainda não (precisam de save V4 e de malha).
+
+Próximas versões: **2.0b** = combustível + teto do motor + Fuel Engine; **2.0c** = Manual/Auto + piloto automático +
+skill-checks; **2.0d** = primeira pessoa + 21 carros na loja; elenco em malha quando o dono aprovar cada personagem.
+
 ## Atualização de 22/11/2026 — importação feita
 
 A pasta foi aprovada e as malhas estão no place, em `ReplicatedStorage.Assets` (`Cars/<21 ids>`, `Characters/<4 ids>`),

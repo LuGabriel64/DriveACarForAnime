@@ -18,9 +18,9 @@ aliases: [Início, Home, Mapa Mental]
 
 | | |
 |---|---|
-| Versão no Studio | **Beta 1.9** + peças da 2.0 ainda sem uso no jogo: `Shared.CharacterRig`/`CharacterAnims` e `ReplicatedStorage.Assets` (21 carros + 4 personagens importados em 22/11); salva (versão 129), Team Create |
+| Versão no Studio | **Beta 2.0** (salva em 22/11, versão 132, Team Create): carros em malha, Gokun em malha, Super Gokun e Mini Gokun, personagens animados |
 | Versão publicada | Beta 1.8b |
-| Em andamento | **Beta 2.0**: carros aprovados (21 FBX); personagens **v3** (rosto fino, mãos, versão de jogo) com [animação de parado](05_Modelagem/Animacao_Idle_CharacterRig.md); **malhas já no place** (`ReplicatedStorage.Assets`), falta ligá-las ao jogo → [Beta 2.0](07_Versoes/Beta_2.0.md) |
+| Em andamento | **Beta 2.0**: carros aprovados (21 FBX); personagens **v3** (rosto fino, mãos, versão de jogo) com [animação de parado](05_Modelagem/Animacao_Idle_CharacterRig.md); **malhas aplicadas ao jogo (22/11)**; próximas: 2.0b combustível, 2.0c piloto automático, 2.0d primeira pessoa → [Beta 2.0](07_Versoes/Beta_2.0.md) |
 | Bloqueio principal | nenhum técnico; do dono: teste com 2 jogadores, músicas, publicar → [Tarefas do dono](13_Pendencias/Tarefas_do_Dono.md) |
 | GitHub | `LuGabriel64/DriveACarForAnime`, `main`, tag `beta-1.9` |
 
