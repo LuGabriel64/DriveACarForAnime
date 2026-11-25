@@ -4,6 +4,13 @@
 > pelo MCP). Se você é um Claude Code (app, nuvem, PC do amigo) chegando agora, esta pasta resume **tudo** o
 > que foi feito, testado, deixado de lado e o que falta. Nada aqui depende da memória de alguma conversa.
 
+## Agora (25/11/2026): Beta 2.0b
+
+**No place: Beta 2.0b salva (versão 135), não publicada.** Painel 🛠️ DEV (tecla F7) só para LuGabriel64 e GabXX10
+(`Config.Dev`): dar personagens com estrelas/mutação/nível, dinheiro, giros, carros e F1 sem correr. Créditos com os dois
+nomes. Detalhes e testes no `CHANGELOG.md` (seção Jogo). As próximas etapas viraram 2.0c (combustível), 2.0d (piloto
+automático) e 2.0e (primeira pessoa).
+
 ## Em andamento (16/11/2026): Beta 2.0
 
 A arte está em `arte/`: 21 carros de Fórmula (aprovados pelo dono) e os personagens **v3** (Gokun, Super Gokun, Mini

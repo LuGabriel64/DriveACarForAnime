@@ -43,7 +43,7 @@ não baixam o place. Marque com `[x]` quando fizer (ou peça ao Claude Code para
 - [ ] **Sons**: `Config.Sounds` está vazio desde a Beta 1.1, e o jogo não tem nenhum som.
 - [ ] **Músicas** da Beta 1.9 (`Config.Music`: corrida, batalha, sala de espera, vitória). Sem ID o jogo roda
       mudo, sem erro.
-- [ ] **Créditos**: trocar `[Your Name]` e `[Your Friend's Name]` em `Config.Credits`.
+- [x] **Créditos**: LuGabriel64 & GabXX10 (feito na Beta 2.0b, 25/11).
 - [ ] **Presente grátis**: `Config.Gift.GroupId = 0`, ou seja, o presente não exige entrar num grupo. Se
       quiser exigir, ponha o ID do grupo.
 - [ ] **Bandeiras do botão de idiomas** (Beta 1.9): conferir se 🇺🇸 e 🇧🇷 aparecem no Studio.

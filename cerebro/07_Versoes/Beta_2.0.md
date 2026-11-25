@@ -33,7 +33,7 @@ Mini Gokun em 2 skins, 20 imagens de referência guardadas com nota.
 
 **Feito em 22/11:** upload liberado; 25 assets enviados (grupo 879120012) e guardados normalizados em `ReplicatedStorage.Assets`; animação testada com as malhas → [sessão](../15_Registro_de_Sessoes/2026-11-22_Beta_2.0_Malhas_no_Roblox.md).
 
-**APLICADA AO JOGO em 22/11 (place versão 132, não publicada):** todos os carros em malha, Gokun em malha, novos Super Gokun (Secret) e Mini Gokun (Epic), personagens animados (`Client.CharacterAnimator`). Testado no Play: corrida com o carro novo (69/70 km/h, rodas girando), garagem, vitrine, personagens animados. Não testado: ovo chocando os novos, ícones, batalha, 1v1 com 2 jogadores, celular. Lista completa no `CHANGELOG.md` do repositório. Próximas: 2.0b combustível, 2.0c piloto automático, 2.0d primeira pessoa + 21 carros.
+**APLICADA AO JOGO em 22/11 (place versão 132, não publicada):** todos os carros em malha, Gokun em malha, novos Super Gokun (Secret) e Mini Gokun (Epic), personagens animados (`Client.CharacterAnimator`). Testado no Play: corrida com o carro novo (69/70 km/h, rodas girando), garagem, vitrine, personagens animados. Não testado: ovo chocando os novos, ícones, batalha, 1v1 com 2 jogadores, celular. Lista completa no `CHANGELOG.md` do repositório. Próximas (renumeradas em 25/11, porque a [2.0b](Beta_2.0b.md) virou o painel DEV): 2.0c combustível, 2.0d piloto automático, 2.0e primeira pessoa + 21 carros.
 
 ![corrida com o carro novo](../11_Referencias_Visuais/imagens/2026-11-22_jogo_corrida_carro_novo.jpg)
 ![garagem com os personagens novos](../11_Referencias_Visuais/imagens/2026-11-22_jogo_garagem_personagens.jpg)

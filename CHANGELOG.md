@@ -12,6 +12,7 @@ Catálogo de **todas as versões** do jogo e do repositório. A mais nova fica n
 
 | Versão | Data | Estado | Em uma linha |
 |--------|------|--------|--------------|
+| [Beta 2.0b](#beta-20b--25112026-salva-no-place-versão-135-não-publicada) | 25/11/2026 | 💾 salva no Studio (versão 135), **não publicada** | Painel 🛠️ DEV só para a equipe (personagens com estrelas, dinheiro, giros, carros) e créditos com LuGabriel64 & GabXX10 |
 | [Beta 2.0](#beta-20--22112026-salva-no-place-versão-132-não-publicada) | 22/11/2026 | 💾 salva no Studio (versão 132), **não publicada** | Carros de Fórmula em malha, Gokun em malha, novos Super Gokun (Secret) e Mini Gokun (Epic), personagens animados | Carros de F1 em malha (3 por bioma), piloto automático com skill-checks, combustível, primeira pessoa, elenco do bioma 1 em malha |
 | [Beta 1.9](#jogo) | 13/11/2026 | 💾 salva no Studio (versão 113), falta teste com 2 jogadores e publicar | Desafio 1v1 (corrida de F1 e batalha de anime), estrelas, nível, pontos de spin, idiomas, UI por plataforma |
 | [Beta 1.8d](#beta-18d--12112026) | 12/11/2026 | 💾 salva no Studio, falta publicar | Correções da auditoria (mapa duplicado, anti-trapaça, save) |
@@ -38,6 +39,14 @@ Backups: dentro do place existem `ServerStorage.Backups["Beta 1.1"]` (o único c
 ---
 
 ## Repositório
+
+### 25/11/2026 — Beta 2.0b: painel DEV e créditos · Claude Code (PC do dono, Opus 5.5)
+
+- Pedido do dono: "uma aba só nossa (cargo DEV) para pegar personagens sem correr, com quantas estrelas quiser, dinheiro
+  e spins; faça algo realmente para DEVS" + "mude os créditos para LuGabriel64 e Gabxx10". Ver
+  [Beta 2.0b](#beta-20b--25112026-salva-no-place-versão-135-não-publicada) na seção Jogo.
+- Espelho em `src/` (9 scripts, 2 novos), tag `beta-2.0b`. Docs: `CLAUDE.md`, `estado-atual/`, `docs/ESTRUTURA.md`,
+  `planejamento/beta-2.0/README.md` (as próximas etapas viraram 2.0c, 2.0d e 2.0e), vault `cerebro/`.
 
 ### 22/11/2026 (2) — Beta 2.0 aplicada ao jogo · Claude Code (PC do dono, Opus 5.5)
 
@@ -222,6 +231,47 @@ Testado: extração feita duas vezes, por caminhos diferentes, com resultado id�
 ---
 
 ## Jogo
+
+### Beta 2.0b — 25/11/2026 (salva no place, versão 135; **não publicada**)
+
+Pedido do dono (25/11): um painel só dos DEVs para pegar personagens sem correr (com as estrelas que quiser), dinheiro e
+giros, "algo realmente para DEVS"; e os créditos com os nomes dos dois. Save **não** mudou (Version 3).
+
+**Quem é DEV:** `Config.Dev.Members` pelo **UserId** (o nome pode mudar): LuGabriel64 = 158350958, GabXX10 = 338868517.
+No grupo "Resenha's House" os dois são "Admin" (rank 254) e não existe um cargo "DEV"; por isso a lista fica no Config.
+Opcional: `Config.Dev.GroupMinRank` (0 = desligado). No Studio, os bonecos de teste (Player1/Player2) também são DEV.
+O servidor confere em **toda** ação; um jogador comum não recebe o botão e, se chamar a ação, recebe `NotDev` (fica no Output).
+
+**O painel** (botão vermelho 🛠️ DEV ao lado do ⚙️, ou tecla **F7**):
+- **Alvo**: ◀ ▶ escolhe quem recebe (você ou qualquer jogador do servidor; o alvo recebe um aviso).
+- **CHARACTERS**: todos os personagens (filtro por bioma, busca, prévia 3D); estrelas 0–5, Gold/Diamond, BIG, nível 1–50,
+  x1–x50. **GIVE** = direto para a garagem/mochila; **HATCH** = ovo na incubadora que choca em 2 s (testa a revelação);
+  **GIVE ALL** = um de cada do filtro.
+- **CASH & SPINS**: somar ou definir dinheiro (aceita 2.5M, 1B, 1T, 1QA), botões +1K…+1QA, giros extras ±, pontos de giro,
+  giro grátis liberado já.
+- **UNLOCKS**: todos os carros (equipar na garagem para ir ao bioma), motor 25 em todos, todos os F1 e efeitos de vitória,
+  todos os personagens 5★ nível 50, chocar a incubadora agora, salvar agora.
+- **LOG**: quem fez o quê neste servidor (também no Output como `[DEV] ...`).
+- Etiqueta vermelha **[DEV]** no chat antes do nome dos DEVs (todos veem).
+
+**Scripts:**
+- `Services.DevService` (novo): ações `DevInfo`, `DevGiveAnime`, `DevGiveAll`, `DevCash`, `DevSpins`, `DevCars`,
+  `DevVersusShop`, `DevMaxAnimes`, `DevHatchNow`, `DevSaveNow`; atributo `IsDev` no Player.
+- `Client.DevPanel` (novo): o painel (só criado para quem tem `IsDev`) e a etiqueta do chat.
+- `Shared.Config`: `Version = "Beta 2.0b"`, `Config.Credits` (LuGabriel64, GabXX10), `Config.Dev`, novidade "Beta 2.0b".
+- `Services.WheelService`: + `WheelService.Push(player)`. `ServerScriptService.Main`: + `DevService`.
+  `StarterPlayerScripts.ClientMain`: + `DevPanel` antes do `StartMenu`.
+- Backup: `ServerStorage.Backups["Beta 2.0"]` (os 4 scripts alterados + LEIA-ME). Desligar tudo: `Config.Dev.Enabled = false`.
+
+**Testado (Play, 1 jogador, LuGabriel64):** `IsDev` e botão DEV ao lado do ⚙️; pelo `Shared.Net` do cliente, cada ação com
+os mesmos argumentos do painel: dinheiro +2,5M e = $1B; +10 giros; +150 pontos (virou +1 giro); giro grátis; 2x Super
+Gokun Gold 5★ Lv50; HATCH do Mini Gokun 3★ (chocou); GIVE ALL do bioma 1 (10); todos os carros; motor 25; F1 + efeitos;
+13 personagens 5★ Lv50; chocar agora; salvar; alvo inexistente → `NoTarget`; personagem inexistente → `Invalid`;
+etiqueta [DEV] na mensagem do chat; abas CHARACTERS (com prévia 3D) e UNLOCKS em captura; créditos e "Beta 2.0b" no menu;
+Output sem erros; sintaxe dos 78 scripts.
+
+**Não testado:** clique de verdade nos botões (o clique do MCP não chega na interface); uma conta que **não** é DEV
+(precisa de outra conta); dar para **outro** jogador (precisa de 2 jogadores); jogo publicado (save de verdade); celular.
 
 ### Beta 2.0 — 22/11/2026 (salva no place, versão 132; **não publicada**)
 

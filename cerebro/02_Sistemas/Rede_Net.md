@@ -17,6 +17,8 @@ Tem rate limit por ação, `pcall` em todo handler e validação de tipo em cada
   WheelPack, SaveSettings, ClaimGift.
 - **Beta 1.9:** SetLanguage, SetPartner, VersusPlayers, VersusInvite, VersusRespond, VersusCancel, VersusReady,
   VersusVote, VersusLeave, GetVersusShop, BuyF1, EquipF1, BuyVictoryFx, EquipVictoryFx, PickFighter.
+- Beta 2.0b, **só DEV** (o servidor confere o UserId; ver [Painel DEV](Painel_DEV.md)): DevInfo, DevGiveAnime, DevGiveAll,
+  DevCash, DevSpins, DevCars, DevVersusShop, DevMaxAnimes, DevHatchNow, DevSaveNow. O 1º argumento é o UserId do alvo (nil = você).
 - **Guardadas:** CollectRoadEgg, BuyEgg, StartEncounter, ResolveEncounter.
 
 ## Eventos (servidor → cliente)

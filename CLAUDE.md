@@ -11,7 +11,7 @@ Jogo de Roblox no estilo "Steal an Egg" / "Throw a Food For Animals" / "Kick a L
 - choca personagens de anime, que rendem $/s na garagem;
 - compra carros melhores, que abrem os próximos biomas.
 
-Versão atual do jogo: **Beta 2.0** (salva no Studio em 22/11, versão 132; a publicada ainda é a 1.8b). A 1.9 foi salva em 13/11. Projeto e plano em
+Versão atual do jogo: **Beta 2.0b** (salva no Studio em 25/11, versão 135; a publicada ainda é a 1.8b). A 1.9 foi salva em 13/11. Projeto e plano em
 `planejamento/beta-1.9/`; o que foi aplicado, testado e não testado em `estado-atual/07_beta-1.9_aplicacao_em_andamento.md`. Dois desenvolvedores: o dono do repositório (LuGabriel64) e um amigo (Gabxx10),
 cada um com o seu Claude Code.
 
@@ -128,6 +128,16 @@ git diff --stat                                                  # o que mudou d
 ```
 
 No Windows/macOS: `pip install zstandard lz4` antes, porque o leitor usa esses pacotes.
+
+## Estado em 25/11/2026
+
+- **Beta 2.0b salva (versão 135), não publicada:** painel 🛠️ DEV (`Services.DevService` + `Client.DevPanel`, tecla F7) só
+  para `Config.Dev.Members` (UserId de LuGabriel64 e GabXX10): dar personagens com estrelas/mutação/nível, dinheiro, giros,
+  carros, F1; etiqueta [DEV] no chat. Créditos com LuGabriel64 & GabXX10.
+- **Para testar rápido:** use o painel DEV em vez de correr (o servidor confere o UserId; no Studio os bonecos Player1/2
+  também são DEV). Pelo MCP, chame as ações `Dev*` pelo `Shared.Net` no datamodel Client (alvo `nil` = você).
+- **Numeração:** as próximas etapas da 2.0 viraram **2.0c** (combustível), **2.0d** (Manual/Auto, piloto automático) e
+  **2.0e** (primeira pessoa, 21 carros na loja).
 
 ## Estado em 22/11/2026
 
