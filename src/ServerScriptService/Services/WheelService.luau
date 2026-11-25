@@ -73,6 +73,12 @@ function WheelService.AddPoints(player, amount)
 	return spins
 end
 
+-- Beta 2.0b: reenvia os atributos da roleta (WheelNextAt / WheelTokens / WheelPoints). Usado pelo DevService.
+function WheelService.Push(player)
+	local data = DataService.Get(player)
+	if data then push(player, data) end
+end
+
 local function roll()
 	local total = 0
 	for _, p in ipairs(WC.Prizes) do total += p.Weight end

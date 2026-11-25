@@ -25,6 +25,9 @@ Como cada sistema funciona: quem decide (servidor), quem mostra (cliente), onde 
 - [Idiomas (Locale)](Idiomas_Locale.md): EN/PT com o texto em inglês como chave.
 - [Música e sons](Musica_e_Sons.md): MusicController e IDs pendentes.
 
+## Equipe
+- [Painel DEV](Painel_DEV.md): só para os DEVs (UserId em `Config.Dev`); dá personagens, dinheiro, giros, carros (2.0b).
+
 ## Base técnica
 - [Save (DataService)](Save_DataService.md): perfil, trava de sessão, migrações v1→v2→v3.
 - [Rede (Net)](Rede_Net.md): todas as ações e eventos.

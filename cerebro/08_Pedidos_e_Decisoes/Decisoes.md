@@ -54,5 +54,11 @@ Cada linha: o que foi decidido, por quê e onde mudar. Decisões do **dono** sã
 | 42 | Super Gokun = **Secret** ($12.000/s) e Mini Gokun = **Epic** ($100/s) no bioma 1, dividindo o sorteio com Majin Bubu e Gohen | pedido de 15/11; renda igual à da raridade | `Config.Animes` |
 | 43 | Tudo da malha atrás de `Config.Features.MeshArt` | regra do projeto: sistema antigo guardado, volta com uma chave | `Shared.Config` |
 | 44 | Peças de malha com `Color` **branco** | a cor da peça multiplica a cor por vértice; branco = cor do Blender; preto = silhueta; mutação = tinta | `ReplicatedStorage.Assets` |
+| 45 | Quem é DEV vem de `Config.Dev.Members` pelo **UserId** (não pelo nome, nem por cargo do grupo) | o grupo não tem cargo "DEV" (os dois são Admin, 254); nome muda, UserId não; o rank do grupo fica opcional (`GroupMinRank`) | `Shared.Config`, `Services.DevService` |
+| 46 | O servidor confere o DEV em **toda** ação; o atributo `IsDev` só desenha a UI | regra do projeto: o servidor decide tudo | `Services.DevService` |
+| 47 | O DEV pode dar coisas a **qualquer jogador do servidor** (alvo), com aviso ao alvo e registro | testar o 1v1 entre os dois devs sem correr | `Client.DevPanel` |
+| 48 | Painel DEV em inglês e sem tradução própria | não é UI de jogador; os rótulos que o `Locale` já conhecia saem traduzidos | `Client.DevPanel` |
+| 49 | Créditos com o nome de usuário do Roblox: **GabXX10** (X maiúsculos), como aparece no Roblox | o dono escreveu "Gabxx10"; pode trocar em `Config.Credits` | `Shared.Config` |
+| 50 | Painel DEV e créditos = **Beta 2.0b**; combustível vira 2.0c, piloto automático 2.0d, primeira pessoa 2.0e | regra: toda mudança relevante gera versão nova | `CHANGELOG.md` |
 
 Relacionado: [Pedidos do dono](Pedidos_do_Dono.md) · [Requisitos permanentes](Requisitos_Permanentes.md) · [Arquitetura](../06_Codigo/Arquitetura.md)

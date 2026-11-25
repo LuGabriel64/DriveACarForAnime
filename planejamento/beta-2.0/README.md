@@ -45,6 +45,13 @@ Os arquivos da v2 citados acima foram para `arte/arquivo/personagens_v2/`.
 na lista de pastas aprovadas (Assistant Settings → MCP Permissions → pastas de upload). O jogo é de um grupo
 (id 879120012), então o `creationContext.creator` do upload é `{"groupId":"879120012"}`.
 
+## Atualização de 25/11/2026 — Beta 2.0b (painel DEV) e nova numeração
+
+O dono pediu um painel só dos DEVs e os créditos; isso virou a **Beta 2.0b** (place versão 135). Por isso as próximas
+etapas mudaram de letra: **2.0c** = combustível + teto do motor + Fuel Engine; **2.0d** = Manual/Auto + piloto
+automático + skill-checks; **2.0e** = primeira pessoa + 21 carros na loja. Para testar essas etapas, use o painel DEV
+(dinheiro, carros, personagens) em vez de correr.
+
 ## Atualização de 22/11/2026 (2) — APLICADA AO JOGO (Beta 2.0, place versão 132)
 
 Feito: `CarFactory` com malha (todos os 12 carros da Config), `AnimeModelFactory` com malha (Gokun + novos Super Gokun

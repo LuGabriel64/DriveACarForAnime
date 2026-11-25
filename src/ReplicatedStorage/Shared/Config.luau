@@ -15,7 +15,7 @@ local Config = {}
 local C = Color3.fromRGB
 
 Config.GameName = "Drive A Car For Anime"
-Config.Version  = "Beta 2.0"
+Config.Version  = "Beta 2.0b"
 
 -- ---------------------------------------------------------------- RECURSOS (liga/desliga sistemas)
 Config.Features = {
@@ -52,15 +52,37 @@ Config.Settings = {
 }
 
 -- ---------------------------------------------------------------- MENU: créditos e atualizações
--- EDITE os nomes abaixo (aparecem no botão CREDITS da tela de início).
+-- Nomes do botão CREDITS da tela de início. Beta 2.0b: os dois DEVs (nomes de usuário do Roblox).
 Config.Credits = {
-	{ Role = "Created by",          Names = { "[Your Name]", "[Your Friend's Name]" } },
-	{ Role = "Game Design & Build", Names = { "[Your Name]", "[Your Friend's Name]" } },
+	{ Role = "Created by",          Names = { "LuGabriel64", "GabXX10" } },
+	{ Role = "Game Design & Build", Names = { "LuGabriel64", "GabXX10" } },
 	{ Role = "Built with",          Names = { "Roblox Studio" } },
 	{ Role = "AI Assistance",       Names = { "Claude (Anthropic)" } },
 	{ Role = "Special Thanks",      Names = { "Every beta tester!" } },
 }
+-- ---------------------------------------------------------------- EQUIPE DEV (Beta 2.0b)
+-- Painel 🛠️ DEV (Services.DevService + Client.DevPanel): dar personagens (estrelas, mutação, nível), dinheiro, giros,
+-- carros etc. a si mesmo ou a quem está no servidor. O SERVIDOR confere o UserId em toda ação (o nome pode mudar, o
+-- UserId não). Para tirar ou pôr alguém, edite Members. Enabled = false desliga o painel e as ações Dev*.
+Config.Dev = {
+	Enabled = true,
+	Members = {
+		{ UserId = 158350958, Name = "LuGabriel64" },
+		{ UserId = 338868517, Name = "GabXX10" },
+	},
+	GroupMinRank = 0,          -- > 0: também é DEV quem tem esse rank (ou maior) no grupo dono do jogo. 0 = só a lista
+	StudioTestPlayers = true,  -- no Studio, os bonecos de teste (Player1/Player2, UserId <= 0) também são DEV
+	ChatTag = "[DEV]", ChatTagColor = C(255, 70, 70), -- etiqueta no chat antes do nome
+	MaxCash = 1e15,            -- teto de dinheiro por ação
+	MaxGive = 50,              -- máximo de cópias de um personagem por clique
+	MaxSpins = 1000,           -- máximo de giros por clique
+	LogSize = 60,              -- quantas ações o servidor guarda para a aba LOG
+}
 Config.Updates = {
+	{ Version = "Beta 2.0b", Date = "Nov 25, 2026", Notes = {
+		"⭐ Credits: made by LuGabriel64 & GabXX10",
+		"🛠️ New behind-the-scenes tools for the dev team (faster testing = faster updates!)",
+	} },
 	{ Version = "Beta 2.0", Date = "Nov 22, 2026", Notes = {
 		"🏎️ ALL-NEW CARS: every car is now a real Formula racer with its own biome paint job",
 		"🔥 NEW SECRET in Azure Planet: Super Gokun, with a golden aura!",

@@ -68,4 +68,7 @@ Relacionado: [Erros corrigidos](Erros_Corrigidos.md) · [Checklist antes de mexe
 - **Play pelo MCP:** os cliques do `user_mouse_input` não chegaram ao menu inicial (22/11). Para testar a corrida, chame `Net.Call("ClaimGarage", i)` e `Net.Call("StartRace")` no datamodel **Client** (o `Shared.Net` do cliente pode; `Services.*` no servidor nunca). A câmera orbital do menu continua ligada: para fotografar, crie uma `Camera` nova e ponha em `workspace.CurrentCamera`.
 - **`require` no execute_luau do Play roda numa cópia à parte dos módulos:** `Rig.IsPlaying` dá false mesmo com o jogo animando. Confira pelo efeito (a peça se mexeu entre duas leituras).
 - **Resposta do execute_luau acima de ~100 mil caracteres é cortada.** Para o espelho, divida em partes de tamanho parecido (todas grandes o bastante para irem para arquivo).
+- **O Studio pode estar num Play com outra pessoa (Team Test, 25/11):** antes de parar o Play, veja quem está em `Players` pelo datamodel Client. Se houver outro dev, espere o dono parar. Nesse modo o datamodel Server não responde ao MCP.
+- **`Source` dos scripts só se lê no datamodel Edit** (no Client volta vazio). Compare o place com o GitHub por checksum no Edit, tirando o `\r` (o `src/` tem CRLF).
+- **String longa dentro de outra no execute_luau:** `[[ --[[ ... ]] ]]` fecha no primeiro `]]` e dá "Failed to parse". Use `[==[ ... ]==]` por fora.
 - **Malha recém-replicada com StreamingEnabled** chega em pedaços (cabelo depois do corpo): o `CharacterAnimator` espera `Torso` e `Head` e recomeça quando outra peça chega.

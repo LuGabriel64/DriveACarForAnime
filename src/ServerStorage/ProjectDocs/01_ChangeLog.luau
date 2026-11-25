@@ -4,6 +4,22 @@
 ]]
 return {
 	{
+		Date = "2026-11-25", Author = "Claude Code (Lu, via MCP; Opus 5.5)", Version = "Beta 2.0b",
+		Summary = "PAINEL DEV + CRÉDITOS (pedido do dono: 'uma aba só nossa, cargo DEV, para pegar personagens sem correr, com quantas estrelas quiser, dinheiro e spins'). Botão vermelho 🛠️ DEV (ao lado do ⚙️; tecla F7) SÓ para a equipe de Config.Dev (UserId 158350958 LuGabriel64 e 338868517 GabXX10). Abas: CHARACTERS (qualquer personagem, 0-5★, Gold/Diamond, BIG, nível 1-50, x1-x50; GIVE direto, HATCH pela incubadora em 2 s, GIVE ALL do bioma), CASH & SPINS (somar/definir dinheiro, giros extras, pontos, giro grátis já), UNLOCKS (todos os carros, motor máximo, todos os F1 e efeitos de vitória, personagens 5★ Lv50, chocar incubadora, salvar), LOG. Alvo = você ou qualquer jogador do servidor. Etiqueta [DEV] no chat. Créditos: LuGabriel64 & GabXX10. Save NÃO mudou (Version 3).",
+		Files = {
+			"ServerScriptService.Services.DevService (NOVO): ações DevInfo, DevGiveAnime, DevGiveAll, DevCash, DevSpins, DevCars, DevVersusShop, DevMaxAnimes, DevHatchNow, DevSaveNow. O servidor confere o UserId em TODA ação (não-DEV recebe err='NotDev' e fica no Output). Atributo IsDev no Player. Registro '[DEV] ...' no Output e na aba LOG.",
+			"StarterPlayer.StarterPlayerScripts.Client.DevPanel (NOVO): painel só é criado para quem tem IsDev; etiqueta [DEV] no chat (TextChatService.OnIncomingMessage) para todos os clientes.",
+			"ReplicatedStorage.Shared.Config: Version 'Beta 2.0b'; Config.Credits com LuGabriel64 e GabXX10; Config.Dev (Members, GroupMinRank=0, StudioTestPlayers, ChatTag, limites MaxCash/MaxGive/MaxSpins, LogSize); entrada 'Beta 2.0b' em Config.Updates.",
+			"ServerScriptService.Services.WheelService: + WheelService.Push(player) (reenvia os atributos da roleta).",
+			"ServerScriptService.Main: + 'DevService' no fim da ORDER. StarterPlayerScripts.ClientMain: + 'DevPanel' antes do StartMenu.",
+			"Backup: ServerStorage.Backups['Beta 2.0'] (Config, WheelService, Main, ClientMain + LEIA-ME).",
+		},
+		Notes = {
+			"Testado: Play no Studio (1 jogador, LuGabriel64): IsDev=true e botão DEV ao lado do ⚙️; via Shared.Net do cliente: somar/definir dinheiro ($1B), +10 giros, +150 pontos (virou +1 giro), giro grátis, 2x Super Gokun Gold 5★ Lv50, HATCH do Mini Gokun 3★ (chocou), GIVE ALL do bioma 1 (10), todos os carros, motor 25, F1 + efeitos, 13 personagens 5★ Lv50, chocar agora, salvar; alvo inexistente => NoTarget; personagem inexistente => Invalid; etiqueta [DEV] no PrefixText do chat; telas CHARACTERS (com prévia 3D) e UNLOCKS em captura; créditos e 'Beta 2.0b' no menu; Output sem erros; sintaxe dos 78 scripts.",
+			"NÃO testado: Cliques reais nos botões do painel (o clique do MCP não chega na UI; as ações foram chamadas pelo Net com os mesmos argumentos); conta NÃO-DEV (precisa de 2ª conta); dar para OUTRO jogador (precisa de 2 jogadores); jogo publicado (save real); celular.",
+		},
+	},
+	{
 		Date = "2026-11-22", Author = "Claude Code (Lu, via MCP; Opus 5.5)", Version = "Beta 2.0",
 		Summary = "Beta 2.0 APLICADA AO JOGO (pedido do dono: 'Pode fazer e APLICAR AO JOGO'): todos os carros (os 7 da corrida solo e os 5 F1 do 1v1) passam a usar as MALHAS de Fórmula feitas no Blender; Gokun ganha a malha nova; dois personagens novos no bioma 1 — Super Gokun (Secret, com aura) e Mini Gokun (Epic, na nuvem); os personagens de malha se mexem na pose de parado (guarda de luta, carregando energia, acenando na nuvem). Física, Ids, preços e save NÃO mudam. Tudo atrás de Config.Features.MeshArt (false = volta aos modelos por peças). Ainda NÃO entrou: combustível, piloto automático/skill-checks, primeira pessoa, os 21 carros na loja e o resto do elenco em malha (ficam para 2.0b+).",
 		Files = {

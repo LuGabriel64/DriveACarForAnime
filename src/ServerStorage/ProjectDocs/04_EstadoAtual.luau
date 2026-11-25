@@ -88,7 +88,7 @@
 
 6. PENDENTE (dono)
    - Criar 2 Developer Products (x3 Spins R$29, x10 Spins R$79) e pôr os IDs em Config.Wheel.Packs[i].ProductId.
-   - Sons (Config.Sounds vazio), nomes em Config.Credits, botão Index.
+   - Sons (Config.Sounds vazio), botão Index.
    - Testar DataStore no servidor publicado (Studio sem API).
    - PUBLICAR a Beta 1.8d (o Studio só salvou; jogadores ainda veem a 1.8b).
 

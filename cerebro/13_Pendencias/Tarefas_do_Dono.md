@@ -9,7 +9,12 @@ tags: [pendencias, dono]
 
 Espelho do `estado-atual/03_tarefas_do_dono.md` do repositório. Marque `[x]` quando fizer.
 
-## Agora (Beta 2.0)
+## Agora (Beta 2.0b)
+- [ ] **Testar o painel DEV** (botão 🛠️ DEV ou F7) com cliques de verdade: dar um personagem, dinheiro e giros a você.
+- [ ] Com o GabXX10 no mesmo servidor: escolher ele no alvo (◀ ▶) e dar algo; conferir se ele também vê o botão.
+- [ ] Dizer quais **outros personagens** mudam de design (próxima missão) e se a 2.0c (combustível) vem depois.
+
+## Antes (Beta 2.0)
 - [ ] **Jogar a Beta 2.0 no Studio** e dizer o que achou: carro novo na corrida, garagem com os personagens animados, Super e Mini Gokun (chocar no ovo do bioma 1).
 - [ ] **Publicar** quando aprovar (os jogadores ainda veem a 1.8b) e **baixar o `.rbxl`** como `places/DriveACarForAnime_Beta2.0_2026-11-22.rbxl`.
 - [ ] Testar o 1v1 com 2 jogadores (agora com os F1 em malha).
@@ -41,7 +46,7 @@ Espelho do `estado-atual/03_tarefas_do_dono.md` do repositório. Marque `[x]` qu
 - [ ] Testar uma compra no jogo publicado.
 
 ## Conteúdo a escolher
-- [ ] Sons (`Config.Sounds`). · [ ] Créditos (`Config.Credits`: trocar `[Your Name]`). · [ ] `Config.Gift.GroupId`.
+- [ ] Sons (`Config.Sounds`). · [x] Créditos (LuGabriel64 & GabXX10, 25/11). · [ ] `Config.Gift.GroupId`.
 
 ## Com o amigo (Gabxx10)
 - [ ] Confirmar que ele abre o mesmo place no Team Create.

@@ -24,7 +24,7 @@ ReplicatedStorage
 
 ServerScriptService
 ├─ Main (Script)            ← inicia os serviços na ORDEM: Data, Farm, Car, Zone, Race, Egg, Incubator,
-│                             Escape, Wheel, Progress, Versus, DuelRace, Battle, Anime, Gift (cada um em pcall)
+│                             Escape, Wheel, Progress, Versus, DuelRace, Battle, Anime, Gift, Dev (cada um em pcall)
 └─ Services/
    ├─ DataService           perfil "P_<UserId>" no DataStore "DACFA_Player_v1", trava de sessão, migração v1→v2
    ├─ FarmService           garagens (Plot_1..8, nome interno antigo), 8 pedestais, renda $/s, vender/equipar
@@ -42,7 +42,8 @@ ServerScriptService
    ├─ VersusService         desafio 1v1: convite, etapas, lojas de F1 e de vitória, recompensas (1.9)
    ├─ DuelRaceService       modo "Race": corrida 1v1 com F1 e colapso desde a largada (1.9)
    ├─ BattleSim             simulação da batalha (biblioteca, sem Init) (1.9)
-   └─ BattleService         modo "Battle": monta os lutadores, simula e manda o roteiro (1.9)
+   ├─ BattleService         modo "Battle": monta os lutadores, simula e manda o roteiro (1.9)
+   └─ DevService            painel DEV: só Config.Dev.Members (UserId); dá personagens, dinheiro, giros, carros (2.0b)
 
 StarterPlayer.StarterPlayerScripts
 ├─ ClientMain (LocalScript) ← inicia os módulos do cliente na ordem (StartMenu por último)
@@ -53,6 +54,7 @@ StarterPlayer.StarterPlayerScripts
                             HazardController (obstáculos animados, Beta 1.8), EggHatchUI, AnimesPanel
                             (+ guardados: EggNodes, EggShop, EggVisuals, EncounterUI, AnimeNodes)
                             1.9: Platform (1º da ordem), VersusUI, DuelRaceUI, BattleUI, MusicController
+                            2.0: CharacterAnimator | 2.0b: DevPanel (botão 🛠️ DEV / F7, só para DEVs; etiqueta [DEV] no chat)
 
 ServerStorage
 ├─ ProjectDocs/             Bíblia, ChangeLog, Protocolo de IA, Guia do Bioma 1
@@ -61,7 +63,7 @@ ServerStorage
 ├─ Tools/VersusBuilder      Versus Hall + 3 arenas em Workspace.Map.Versus (1.9)
 ├─ Tools/MirrorDump         despeja os scripts para o GitHub (par de tools/place/mirror_from_dump.js) (1.9)
 ├─ LegacyCode/              AnimeModelFactory voxel (1.6) e chibi (1.7)
-└─ Backups/                 "Beta 1.1" (único com TERRENO), "Beta 1.6", "Beta 1.7", "Beta 1.8b" + LEIA-ME de restauração
+└─ Backups/                 "Beta 1.1" (único com TERRENO), "Beta 1.6" … "Beta 1.9", "Beta 2.0" (2.0b) + LEIA-ME de restauração
 
 Workspace
 ├─ Map/                     um só desde a Beta 1.8d (a cópia duplicada foi para Backups["Beta 1.8b"])
@@ -114,7 +116,8 @@ GetState, GetGarages, ClaimGarage, DriveCar, ExitCar, BuyCar, EquipCar, UpgradeE
 EndRace, GoHome, PlaceAnime, PickUpAnime, SellAnime, EquipBest, GetIncubator, GetWheel, SpinWheel, WheelPack,
 ClaimGift, SaveSettings. Beta 1.9: SetLanguage, SetPartner, VersusPlayers, VersusInvite, VersusRespond,
 VersusCancel, VersusReady, VersusVote, VersusLeave, GetVersusShop, BuyF1, EquipF1, BuyVictoryFx, EquipVictoryFx,
-PickFighter. As ações guardadas são CollectRoadEgg, BuyEgg, StartEncounter e ResolveEncounter.
+PickFighter. Beta 2.0b (só DEV, o servidor confere o UserId): DevInfo, DevGiveAnime, DevGiveAll, DevCash, DevSpins,
+DevCars, DevVersusShop, DevMaxAnimes, DevHatchNow, DevSaveNow. As ações guardadas são CollectRoadEgg, BuyEgg, StartEncounter e ResolveEncounter.
 
 ## Regras de ouro (resumo do `02_AI_Protocol`)
 

@@ -26,6 +26,7 @@ estas notas resumem e ligam cada versão aos sistemas que ela mexeu.
 | 12/11 | [Beta 1.8d](Beta_1.8d.md) | Map duplicado, anti-trapaça, save seguro |
 | 13/11 | [Beta 1.9](Beta_1.9.md) | **desafio 1v1, F1, batalha, estrelas, nível, idiomas** (salva) |
 | 22/11 | [Beta 2.0](Beta_2.0.md) | **carros em malha, Gokun em malha, Super Gokun e Mini Gokun, personagens animados** (salva, versão 132); combustível/piloto/primeira pessoa em 2.0b+ |
+| 25/11 | [Beta 2.0b](Beta_2.0b.md) | **painel DEV** (personagens com estrelas, dinheiro, giros, carros) e créditos (salva, versão 135) |
 | — | depois | ver [Roadmap](../12_Ideias_e_Roadmap/Roadmap.md) |
 
 Ao criar uma versão nova: copie o [modelo de versão](../_Modelos/Modelo_Versao.md).

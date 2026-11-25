@@ -26,7 +26,7 @@ Caminho no repositório: `src/` espelha o Explorer.
 DataService (save) · FarmService (garagens, renda) · CarService (carro, compra, F1) · ZoneService (zona/bioma,
 tier, resgate de queda) · RaceService (corrida solo e Duel) · EscapeService (ovo gigante e fuga) · EggRoll
 (sorteio, lib) · IncubatorService · WheelService (roleta, Robux, pontos) · EggService (guardado) · AnimeService
-(guardado) · GiftService (presente $10K) · ProgressService (XP, parceiro) · VersusService (desafio) ·
+(guardado) · GiftService (presente $10K) · DevService (painel DEV, 2.0b) · ProgressService (XP, parceiro) · VersusService (desafio) ·
 DuelRaceService (corrida 1v1) · BattleSim (lib) · BattleService (batalha).
 
 ## StarterPlayerScripts.Client

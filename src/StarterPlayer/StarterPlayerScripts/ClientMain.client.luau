@@ -36,6 +36,7 @@ for _, n in ipairs({ "GhostController", "RaceUI" }) do table.insert(ORDER, n) en
 table.insert(ORDER, "HazardController") -- Beta 1.8: obstáculos animados (pêndulo, hélice, pistão, laser, gêiser)
 -- Beta 1.9: desafio 1v1 (música, convite/etapas/lojas, placar da corrida, cena da batalha). Antes do StartMenu.
 for _, n in ipairs({ "MusicController", "VersusUI", "DuelRaceUI", "BattleUI" }) do table.insert(ORDER, n) end
+table.insert(ORDER, "DevPanel") -- Beta 2.0b: painel DEV (só é criado para quem tem o atributo IsDev) + etiqueta [DEV] no chat
 table.insert(ORDER, "StartMenu")
 
 for _, name in ipairs(ORDER) do

@@ -132,7 +132,7 @@
    DADOS NOVOS: data.Settings (menu CONFIGS) e data.Stats.Hatches.
    CLIENTE NOVO: StartMenu, EggVisuals, EggNodes, EggShop, EggHatchUI. UIKit ganhou Rainbow, SpinGradient,
      Shine, FloatText, Sunburst, Wobble e Percent.
-   CRÉDITOS / ATUALIZAÇÕES do menu: Config.Credits (TROCAR os nomes "[Your Name]") e Config.Updates.
+   CRÉDITOS / ATUALIZAÇÕES do menu: Config.Credits (LuGabriel64 & GabXX10 desde a Beta 2.0b) e Config.Updates.
    OUTRAS FERRAMENTAS: ServerStorage.Tools.LobbyBuilder (outra sessão, 04/11) gera um lobby/garagens ALTERNATIVO.
      NÃO está aplicado. Se rodar, ele substitui as garagens atuais (mesmo contrato Plot_N).
    BACKUPS: ServerStorage.Backups["Beta 1.0"] (scripts, docs, ferramentas, iluminação + LEIA-ME de restauração).
